@@ -1,0 +1,43 @@
+<section class='tab {{tabs.inventory.cssClass}} {{tabs.inventory.id}}' data-tab='{{tabs.inventory.id}}'
+    data-group='{{tabs.inventory.group}}'>
+    {{#if inventory.hasCurrency}}
+        {{> "systems/daggerheart/templates/sheets/global/partials/gold.hbs" currencies=inventory.currencies}}
+    {{/if}}
+
+    <div class="items-section">
+        {{> 'daggerheart.inventory-items'
+        title='TYPES.Item.weapon'
+        type='weapon'
+        collection=@root.inventory.weapons
+        isGlassy=true
+        canCreate=@root.editable
+        actorType=@root.document.type
+        }}
+        {{> 'daggerheart.inventory-items'
+        title='TYPES.Item.armor'
+        type='armor'
+        collection=@root.inventory.armor
+        isGlassy=true
+        canCreate=@root.editable
+        actorType=@root.document.type
+        }}
+        {{> 'daggerheart.inventory-items'
+        title='TYPES.Item.consumable'
+        type='consumable'
+        collection=@root.inventory.consumables
+        isGlassy=true
+        canCreate=@root.editable
+        actorType=@root.document.type
+        isQuantifiable=true
+        }}
+        {{> 'daggerheart.inventory-items'
+        title='TYPES.Item.loot'
+        type='loot'
+        collection=@root.inventory.loot
+        isGlassy=true
+        canCreate=@root.editable
+        actorType=@root.document.type
+        isQuantifiable=true
+        }}
+    </div>
+</section>

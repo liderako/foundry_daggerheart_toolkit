@@ -1,0 +1,31 @@
+{
+	"MIST_AGE": {
+		"SplitModulesActive": "The Mist Age - Toolkit replaces {modules}. Disable those modules in Manage Modules, otherwise the toolkit stays off."
+	},
+	"MIST_AGE_PRICES": {
+		"Price": "Price",
+		"PriceHint": "In {currency}. {smallestRate} = one {smallest}, {largestRate} = one {largest}.",
+		"NoPrice": "No price",
+		"TableApplied": "Price table applied: {compendium} items in world compendiums, {copies} items in the world.",
+		"HbCreated": "Created compendiums: {packs}.",
+		"TablesRelinked": "Roll tables now point to HB items: {count} results.",
+		"LootTablesCreated": "Created roll tables: {tables}."
+	},
+	"MIST_AGE_WEIGHT": {
+		"Weight": "Weight (slots)",
+		"WeightHint": "Small 0-1, medium 2-3, large 4-8. Fractions allowed. Leave empty for the default ({default}).",
+		"Slots": "slots",
+		"Default": "default",
+		"Worn": "Worn (doesn't count)",
+		"WornTag": "worn",
+		"Load": "Load",
+		"LoadTooltip": "Strength {strength}: {capacity} slots{bonus}. Overload up to {free} slots has no consequences.",
+		"Bonus": " ({bonus} from effects)",
+		"Overloaded": "Overloaded, no consequences",
+		"HeavilyOverloaded": "Heavily overloaded",
+		"FreeOverload": {
+			"Name": "Overload without consequences",
+			"Hint": "How many slots over capacity a character can carry before counting as heavily overloaded."
+		}
+	}
+}

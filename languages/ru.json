@@ -1,0 +1,31 @@
+{
+	"MIST_AGE": {
+		"SplitModulesActive": "The Mist Age - Toolkit заменяет {modules}. Выключи эти модули в Manage Modules, иначе тулкит не включится."
+	},
+	"MIST_AGE_PRICES": {
+		"Price": "Цена",
+		"PriceHint": "В {currency}. {smallestRate} = один {smallest}, {largestRate} = один {largest}.",
+		"NoPrice": "Без цены",
+		"TableApplied": "Таблица цен применена: {compendium} предметов в мировых компендиумах, {copies} предметов в мире.",
+		"HbCreated": "Созданы компендиумы: {packs}.",
+		"TablesRelinked": "Таблицы бросков переведены на HB-предметы: {count} результатов.",
+		"LootTablesCreated": "Созданы таблицы бросков: {tables}."
+	},
+	"MIST_AGE_WEIGHT": {
+		"Weight": "Вес (слоты)",
+		"WeightHint": "Маленький 0-1, средний 2-3, большой 4-8. Можно дробные. Пусто — значение по умолчанию ({default}).",
+		"Slots": "слотов",
+		"Default": "по умолчанию",
+		"Worn": "Надето (не считается)",
+		"WornTag": "надето",
+		"Load": "Нагрузка",
+		"LoadTooltip": "Сила {strength}: {capacity} слотов{bonus}. Перевес до {free} слотов без последствий.",
+		"Bonus": " ({bonus} от эффектов)",
+		"Overloaded": "Перевес, без последствий",
+		"HeavilyOverloaded": "Сильный перевес",
+		"FreeOverload": {
+			"Name": "Перевес без последствий",
+			"Hint": "На сколько слотов можно превысить вместимость, прежде чем персонаж считается сильно перегруженным."
+		}
+	}
+}

@@ -1,0 +1,666 @@
+{
+	"source": "The Mist Age/TradeGoods/Toвари/Price Tables.md",
+	"note": "Prices in Silver (handfuls). Ranges use the midpoint: silver rounded to 0.5, pennies to 1 penny. Entries without pack/id are HB items matched to unlinked table rows.",
+	"prices": [
+		{
+			"pack": "daggerheart.armors",
+			"id": "yJFp1bfpecDcStVK",
+			"name": "Gambeson Armor",
+			"type": "armor",
+			"price": 10,
+			"source": "10 с"
+		},
+		{
+			"pack": "daggerheart.armors",
+			"id": "jphnMZjnS2FkOH3s",
+			"name": "Improved Gambeson Armor",
+			"type": "armor",
+			"price": 25,
+			"source": "25 с"
+		},
+		{
+			"pack": "daggerheart.armors",
+			"id": "epkAmlZVk7HOfUUT",
+			"name": "Advanced Gambeson Armor",
+			"type": "armor",
+			"price": 50,
+			"source": "50"
+		},
+		{
+			"pack": "daggerheart.armors",
+			"id": "nibfdNtp2PtxvbVz",
+			"name": "Leather Armor",
+			"type": "armor",
+			"price": 15,
+			"source": "15 с"
+		},
+		{
+			"pack": "daggerheart.armors",
+			"id": "t91M61pSCMKStTNt",
+			"name": "Improved Leather Armor",
+			"type": "armor",
+			"price": 30,
+			"source": "30 с"
+		},
+		{
+			"pack": "daggerheart.armors",
+			"id": "itSOp2GCyem0f7oM",
+			"name": "Advanced Leather Armor",
+			"type": "armor",
+			"price": 60,
+			"source": "60"
+		},
+		{
+			"pack": "daggerheart.armors",
+			"id": "haULhuEg37zUUvhb",
+			"name": "Chainmail Armor",
+			"type": "armor",
+			"price": 20,
+			"source": "20 с"
+		},
+		{
+			"pack": "daggerheart.armors",
+			"id": "K5WkjS0NGqHYmhU3",
+			"name": "Improved Chainmail Armor",
+			"type": "armor",
+			"price": 40,
+			"source": "40 с"
+		},
+		{
+			"pack": "daggerheart.armors",
+			"id": "LzLOJ9EVaHWAjoq9",
+			"name": "Advanced Chainmail Armor",
+			"type": "armor",
+			"price": 80,
+			"source": "80"
+		},
+		{
+			"pack": "daggerheart.armors",
+			"id": "UdUJNa31WxFW2noa",
+			"name": "Full Plate Armor",
+			"type": "armor",
+			"price": 45,
+			"source": "45 с"
+		},
+		{
+			"pack": "daggerheart.armors",
+			"id": "9f7RozpPTqrzJS1m",
+			"name": "Improved Full Plate Armor",
+			"type": "armor",
+			"price": 80,
+			"source": "80 с"
+		},
+		{
+			"pack": "daggerheart.armors",
+			"id": "crIbCb9NZ4K0VpoU",
+			"name": "Advanced Full Plate Armor",
+			"type": "armor",
+			"price": 160,
+			"source": "160"
+		},
+		{
+			"pack": "daggerheart.armors",
+			"id": "PSW3BxCGmtLeWOxM",
+			"name": "Tyris Soft Armor",
+			"type": "armor",
+			"price": 35,
+			"source": "35"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "mlIj88p1wcQNjEDG",
+			"name": "Quarterstaff",
+			"type": "weapon",
+			"price": 2,
+			"source": "2 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "iStO0BbeMTTR0rQi",
+			"name": "Dagger",
+			"type": "weapon",
+			"price": 2,
+			"source": "2 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "fbDYUja3ll9vCtrB",
+			"name": "Battleaxe",
+			"type": "weapon",
+			"price": 5,
+			"source": "5 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "cKQCDyM2UopDL9zF",
+			"name": "Mace",
+			"type": "weapon",
+			"price": 5,
+			"source": "5 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "CWrbnethuILXrEpA",
+			"name": "Cutlass",
+			"type": "weapon",
+			"price": 5,
+			"source": "5 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "p9tdjQr2AZP19RYm",
+			"name": "Shortbow",
+			"type": "weapon",
+			"price": 6,
+			"source": "6 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "ZXh1GQahBiODfSTC",
+			"name": "Warhammer",
+			"type": "weapon",
+			"price": 6,
+			"source": "6 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "1cwWNt4sqlgA8gCT",
+			"name": "Broadsword",
+			"type": "weapon",
+			"price": 7,
+			"source": "7 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "Iv8BZM1R24QMT72M",
+			"name": "Longsword",
+			"type": "weapon",
+			"price": 10,
+			"source": "10 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "zkAgEW6zMkRZalEm",
+			"name": "Rapier",
+			"type": "weapon",
+			"price": 10,
+			"source": "10 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "YfVs6Se903az4Yet",
+			"name": "Longbow",
+			"type": "weapon",
+			"price": 10,
+			"source": "10 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "TF85tKJetUjLwh54",
+			"name": "Spear",
+			"type": "weapon",
+			"price": 12,
+			"source": "12 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "cw7HG1Z7hp7OOLD0",
+			"name": "Crossbow",
+			"type": "weapon",
+			"price": 15,
+			"source": "15 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "qT7FfmauAumOjJoq",
+			"name": "Halberd",
+			"type": "weapon",
+			"price": 25,
+			"source": "25 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "70ysaFJDREwTgvZa",
+			"name": "Greatsword",
+			"type": "weapon",
+			"price": 25,
+			"source": "25 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "PC5EyEIq7NWBV0n5",
+			"name": "Arcane Gauntlets",
+			"type": "weapon",
+			"price": 30,
+			"source": "30 c"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "wKklDxs5nkzILNp4",
+			"name": "Small Dagger",
+			"type": "weapon",
+			"price": 1,
+			"source": "1 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "nMuF8ZDZ2aXZVTg6",
+			"name": "Improved Small Dagger",
+			"type": "weapon",
+			"price": 3,
+			"source": "3"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "CmtWqw6DwoePnX7W",
+			"name": "Whip",
+			"type": "weapon",
+			"price": 3,
+			"source": "3 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "ftTp8VlsBQ1r4LFD",
+			"name": "Improved Whip",
+			"type": "weapon",
+			"price": 6,
+			"source": "6"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "mxwWKDujgsRcZWPT",
+			"name": "Round Shield",
+			"type": "weapon",
+			"price": 4,
+			"source": "4 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "DlinEBGZfIlvreO3",
+			"name": "Improved Round Shield",
+			"type": "weapon",
+			"price": 8,
+			"source": "8"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "iEzPscUc18GuFoB6",
+			"name": "Grappler",
+			"type": "weapon",
+			"price": 3,
+			"source": "3 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "3T3o9zfe61t22L1H",
+			"name": "Improved Grappler",
+			"type": "weapon",
+			"price": 6,
+			"source": "6"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "cjGZpXCoshEqi1FI",
+			"name": "Shortsword",
+			"type": "weapon",
+			"price": 5,
+			"source": "5 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "rSyBNRwemBVuTo3H",
+			"name": "Improved Shortsword",
+			"type": "weapon",
+			"price": 10,
+			"source": "10"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "C9aWpK1shVMWP4m5",
+			"name": "Tower Shield",
+			"type": "weapon",
+			"price": 8,
+			"source": "8 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "bxt3NsbMqTSdI5ab",
+			"name": "Improved Tower Shield",
+			"type": "weapon",
+			"price": 18,
+			"source": "18"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "zxKt6qXe7uZB6ljm",
+			"name": "Hand Crossbow",
+			"type": "weapon",
+			"price": 10,
+			"source": "10 с"
+		},
+		{
+			"pack": "daggerheart.weapons",
+			"id": "XEDRkuw3BhMoVBn9",
+			"name": "Improved Hand Crossbow",
+			"type": "weapon",
+			"price": 20,
+			"source": "20"
+		},
+		{
+			"pack": "daggerheart.consumables",
+			"id": "lNtcrkgFGOJNaroE",
+			"name": "Stride Potion",
+			"type": "consumable",
+			"price": 3,
+			"source": "3c"
+		},
+		{
+			"pack": "daggerheart.consumables",
+			"id": "FOPQNqXbiVO0ilYL",
+			"name": "Bolster Potion",
+			"type": "consumable",
+			"price": 3,
+			"source": "3c"
+		},
+		{
+			"pack": "daggerheart.consumables",
+			"id": "eeBhZSGLjuNZuJuI",
+			"name": "Control Potion",
+			"type": "consumable",
+			"price": 3,
+			"source": "3c"
+		},
+		{
+			"pack": "daggerheart.consumables",
+			"id": "JGD3M9hBHtVAA8XP",
+			"name": "Attune Potion",
+			"type": "consumable",
+			"price": 3,
+			"source": "3c"
+		},
+		{
+			"pack": "daggerheart.consumables",
+			"id": "Nwv5ydGf0MWnzq1n",
+			"name": "Vial of Darksmoke",
+			"type": "consumable",
+			"price": 11,
+			"source": "9–13 с"
+		},
+		{
+			"pack": "daggerheart.consumables",
+			"id": "CVBbFfOY75YwyQsp",
+			"name": "Charm Potion",
+			"type": "consumable",
+			"price": 3,
+			"source": "3c"
+		},
+		{
+			"pack": "daggerheart.consumables",
+			"id": "aWHSO2AqDufi7nL4",
+			"name": "Enlighten Potion",
+			"type": "consumable",
+			"price": 3,
+			"source": "3c"
+		},
+		{
+			"pack": "daggerheart.consumables",
+			"id": "tPfKtKRRjv8qdSqy",
+			"name": "Minor Health Potion",
+			"type": "consumable",
+			"price": 16.5,
+			"source": "8–25 с"
+		},
+		{
+			"pack": "daggerheart.consumables",
+			"id": "Aruc2NLutWuVIjP1",
+			"name": "Health Potion",
+			"type": "consumable",
+			"price": 19.5,
+			"source": "12-27"
+		},
+		{
+			"pack": "daggerheart.consumables",
+			"id": "b6vGSPFWOlzZZDLO",
+			"name": "Minor Stamina Potion",
+			"type": "consumable",
+			"price": 16.5,
+			"source": "8–25 с"
+		},
+		{
+			"pack": "daggerheart.consumables",
+			"id": "hf3k1POoVSooJyN2",
+			"name": "Stamina Potion",
+			"type": "consumable",
+			"price": 19.5,
+			"source": "12-27"
+		},
+		{
+			"pack": "daggerheart.consumables",
+			"id": "VqEX5YwK5oL3r1t6",
+			"name": "Vial of Moondrip",
+			"type": "consumable",
+			"price": 12.5,
+			"source": "10-15"
+		},
+		{
+			"pack": "daggerheart.consumables",
+			"id": "bLvJPYvDYJWtICP2",
+			"name": "Chimeric Saliva",
+			"type": "consumable",
+			"price": 6,
+			"source": "6с"
+		},
+		{
+			"pack": "daggerheart.loot",
+			"id": "QGYPNBIufpBguwjC",
+			"name": "Premium Bedroll",
+			"type": "loot",
+			"price": 30,
+			"source": "30 с"
+		},
+		{
+			"pack": "daggerheart.loot",
+			"id": "I63LTFD6GXHgyGpR",
+			"name": "Piercing Arrows",
+			"type": "loot",
+			"price": 1.5,
+			"source": "1.5 с"
+		},
+		{
+			"pack": "daggerheart.loot",
+			"id": "CiXwelozmBDcPY48",
+			"name": "Glider",
+			"type": "loot",
+			"price": 20,
+			"source": "15–25 с"
+		},
+		{
+			"pack": "daggerheart.loot",
+			"id": "GkmATIuemyFtQX1D",
+			"name": "Manacles",
+			"type": "loot",
+			"price": 4,
+			"source": "4 с"
+		},
+		{
+			"name": "Tent (HB)",
+			"type": "loot",
+			"price": 15,
+			"source": "Tent (x1): 15 с"
+		},
+		{
+			"name": "Premium Tent (HB)",
+			"type": "loot",
+			"price": 40,
+			"source": "Premium Tent (на 4): 40 с"
+		},
+		{
+			"name": "Herbalism Kit (HB)",
+			"type": "loot",
+			"price": 12,
+			"source": "Herbalism kit: 12 с"
+		},
+		{
+			"name": "Alchemist's supplies (HB)",
+			"type": "loot",
+			"price": 25,
+			"source": "Alchemist's supplies: 25 с"
+		},
+		{
+			"name": "Leatherworker's tools (HB)",
+			"type": "loot",
+			"price": 10,
+			"source": "Leatherworker's tools: 10 с"
+		},
+		{
+			"name": "Set of Forgery Tools (HB)",
+			"type": "loot",
+			"price": 15,
+			"source": "Forgery kit: 15 с"
+		},
+		{
+			"name": "Paper (HB)",
+			"type": "consumable",
+			"price": 4,
+			"source": "Папір (1 аркуш): 4 с"
+		},
+		{
+			"name": "Bottle of ink (HB)",
+			"type": "loot",
+			"price": 2,
+			"source": "Чорнило (1 унція): 2 с"
+		},
+		{
+			"name": "Ink pen (HB)",
+			"type": "loot",
+			"price": 0.2,
+			"source": "Перо для письма: 2 п"
+		},
+		{
+			"name": "Torch (HB)",
+			"type": "loot",
+			"price": 0.2,
+			"source": "Смолоскип: 2 п"
+		},
+		{
+			"name": "Bedroll (HB)",
+			"type": "loot",
+			"price": 0.5,
+			"source": "Спальний мішок: 5 п"
+		},
+		{
+			"name": "Shovel (HB)",
+			"type": "weapon",
+			"price": 0.5,
+			"source": "Лопата: 5 п"
+		},
+		{
+			"name": "Empty Vial (HB)",
+			"type": "consumable",
+			"price": 3.5,
+			"source": "Vial: 2–5 с"
+		},
+		{
+			"name": "Pack of Materials (HB)",
+			"type": "consumable",
+			"price": 2,
+			"source": "Пак матеріалів (для ремонту): 1–3 с"
+		},
+		{
+			"name": "Antitoxin (HB)",
+			"type": "consumable",
+			"price": 5,
+			"source": "Антітоксін: 3–7 с"
+		},
+		{
+			"name": "Poison T-1 (HB)",
+			"type": "consumable",
+			"price": 5,
+			"source": "Отрута: 3–7 с"
+		},
+		{
+			"name": "Порція Фумалісту (HB)",
+			"type": "consumable",
+			"price": 0.3,
+			"source": "Фумаліст: 3п"
+		},
+		{
+			"name": "Clothing (HB)",
+			"type": "loot",
+			"price": 0.5,
+			"source": "Базовий одяг: 5 п"
+		},
+		{
+			"name": "Fine Clothing (HB)",
+			"type": "loot",
+			"price": 7.5,
+			"source": "Хороший одяг: 5–10 с"
+		},
+		{
+			"name": "Рубиновий Дим (HB)",
+			"type": "consumable",
+			"price": 0.5,
+			"source": "Рубиновий Дим: 5п/1с5п/3c (перша ціна)"
+		},
+		{
+			"name": "Рубиновий Дим +- (HB)",
+			"type": "consumable",
+			"price": 1.5,
+			"source": "Рубиновий Дим: 5п/1с5п/3c (друга ціна)"
+		},
+		{
+			"name": "Ration (HB)",
+			"type": "consumable",
+			"price": 0.2,
+			"source": "Базова їжа: 1–3 п"
+		},
+		{
+			"name": "Раціони (HB)",
+			"type": "consumable",
+			"price": 0.2,
+			"source": "Базова їжа: 1–3 п"
+		},
+		{
+			"name": "Winter Clothing (HB)",
+			"type": "loot",
+			"price": 0.9,
+			"source": "Базовий специальний одяг: 7-10 п"
+		},
+		{
+			"name": "Jungle Clothing (HB)",
+			"type": "loot",
+			"price": 0.9,
+			"source": "Базовий специальний одяг: 7-10 п"
+		},
+		{
+			"name": "Пустельний одяг (HB)",
+			"type": "loot",
+			"price": 0.9,
+			"source": "Базовий специальний одяг: 7-10 п"
+		},
+		{
+			"name": "Одяг трущоб (HB)",
+			"type": "loot",
+			"price": 0.9,
+			"source": "Базовий специальний одяг: 7-10 п"
+		},
+		{
+			"name": "Fine Сідр (HB)",
+			"type": "loot",
+			"price": 3.5,
+			"source": "Хороший алкоголь: 2–5 с"
+		},
+		{
+			"name": "Єгермейстер (HB)",
+			"type": "loot",
+			"price": 3.5,
+			"source": "Хороший алкоголь: 2–5 с"
+		},
+		{
+			"name": "Бутилка рому (HB)",
+			"type": "loot",
+			"price": 0.3,
+			"source": "Базовий алкоголь: 2–4 п"
+		}
+	]
+}

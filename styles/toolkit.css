@@ -1,0 +1,86 @@
+.daggerheart .item-sheet-header .mist-price {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.daggerheart .mist-price-part {
+	white-space: nowrap;
+}
+
+.daggerheart .mist-price-none {
+	opacity: 0.6;
+	font-style: italic;
+}
+
+.daggerheart .mist-price-tag {
+	display: flex;
+	gap: 6px;
+	white-space: nowrap;
+}
+
+.daggerheart .item-sheet-header .mist-weight {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.daggerheart .mist-weight-tag {
+	white-space: nowrap;
+}
+
+.daggerheart .mist-load {
+	--mist-load-color: light-dark(#3d7a3a, #7fbf6a);
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	align-items: center;
+	gap: 4px 10px;
+	padding: 4px 16px 8px 16px;
+	color: light-dark(var(--dark, #222222), var(--beige, #efe6d8));
+}
+
+.daggerheart .mist-load.mist-load-overloaded {
+	--mist-load-color: light-dark(#a87b00, #e0b23a);
+}
+
+.daggerheart .mist-load.mist-load-heavy {
+	--mist-load-color: light-dark(#a8261b, #e5574a);
+}
+
+.daggerheart .mist-load-label {
+	white-space: nowrap;
+}
+
+.daggerheart .mist-load-bar {
+	height: 8px;
+	border-radius: 4px;
+	overflow: hidden;
+	background: light-dark(rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.15));
+}
+
+.daggerheart .mist-load-fill {
+	height: 100%;
+	background: var(--mist-load-color);
+}
+
+.daggerheart .mist-load-value {
+	font-weight: bold;
+	white-space: nowrap;
+	color: var(--mist-load-color);
+}
+
+.daggerheart .mist-load-status {
+	grid-column: 1 / -1;
+	text-align: right;
+	font-style: italic;
+	color: var(--mist-load-color);
+}
+
+.application.sheet.daggerheart.actor.dh-style.adversary .tab.inventory .items-section {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 8px calc(12px - var(--scrollbar-width)) 4px 12px;
+	overflow-y: auto;
+	scrollbar-gutter: stable;
+}

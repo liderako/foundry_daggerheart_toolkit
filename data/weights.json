@@ -1,0 +1,1045 @@
+{
+	"note": "Default weights in slots for items without their own weight. Names match originals and their (HB) copies. Potions 0.5, tiny consumables 0.1, leather, gambeson and cloth armor (robes, cloaks, tunics) 2, small one-handed weapons 1.",
+	"weights": [
+		{
+			"name": "Attune Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Bolster Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Charm Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Control Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Enlighten Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Stride Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Health Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Minor Health Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Major Health Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Stamina Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Minor Stamina Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Major Stamina Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Major Attune Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Major Bolster Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Major Charm Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Major Control Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Major Enlighten Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Major Stride Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Berserker's Brew",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Blood of the Yorgi",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Cacophonous Concoction",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Concoction",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Cockerel Claw Tea",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Death Tea",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Dragonbloom Tea",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Demiurge's Draught",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Featherstep Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Formoid Serum",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Growing Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Shrinking Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Homet's Secret Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Invisibility Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Lionheart Tonic",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Mesmer's Tonic",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Midas Flask",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Mnemonic Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Mossmantle Potion",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Nightmare Mead",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Phial of Deep Ink",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Potion of Stability",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Potion of Vigilance",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Sleeping Sap",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Snakeskin Spirit",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Tears of the Undying Hero",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Vial of Darksmoke",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Vial of Featherfall",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Vial of Moondrip",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Yakamel Milk",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Sun Tree Sap",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Dripfang Poison",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Grindletooth Venom",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Improved Grindletooth Venom",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Red Ooze Oil",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Green Ooze Oil",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Chimeric Saliva",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Redthorn Saliva",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Gill Salve",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Salamander Salve",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Steelskin Salve",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Acidpaste",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Bonding Honey",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Ciscan Fog Bottle",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Sprite Bottle",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Ogre Musk",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Varik Leaves",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Pipeweed",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Jumping Root",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Glowmoss Mushroom",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Sweet Moss",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Bundle of Spiderlegs",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Bridge Seed",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Snapthorn Seed",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Gossip Flower",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Verglasian Seed",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Deathseer's Powder",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Iridian Dust",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Mythic Dust",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Night Hag's Dust",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Packet of Space Dust",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Snap Powder",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Slayer's Salt",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Cupbearer's Bezoar",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Displacement Token",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Lyrebird Lozenge",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Replication Parchment",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Self-Sewing Thread",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Featherbone",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Unstable Arcane Shard",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Improved Arcane Shard",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Major Arcane Shard",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Emberite Shard",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Arcticite Shard",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Fulgurite Shard",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Stardrop",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Knowledge Stone",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Channelstone",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Warding Candle",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Antitoxin (HB)",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Poison T-1 (HB)",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Potion of Vigor (HB)",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Minor Health Po0tion (HB)",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Vial Blood of Lizard (HB)",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Vial of Night Eye (HB)",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Gill SalvE Potion (HB)",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Empty Vial (HB)",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Salt water (HB)",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Bottle of Wildflame (HB)",
+			"type": "consumable",
+			"slots": 0.5
+		},
+		{
+			"name": "Blue Seaweed (HB)",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Bone Dust (HB)",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Dust of corals (HB)",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Herbal antiseptic (HB)",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Tea Herbal (HB)",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Paper (HB)",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Рубиновий Дим (HB)",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Рубиновий Дим +- (HB)",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Порція Фумалісту (HB)",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Павутина (HB)",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Incense to speak with Dead (HB)",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Spellscroll of Invisibility (HB)",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Arrow (HB)",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Spells Materials (HB)",
+			"type": "consumable",
+			"slots": 0.1
+		},
+		{
+			"name": "Legendary Gambeson Armor",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Advanced Gambeson Armor",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Improved Gambeson Armor",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Gambeson Armor",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Legendary Leather Armor",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Advanced Leather Armor",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Leather Armor",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Improved Leather Armor",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Tyran Leather Armor (HB)",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Mage Robes",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Improved Mage Robes",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Advanced Mage Robes",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Legendary Mage Robes",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Enchanter's Robes",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Astral Raiment",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Spidersilk Tunic",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Stormthread Habit",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Hawkguard's Mantle",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Cloverweave Cloak",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Monett's Cloak",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Darkweave Shroud",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Granminster's Finery",
+			"type": "armor",
+			"slots": 2
+		},
+		{
+			"name": "Legendary Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Improved Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Advanced Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Advanced Small Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Legendary Small Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Improved Small Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Small Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Twisted Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Advanced Twisted Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Legendary Twisted Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Improved Twisted Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Casting Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Legendary Casting Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Advanced Casting Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Improved Casting Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Curved Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Devouring Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Parrying Dagger",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Blessed Anlace",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Adder's Fang",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Cyrurgien's Scalpel",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Throwing Knives",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Improved Throwing Knives",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Legendary Throwing Knives",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Advanced Throwing Knives",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Void Needle",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Legendary Brass Knuckles",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Brass Knuckles",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Improved Brass Knuckles",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Advanced Brass Knuckles",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Improved Offhand Brass Knuckles",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Advanced Offhand Brass Knuckles",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Offhand Brass Knuckles",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Legendary Offhand Brass Knuckles",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Knuckle Claws",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Improved Wand",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Wand",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Advanced Wand",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Legendary Wand",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Arc Wand",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Wand of Enthrallment",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Wand of Essek",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Hand Runes",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Legendary Hand Runes",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Advanced Hand Runes",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Improved Hand Runes",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Advanced Focus Runes",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Focus Runes",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Improved Focus Runes",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Legendary Focus Runes",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Fury Gem",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Primer Shard",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Vorpal Shard",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Widogast Pendant",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Mage Orb",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Möbius Orb",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "War Dart",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Bladed Star",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Razor Wire",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Hand Sling",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Bladed Fan",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "LIght Small Dagger (HB)",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Rope Dart (HB)",
+			"type": "weapon",
+			"slots": 1
+		},
+		{
+			"name": "Improved Wand (HB) (lightning)",
+			"type": "weapon",
+			"slots": 1
+		}
+	]
+}
