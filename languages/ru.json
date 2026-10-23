@@ -1,6 +1,10 @@
 {
 	"MIST_AGE": {
-		"SplitModulesActive": "The Mist Age - Toolkit заменяет {modules}. Выключи эти модули в Manage Modules, иначе тулкит не включится."
+		"SplitModulesActive": "The Mist Age - Toolkit заменяет {modules}. Выключи эти модули в Manage Modules, иначе тулкит не включится.",
+		"DeathLoot": {
+			"Name": "Лут с павших противников",
+			"Hint": "Когда adversary с предметами или золотом в инвентаре падает (отмечены все HP или стоит Dead / Defeated), его токен становится лутом Item Piles. Если adversary встаёт, токен возвращается в обычный."
+		}
 	},
 	"MIST_AGE_PRICES": {
 		"Price": "Цена",

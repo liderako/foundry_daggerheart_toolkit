@@ -1,6 +1,10 @@
 {
 	"MIST_AGE": {
-		"SplitModulesActive": "The Mist Age - Toolkit replaces {modules}. Disable those modules in Manage Modules, otherwise the toolkit stays off."
+		"SplitModulesActive": "The Mist Age - Toolkit replaces {modules}. Disable those modules in Manage Modules, otherwise the toolkit stays off.",
+		"DeathLoot": {
+			"Name": "Loot from fallen adversaries",
+			"Hint": "When an adversary that carries inventory items or gold is downed (all Hit Points marked, or Dead / Defeated), its token becomes an Item Piles loot pile. It turns back if the adversary recovers."
+		}
 	},
 	"MIST_AGE_PRICES": {
 		"Price": "Price",

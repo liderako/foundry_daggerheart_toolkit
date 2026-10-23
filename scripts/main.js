@@ -1,4 +1,5 @@
 import { registerAdversaryInventory } from "./adversary-inventory.js";
+import { registerDeathLoot } from "./death-loot.js";
 import { preparePricesWorld, registerPrices } from "./prices.js";
 import { MODULE_ID } from "./shared.js";
 import { registerWeight } from "./weight.js";
@@ -43,6 +44,7 @@ Hooks.once("init", () => {
 	registerPrices();
 	registerWeight();
 	registerAdversaryInventory();
+	registerDeathLoot();
 
 	Hooks.once("ready", async () => {
 		if (!game.user.isGM) {

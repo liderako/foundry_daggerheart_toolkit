@@ -7,6 +7,7 @@ Foundry VTT module for the Daggerheart world *The Mist Age*.
 - **Loot tables.** Primary/Secondary × Physical/Magic weapon tables and an armor table; the roll formula picks the rarity (Common = Tier 1 … Legendary = Tier 4).
 - **Weight.** Weight in slots per item (`data/weights.json` holds per-item defaults) and a load bar on character sheets with capacity from Strength.
 - **Adversary inventory.** An Inventory tab with gold on adversary sheets.
+- **Loot from fallen adversaries.** When an adversary with inventory items or gold is downed (all Hit Points marked, or Dead / Defeated), its token becomes an Item Piles loot pile; it turns back if the adversary recovers. Can be switched off in the module settings.
 
 ## Install
 
