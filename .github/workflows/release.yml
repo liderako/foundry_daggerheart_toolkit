@@ -1,10 +1,12 @@
-# Publishing a GitHub release tagged vX.Y.Z builds the Foundry package:
+# Pushing a tag vX.Y.Z (or publishing a GitHub release with that tag) builds the Foundry package:
 # module.json gets that version plus the manifest/download URLs of this repository, and module.json + module.zip
-# are attached to the release. Foundry installs from the stable manifest URL:
+# are attached to the release, which is created for a pushed tag. Foundry installs from the stable manifest URL:
 #   https://github.com/<owner>/<repo>/releases/latest/download/module.json
 name: Release
 
 on:
+  push:
+    tags: ["v*"]
   release:
     types: [published]
 
@@ -31,6 +33,12 @@ jobs:
 
       - name: Build module.zip
         run: zip -r module.zip module.json README.md scripts styles templates languages data
+
+      # A release created here with the workflow token does not trigger this workflow again.
+      - name: Create the release for a pushed tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1 || gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --generate-notes
 
       - name: Attach to the release
         env:

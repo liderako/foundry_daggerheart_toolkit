@@ -22,8 +22,10 @@ https://github.com/liderako/the_mist_age_foundry_daggerheart_addtional/releases/
 ## Release a new version
 
 1. Commit and push the changes.
-2. On GitHub create a release with a tag like `v1.0.1` and publish it.
-3. The **Release** workflow sets that version in `module.json` and attaches `module.json` and `module.zip` to the release. Foundry then offers the update.
+2. Push a tag like `v1.0.1` (`git tag v1.0.1` then `git push origin v1.0.1`), or create a release with that tag on GitHub.
+3. The **Release** workflow creates the release if needed, sets that version in `module.json` and attaches `module.json` and `module.zip`. Foundry then offers the update.
+
+The manifest URL above only works once at least one release exists.
 
 ## Data notes
 
