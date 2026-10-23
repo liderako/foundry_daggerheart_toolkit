@@ -11,6 +11,8 @@ Foundry VTT module for the Daggerheart world *The Mist Age*.
 
 ## Install
 
+The module requires [Item Piles](https://github.com/fantasycalendar/FoundryVTT-ItemPiles); Foundry offers to install it together with this module.
+
 In Foundry: **Add-on Modules → Install Module**, paste the manifest URL and press **Install**:
 
 ```

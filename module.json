@@ -1,7 +1,7 @@
 {
 	"id": "mist-age-toolkit",
 	"title": "The Mist Age - Toolkit",
-	"description": "Item prices and Item Piles currencies, weight in slots with Strength-based load, HB copies of the Daggerheart item compendiums and loot tables, and an inventory with gold for adversaries.",
+	"description": "Item prices and Item Piles currencies, weight in slots with Strength-based load, HB copies of the Daggerheart item compendiums and loot tables, an inventory with gold for adversaries, and loot from fallen adversaries.",
 	"version": "1.0.0",
 	"compatibility": {
 		"minimum": "13",
@@ -19,11 +19,15 @@
 				"type": "system"
 			}
 		],
-		"recommends": [
+		"requires": [
 			{
 				"id": "item-piles",
 				"type": "module",
-				"reason": "Merchants read item prices and currencies set up by this module."
+				"manifest": "https://github.com/fantasycalendar/FoundryVTT-ItemPiles/releases/latest/download/module.json",
+				"compatibility": {
+					"minimum": "3.0.0",
+					"verified": "3.3.4"
+				}
 			}
 		]
 	},
