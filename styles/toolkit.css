@@ -76,7 +76,9 @@
 	color: var(--mist-load-color);
 }
 
-.application.sheet.daggerheart.actor.dh-style.adversary .tab.inventory .items-section {
+.application.sheet.daggerheart.actor.dh-style:is(.adversary, .companion) .tab.inventory .items-section {
+	flex: 1;
+	min-height: 0;
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
@@ -91,4 +93,71 @@
 	padding: 0 2px;
 	text-align: center;
 	font-weight: bold;
+}
+
+.daggerheart .mist-load.mist-load-unlimited {
+	grid-template-columns: auto 1fr;
+}
+
+.daggerheart .mist-load.mist-load-unlimited .mist-load-value {
+	justify-self: end;
+}
+
+/* The sections scroll inside the window; the save button stays at the bottom. */
+.mist-age-settings .window-content {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.mist-age-settings .mist-settings-sections {
+	flex: 1;
+	min-height: 0;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	padding-right: 6px;
+	scrollbar-gutter: stable;
+}
+
+.mist-age-settings .form-footer {
+	flex: none;
+}
+
+.mist-age-settings .mist-settings-section {
+	flex: none;
+	padding: 8px 12px 10px 12px;
+	border-radius: 6px;
+}
+
+.mist-age-settings .mist-settings-section .form-group > label {
+	flex: 3;
+	line-height: 1.3;
+}
+
+.mist-age-settings .mist-settings-section .form-group > .form-fields {
+	flex: 2;
+}
+
+.mist-age-settings .mist-settings-section legend {
+	padding: 0 6px;
+	font-weight: bold;
+	font-size: var(--font-size-16, 16px);
+}
+
+.mist-age-settings .mist-settings-section legend i {
+	margin-right: 4px;
+}
+
+.mist-age-settings .mist-settings-section-hint {
+	margin: 0 0 6px 0;
+}
+
+.mist-age-settings .mist-settings-icon-preview {
+	flex: none;
+	width: 32px;
+	height: 32px;
+	border: none;
+	object-fit: contain;
 }

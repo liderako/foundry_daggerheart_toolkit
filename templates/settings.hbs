@@ -1,0 +1,28 @@
+<div class="mist-settings-sections">
+    {{#each sections as |section|}}
+        <fieldset class="mist-settings-section">
+            <legend><i class="{{section.icon}}" inert></i> {{section.label}}</legend>
+            {{#if section.hint}}<p class="hint mist-settings-section-hint">{{section.hint}}</p>{{/if}}
+            {{#each section.fields as |field|}}
+                <div class="form-group">
+                    <label for="mist-setting-{{field.key}}">{{field.name}}</label>
+                    <div class="form-fields">
+                        {{#if field.isBoolean}}
+                            <input type="checkbox" id="mist-setting-{{field.key}}" name="{{field.key}}" {{checked field.value}}>
+                        {{else if field.choices}}
+                            <select id="mist-setting-{{field.key}}" name="{{field.key}}">
+                                {{selectOptions field.choices selected=field.value localize=true}}
+                            </select>
+                        {{else if field.filePicker}}
+                            <img class="mist-settings-icon-preview" src="{{field.value}}" alt="">
+                            <file-picker id="mist-setting-{{field.key}}" name="{{field.key}}" type="{{field.filePicker}}" value="{{field.value}}"></file-picker>
+                        {{else}}
+                            <input type="number" id="mist-setting-{{field.key}}" name="{{field.key}}" value="{{field.value}}" step="any">
+                        {{/if}}
+                    </div>
+                    {{#if field.hint}}<p class="hint">{{field.hint}}</p>{{/if}}
+                </div>
+            {{/each}}
+        </fieldset>
+    {{/each}}
+</div>

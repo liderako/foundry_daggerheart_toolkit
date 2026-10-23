@@ -4,6 +4,33 @@
 		"DeathLoot": {
 			"Name": "Loot from fallen adversaries",
 			"Hint": "When an adversary that carries inventory items or gold is downed (all Hit Points marked, or Dead / Defeated), its token becomes an Item Piles loot pile. It turns back if the adversary recovers."
+		},
+		"Settings": {
+			"Title": "The Mist Age - Toolkit settings",
+			"Save": "Save Changes",
+			"Menu": {
+				"Name": "Toolkit settings",
+				"Label": "Open settings",
+				"Hint": "Currencies, carrying capacity, overload and adversary loot, grouped into sections."
+			},
+			"Sections": {
+				"prices": {
+					"Label": "Currency",
+					"Hint": "Exchange rates between Daggerheart currencies. Prices are stored in handfuls."
+				},
+				"capacity": {
+					"Label": "Carrying capacity",
+					"Hint": "Character capacity = base + Strength × per-point step (the negative step below 0). With the defaults: Strength -1 = 18, 0 = 20, 1 = 24, 2 = 28, 3 = 32 slots."
+				},
+				"overload": {
+					"Label": "Overload",
+					"Hint": "What happens when a character carries more than its capacity."
+				},
+				"adversaries": {
+					"Label": "Adversaries",
+					"Hint": "Inventory and loot of adversaries."
+				}
+			}
 		}
 	},
 	"MIST_AGE_PRICES": {
@@ -13,7 +40,21 @@
 		"TableApplied": "Price table applied: {compendium} items in world compendiums, {copies} items in the world.",
 		"HbCreated": "Created compendiums: {packs}.",
 		"TablesRelinked": "Roll tables now point to HB items: {count} results.",
-		"LootTablesCreated": "Created roll tables: {tables}."
+		"LootTablesCreated": "Created roll tables: {tables}.",
+		"Rates": {
+			"coinsPerHandful": {
+				"Name": "Rate: coins per handful",
+				"Hint": "How many coins make one handful. In The Mist Age: 10 Penny = 1 Silver. Prices are stored in handfuls, so changing a rate changes how prices split into coins, not the prices themselves."
+			},
+			"handfulsPerBag": {
+				"Name": "Rate: handfuls per bag",
+				"Hint": "How many handfuls make one bag. In The Mist Age: 100 Silver = 1 Gold."
+			},
+			"bagsPerChest": {
+				"Name": "Rate: bags per chest",
+				"Hint": "How many bags make one chest. In The Mist Age: 10 Gold = 1 Gold Bar."
+			}
+		}
 	},
 	"MIST_AGE_WEIGHT": {
 		"Weight": "Weight (slots)",
@@ -33,6 +74,42 @@
 		"FreeOverload": {
 			"Name": "Overload without consequences",
 			"Hint": "How many slots over capacity a character can carry before counting as heavily overloaded."
+		},
+		"CharacterCapacity": {
+			"Name": "Carrying limit for characters",
+			"Hint": "When off, characters have no maximum load: their load is still counted in slots, but there is no capacity, bar or overload. Adversaries keep their limit."
+		},
+		"LoadUnlimitedTooltip": "No carrying limit for characters: the load is only counted.",
+		"OverloadEffect": {
+			"Name": "Overload icon on characters",
+			"Hint": "An overloaded character gets an icon-only effect (anchor) on its token and sheet. It changes nothing; it only marks the overload.",
+			"Off": "Off",
+			"Any": "Any overload",
+			"Heavy": "Only heavy overload"
+		},
+		"CharacterManualCapacity": {
+			"Name": "Players set character capacity by hand",
+			"Hint": "When on, a character's carrying capacity becomes an input in its load bar for whoever owns the sheet. An empty field uses the Strength formula. When off, the formula is always used."
+		},
+		"CapacityBase": {
+			"Name": "Base capacity",
+			"Hint": "Slots a character with Strength 0 can carry."
+		},
+		"CapacityPerStrength": {
+			"Name": "Slots per point of Strength",
+			"Hint": "Added for every point of Strength above 0."
+		},
+		"CapacityPerNegativeStrength": {
+			"Name": "Slots lost per negative point",
+			"Hint": "Removed for every point of Strength below 0."
+		},
+		"CharacterCapacityGMOnly": {
+			"Name": "Only the GM sets character capacity",
+			"Hint": "With manual character capacity on, only the GM can change it; players see the number."
+		},
+		"OverloadIcon": {
+			"Name": "Overload icon image",
+			"Hint": "Image of the overload effect on tokens and sheets. Changing it updates the icons already shown."
 		}
 	}
 }

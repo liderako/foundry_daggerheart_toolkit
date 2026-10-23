@@ -4,17 +4,26 @@ const SLOTS_PATH = `${WEIGHT_FLAGS}.slots`;
 const WORN_PATH = `${WEIGHT_FLAGS}.worn`;
 // Active effects can raise capacity by adding to this flag (e.g. a backpack: ADD 4).
 const BONUS_PATH = `${WEIGHT_FLAGS}.bonusSlots`;
-// Capacity typed in by the GM; replaces the Strength formula for these actor types.
+// Capacity typed in by whoever can edit the sheet; replaces the Strength formula. Adversaries and companions always
+// allow it, characters only while the GM turns on the characterManualCapacity setting.
 const CAPACITY_PATH = `${WEIGHT_FLAGS}.capacity`;
-const MANUAL_CAPACITY_TYPES = new Set(["adversary"]);
+const MANUAL_CAPACITY_TYPES = new Set(["adversary", "companion"]);
 const WEARABLE_TYPES = new Set(["loot"]);
-const LOAD_BAR_TYPES = new Set(["character", "adversary"]);
+const LOAD_BAR_TYPES = new Set(["character", "adversary", "companion"]);
 
-// Carrying capacity in slots by Strength. Values outside the table continue the nearest step.
-const CAPACITY_BY_STRENGTH = { "-1": 18, 0: 20, 1: 24, 2: 28, 3: 32 };
+// Capacity formula, editable in the module settings. The Mist Age defaults give Strength -1 = 18, 0 = 20, 1 = 24,
+// 2 = 28, 3 = 32 slots: 20 base, +4 per point of Strength, -2 per point below 0.
+const CAPACITY_DEFAULTS = { capacityBase: 20, capacityPerStrength: 4, capacityPerNegativeStrength: 2 };
 // Per-item defaults (potions, tiny consumables, light armor, small weapons), keyed by nameKey().
 const PRESET_WEIGHTS_URL = `modules/${MODULE_ID}/data/weights.json`;
 let presetWeights = new Map();
+// Called when weights or load settings change, so loads computed elsewhere (the overload icon) are refreshed.
+export const LOAD_RULES_HOOK = "mistAgeToolkit.loadRulesChanged";
+
+function onLoadRulesChanged() {
+	rerenderActorSheets();
+	Hooks.callAll(LOAD_RULES_HOOK);
+}
 
 async function loadPresetWeights() {
 	const response = await fetch(PRESET_WEIGHTS_URL, { cache: "no-store" });
@@ -24,7 +33,7 @@ async function loadPresetWeights() {
 	}
 	const { weights } = await response.json();
 	presetWeights = new Map(weights.map(entry => [nameKey(entry.type, entry.name), entry.slots]));
-	rerenderActorSheets();
+	onLoadRulesChanged();
 }
 
 /** Weight used while an item has no weight of its own. */
@@ -49,19 +58,14 @@ function getDefaultWeight(item) {
 const round = value => Math.round(value * 100) / 100;
 const signed = value => (value > 0 ? `+${value}` : `${value}`);
 
+/** Base capacity plus a step per point of Strength, with a separate step for each point below 0. */
 export function getCapacity(strength) {
-	const levels = Object.keys(CAPACITY_BY_STRENGTH).map(Number).sort((a, b) => a - b);
-	const min = levels[0];
-	const max = levels.at(-1);
-	if (strength < min) {
-		const step = CAPACITY_BY_STRENGTH[min + 1] - CAPACITY_BY_STRENGTH[min];
-		return Math.max(0, CAPACITY_BY_STRENGTH[min] - (min - strength) * step);
-	}
-	if (strength > max) {
-		const step = CAPACITY_BY_STRENGTH[max] - CAPACITY_BY_STRENGTH[max - 1];
-		return CAPACITY_BY_STRENGTH[max] + (strength - max) * step;
-	}
-	return CAPACITY_BY_STRENGTH[strength];
+	const value = key => {
+		const number = Number(game.settings.get(MODULE_ID, key));
+		return Number.isFinite(number) ? number : CAPACITY_DEFAULTS[key];
+	};
+	const perPoint = strength >= 0 ? value("capacityPerStrength") : value("capacityPerNegativeStrength");
+	return Math.max(0, value("capacityBase") + strength * perPoint);
 }
 
 function hasOwnWeight(item) {
@@ -95,26 +99,39 @@ export function getItemLoad(item) {
 	return getItemWeight(item) * getQuantity(item);
 }
 
-/** Adversaries have no Strength trait: they use a capacity set by hand, or the Strength 0 capacity. */
+/** Characters only have a carrying limit while the characterCapacity setting is on; other actors always do. */
+function hasCapacityLimit(actor) {
+	return actor.type !== "character" || game.settings.get(MODULE_ID, "characterCapacity");
+}
+
+function allowsManualCapacity(actor) {
+	return MANUAL_CAPACITY_TYPES.has(actor.type) || (actor.type === "character" && game.settings.get(MODULE_ID, "characterManualCapacity"));
+}
+
+/**
+ * Adversaries and companions have no Strength trait: they use a capacity set by hand, or the Strength 0 capacity.
+ * Without a carrying limit the load is still counted, but there is never an overload.
+ */
 export function getEncumbrance(actor) {
+	const limited = hasCapacityLimit(actor);
 	const hasStrength = actor.system.traits?.strength !== undefined;
 	const strength = Number(actor.system.traits?.strength?.value) || 0;
 	const bonus = Number(foundry.utils.getProperty(actor, BONUS_PATH)) || 0;
 	const formulaCapacity = getCapacity(strength);
 	const ownCapacity = foundry.utils.getProperty(actor, CAPACITY_PATH);
-	const manualCapacity = MANUAL_CAPACITY_TYPES.has(actor.type) && ownCapacity !== null && ownCapacity !== undefined && ownCapacity !== "";
+	const manualCapacity = allowsManualCapacity(actor) && ownCapacity !== null && ownCapacity !== undefined && ownCapacity !== "";
 	const baseCapacity = manualCapacity ? Math.max(0, Number(ownCapacity) || 0) : formulaCapacity;
 	const capacity = baseCapacity + bonus;
 	const load = round(actor.items.reduce((sum, item) => sum + getItemLoad(item), 0));
 	const free = game.settings.get(MODULE_ID, "freeOverload");
-	const overload = round(Math.max(0, load - capacity));
+	const overload = limited ? round(Math.max(0, load - capacity)) : 0;
 	let state = "ok";
 	if (overload > free) {
 		state = "heavy";
 	} else if (overload > 0) {
 		state = "overloaded";
 	}
-	return { hasStrength, strength, bonus, manualCapacity, formulaCapacity, baseCapacity, capacity, load, overload, free, state };
+	return { limited, hasStrength, strength, bonus, manualCapacity, formulaCapacity, baseCapacity, capacity, load, overload, free, state };
 }
 
 function weightIcon() {
@@ -186,9 +203,17 @@ function injectInventoryWeights(actor, element) {
 	}
 }
 
-/** The capacity as text, or for the GM on an adversary an input that sets it by hand (empty = formula). */
+/** Whoever can edit the sheet, except that the characterCapacityGMOnly setting keeps character capacity to the GM. */
+function canEditCapacity(sheet) {
+	if (!allowsManualCapacity(sheet.document) || !sheet.isEditable) {
+		return false;
+	}
+	return sheet.document.type !== "character" || game.user.isGM || !game.settings.get(MODULE_ID, "characterCapacityGMOnly");
+}
+
+/** The capacity as text, or, where it can be set by hand, an input (empty = formula). */
 function capacityHTML(sheet, encumbrance) {
-	if (!MANUAL_CAPACITY_TYPES.has(sheet.document.type) || !game.user.isGM || !sheet.isEditable) {
+	if (!canEditCapacity(sheet)) {
 		return `${encumbrance.capacity}`;
 	}
 	const value = encumbrance.manualCapacity ? encumbrance.baseCapacity : "";
@@ -204,6 +229,17 @@ function injectLoadBar(sheet, element) {
 	}
 	tab.querySelector(".mist-load")?.remove();
 	const encumbrance = getEncumbrance(sheet.document);
+	const anchor = tab.querySelector(".gold-section") ?? tab.querySelector(".search-section");
+	const insert = html => (anchor ? anchor.insertAdjacentHTML("afterend", html) : tab.insertAdjacentHTML("afterbegin", html));
+	if (!encumbrance.limited) {
+		const tooltip = foundry.utils.escapeHTML(game.i18n.localize("MIST_AGE_WEIGHT.LoadUnlimitedTooltip"));
+		insert(`
+			<div class="mist-load mist-load-ok mist-load-unlimited" data-tooltip="${tooltip}">
+				<span class="mist-load-label">${weightIcon()} ${game.i18n.localize("MIST_AGE_WEIGHT.Load")}</span>
+				<span class="mist-load-value">${encumbrance.load} ${game.i18n.localize("MIST_AGE_WEIGHT.Slots")}</span>
+			</div>`);
+		return;
+	}
 	const percent = encumbrance.capacity > 0 ? Math.min(100, (encumbrance.load / encumbrance.capacity) * 100) : 100;
 	const bonus = encumbrance.bonus ? game.i18n.format("MIST_AGE_WEIGHT.Bonus", { bonus: signed(encumbrance.bonus) }) : "";
 	let tooltipKey = encumbrance.hasStrength ? "MIST_AGE_WEIGHT.LoadTooltip" : "MIST_AGE_WEIGHT.LoadTooltipNoStrength";
@@ -222,32 +258,37 @@ function injectLoadBar(sheet, element) {
 	} else if (encumbrance.state === "heavy") {
 		status = `${game.i18n.localize("MIST_AGE_WEIGHT.HeavilyOverloaded")} (+${encumbrance.overload})`;
 	}
-	const html = `
+	insert(`
 		<div class="mist-load mist-load-${encumbrance.state}" data-tooltip="${tooltip}">
 			<span class="mist-load-label">${weightIcon()} ${game.i18n.localize("MIST_AGE_WEIGHT.Load")}</span>
 			<div class="mist-load-bar"><div class="mist-load-fill" style="width: ${percent}%"></div></div>
 			<span class="mist-load-value">${encumbrance.load} / ${capacityHTML(sheet, encumbrance)}</span>
 			${status ? `<span class="mist-load-status">${status}</span>` : ""}
-		</div>`;
-	const anchor = tab.querySelector(".gold-section") ?? tab.querySelector(".search-section");
-	if (anchor) {
-		anchor.insertAdjacentHTML("afterend", html);
-	} else {
-		tab.insertAdjacentHTML("afterbegin", html);
-	}
+		</div>`);
 }
 
 /** Called during init: settings, the weight API, preset weights and sheet rendering. */
 export function registerWeight() {
-	game.settings.register(MODULE_ID, "freeOverload", {
-		name: "MIST_AGE_WEIGHT.FreeOverload.Name",
-		hint: "MIST_AGE_WEIGHT.FreeOverload.Hint",
-		scope: "world",
-		config: true,
-		type: Number,
-		default: 8,
-		onChange: rerenderActorSheets
-	});
+	// Edited in the toolkit settings window (settings-menu.js); labels are MIST_AGE_WEIGHT.<Key>.Name / .Hint.
+	const settings = {
+		...Object.fromEntries(Object.entries(CAPACITY_DEFAULTS).map(([key, value]) => [key, { type: Number, default: value }])),
+		characterCapacity: { type: Boolean, default: true },
+		characterManualCapacity: { type: Boolean, default: false },
+		characterCapacityGMOnly: { type: Boolean, default: false },
+		freeOverload: { type: Number, default: 8 }
+	};
+	for (const [key, { type, default: initial }] of Object.entries(settings)) {
+		const label = `MIST_AGE_WEIGHT.${key[0].toUpperCase()}${key.slice(1)}`;
+		game.settings.register(MODULE_ID, key, {
+			name: `${label}.Name`,
+			hint: `${label}.Hint`,
+			scope: "world",
+			config: false,
+			type,
+			default: initial,
+			onChange: onLoadRulesChanged
+		});
+	}
 	const module = game.modules.get(MODULE_ID);
 	module.api = { ...module.api, getCapacity, getItemWeight, getItemLoad, getEncumbrance };
 	loadPresetWeights();

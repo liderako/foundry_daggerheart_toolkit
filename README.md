@@ -1,33 +1,133 @@
 # The Mist Age - Toolkit
 
-Foundry VTT module for the Daggerheart world *The Mist Age*.
+Модуль Foundry VTT для мира *The Mist Age* на системе Daggerheart. Добавляет цены и вес предметам, торговлю через Item Piles, нагрузку персонажей, HB-копии компендиумов и таблиц лута, инвентарь противникам и компаньонам.
 
-- **Prices.** A price (in Silver) on weapons, armor, consumables and loot, shown on item sheets and inventories. Item Piles merchants read it, and the module keeps the Item Piles currencies in line with the Daggerheart homebrew currency (10 Penny = 1 Silver, 100 Silver = 1 Gold).
-- **HB compendiums.** One-time copies of the Daggerheart Weapons, Armors, Consumables, Items and Rolltables compendiums as world compendiums with an `(HB)` suffix, so system updates never overwrite them. Prices from `data/compendium-prices.json` fill items that have no price yet.
-- **Loot tables.** Primary/Secondary × Physical/Magic weapon tables and an armor table; the roll formula picks the rarity (Common = Tier 1 … Legendary = Tier 4).
-- **Weight.** Weight in slots per item (`data/weights.json` holds per-item defaults) and a load bar on character sheets with capacity from Strength.
-- **Adversary inventory.** An Inventory tab with gold on adversary sheets.
-- **Loot from fallen adversaries.** When an adversary with inventory items or gold is downed (all Hit Points marked, or Dead / Defeated), its token becomes an Item Piles loot pile; it turns back if the adversary recovers. Can be switched off in the module settings.
+## Что нужно
 
-## Install
+| | Версия |
+|---|---|
+| Foundry VTT | 13–14 |
+| Система | Daggerheart |
+| Модули | [Item Piles](https://github.com/fantasycalendar/FoundryVTT-ItemPiles) 3.x (вместе с ним socketlib и libWrapper) |
 
-The module requires [Item Piles](https://github.com/fantasycalendar/FoundryVTT-ItemPiles); Foundry offers to install it together with this module.
+## Установка
 
-In Foundry: **Add-on Modules → Install Module**, paste the manifest URL and press **Install**:
+В Foundry: **Add-on Modules → Install Module**, вставь ссылку и нажми **Install**:
 
 ```
 https://github.com/liderako/the_mist_age_foundry_daggerheart_addtional/releases/latest/download/module.json
 ```
 
-## Release a new version
+Foundry сам предложит поставить Item Piles. Потом включи модуль в мире: **Game Settings → Manage Modules → The Mist Age - Toolkit**.
 
-1. Commit and push the changes.
-2. Push a tag like `v1.0.1` (`git tag v1.0.1` then `git push origin v1.0.1`), or create a release with that tag on GitHub.
-3. The **Release** workflow creates the release if needed, sets that version in `module.json` and attaches `module.json` and `module.zip`. Foundry then offers the update.
+### Первый запуск
 
-The manifest URL above only works once at least one release exists.
+При первой загрузке мира GM модуль один раз:
 
-## Data notes
+- создаёт мировые компендиумы **Weapons (HB)**, **Armors (HB)**, **Consumables (HB)**, **Loot (HB)** и **Rolltables (HB)**;
+- создаёт таблицы лута в папке **Weapons & Armor (HB)**;
+- проставляет цены из таблицы цен всем предметам, у которых цены ещё нет;
+- настраивает в Item Piles атрибут цены и валюты.
 
-- Prices are stored in `flags.mist-age-prices.price` and weights in `flags.mist-age-weight.*`: the scopes of the earlier separate modules, kept so existing data needs no migration.
-- Adversary gold is stored in `system.gold`, like character gold. Disabling the module drops that field from adversaries the next time they are saved.
+Это занимает несколько секунд. Повторно эти шаги не выполняются: повторяется только проставление цен, если изменилась таблица цен.
+
+## Возможности
+
+### Цены и валюта
+
+- **Цена предмета.** У оружия, брони, расходников и лута есть цена. GM задаёт её во вкладке **Settings** листа предмета.
+- **Где видна цена:** в шапке листа предмета и тегом у предмета в инвентаре. Цена раскладывается по монетам с иконками валют из homebrew Daggerheart, например `2 Gold 50 Silver 3 Penny`.
+- **Хранение.** Цена хранится в основной валюте, в горстях (handfuls): в The Mist Age это Silver. Поле принимает дроби: `0.1` при курсе 10 — это одна монета.
+- **Курсы валют** задаются в настройках. По умолчанию 10 монет = 1 горсть, 100 горстей = 1 мешок, 10 мешков = 1 сундук. При смене курса меняется только раскладка цены по монетам, сами цены остаются.
+- **Item Piles.** Модуль сам указывает Item Piles, где лежит цена, и собирает его валюты из валют Daggerheart: названия, курсы, основная валюта. Торговцы продают и покупают по этим ценам, а деньги берутся из золота на листе.
+- **Таблица цен** `data/compendium-prices.json` проставляет цены предметам без цены: в мировых компендиумах, в папке Items, у персонажей и торговцев. Предметы сопоставляются по названию и типу, приставка «(HB)» не важна. Цену, поставленную вручную, модуль не трогает.
+
+### HB-компендиумы и таблицы
+
+- **HB-копии.** Модуль копирует компендиумы оружия, брони, расходников и лута Daggerheart в мировые компендиумы с приставкой «(HB)» у каждого предмета. ID предметов те же, что у оригиналов. Обновление системы мировые компендиумы не трогает, поэтому цены и вес настраиваются прямо в HB-копиях.
+- **Таблицы бросков.** Таблицы мира и копия **Rolltables (HB)** ведут на HB-предметы, а не на системные. Если позже импортировать таблицу из системного компендиума, модуль переведёт её на HB при следующей загрузке GM.
+- **Таблицы лута** в папке **Weapons & Armor (HB)**:
+  - Primary Physical Weapons (HB);
+  - Primary Magic Weapons (HB);
+  - Secondary Physical Weapons (HB);
+  - Secondary Magic Weapons (HB);
+  - Armor (HB).
+
+  В каждой таблице все предметы категории, отсортированы по тиру. Редкость выбирается в формуле броска: **Common** = Tier 1, **Uncommon** = Tier 2, **Rare** = Tier 3, **Legendary** = Tier 4. Каждая формула попадает только в предметы своего тира.
+
+### Вес и нагрузка
+
+- **Вес предмета** указывается в слотах, можно дробно. GM задаёт его во вкладке **Settings** листа предмета, пустое поле — вес по умолчанию. Вес виден в шапке листа и тегом в инвентаре: вес × количество.
+- **Вес по умолчанию.** Индивидуальные значения берутся из `data/weights.json`:
+  - зелья и всё во флаконах — 0.5;
+  - травы, порошки, семена и прочая мелочь — 0.1;
+  - кожаная, стёганая и тканевая броня — 2;
+  - кинжалы и прочее маленькое одноручное оружие — 1.
+
+  Остальное считается по типу: одноручное оружие 2, двуручное 3, броня 4, прочее 1.
+- **Что не считается:** надетая броня и лут с галочкой **Worn** (одежда, плащи, украшения).
+- **Шкала нагрузки** на вкладке инвентаря у персонажей, противников и компаньонов: нагрузка / вместимость, цвет по состоянию. Норма — зелёный, перевес без последствий — жёлтый, сильный перевес — красный.
+- **Вместимость персонажа** = база + Сила × прибавка за очко. Ниже 0 вместо прибавки вычитается штраф за очко. Со значениями по умолчанию (20, +4, −2): Сила −1 = 18, 0 = 20, 1 = 24, 2 = 28, 3 = 32 слота. Формула меняется в настройках.
+- **Ручная вместимость.** GM может разрешить задавать вместимость персонажа вручную, прямо в шкале нагрузки; пустое поле — снова формула. Отдельная галочка оставляет это право только GM.
+- **Противники и компаньоны.** Силы у них нет. Вместимость вписывается в шкалу; пусто — вместимость как при Силе 0.
+- **Бонус к вместимости.** Его даёт активный эффект с ключом `flags.mist-age-weight.bonusSlots` в режиме **Add**, например рюкзак +4.
+- **Без ограничения.** Для персонажей ограничение веса можно выключить: тогда нагрузка только считается, без вместимости и перевеса.
+- **Значок перегруза.** Перегруженный персонаж получает эффект-значок с якорем на токене и в эффектах листа: «Overloaded (+5)» или «Heavily overloaded (+15)». Характеристики он не меняет. В настройках выбирается, когда показывать значок: при любом перевесе, только при сильном или никогда. Там же меняется картинка значка; новая картинка сразу появляется и на уже висящих значках.
+
+### Инвентарь противников и компаньонов
+
+- **Вкладка Inventory.** У adversary и компаньонов появляется вкладка **Inventory**, как у персонажа: деньги (Penny/Silver/Gold), оружие, броня, расходники и лут, плюс шкала нагрузки.
+- **Как пользоваться:** предметы перетаскиваются на лист или создаются кнопкой «+». Меню «⋮» у предмета: **Edit**, **Send to Chat**, **Delete**; с Shift удаление идёт без подтверждения.
+- **Деньги** хранятся там же, где у персонажа, поэтому Item Piles может их забрать.
+
+### Лут с павших противников
+
+Когда у adversary отмечены все HP или на нём статус **Dead** или **Defeated**, и у него есть предметы или золото, его токен становится кучей Item Piles. Игроки открывают её двойным кликом и забирают вещи и деньги.
+
+- **Токен остаётся телом на карте:** со своей картинкой и именем, не исчезает, когда кучу опустошат.
+- **Если adversary встаёт,** токен снова становится обычным.
+- **Пустой инвентарь:** без предметов и золота противник лутом не становится.
+
+## Настройки
+
+**Game Settings → Configure Settings → The Mist Age - Toolkit → Open settings** (только для GM). Окно разбито на разделы:
+
+| Раздел | Настройка | По умолчанию |
+|---|---|---|
+| **Currency** | Rate: coins per handful | 10 |
+| | Rate: handfuls per bag | 100 |
+| | Rate: bags per chest | 10 |
+| **Carrying capacity** | Base capacity | 20 |
+| | Slots per point of Strength | 4 |
+| | Slots lost per negative point | 2 |
+| | Carrying limit for characters | вкл |
+| | Players set character capacity by hand | выкл |
+| | Only the GM sets character capacity | выкл |
+| **Overload** | Overload without consequences (слотов перевеса без последствий) | 8 |
+| | Overload icon on characters: Off / Any overload / Only heavy overload | Any overload |
+| | Overload icon image (картинка значка, выбор файла с превью) | `icons/svg/anchor.svg` |
+| **Adversaries** | Loot from fallen adversaries | вкл |
+
+## Файлы данных
+
+- **`data/compendium-prices.json`** — таблица цен: название и тип предмета, цена в горстях, исходная строка из прайса. Изменённая таблица применяется при следующей загрузке GM, но только к предметам без цены.
+- **`data/weights.json`** — веса по умолчанию для отдельных предметов. Изменения видны после перезагрузки. Вес, вписанный руками, главнее.
+
+## Для разработчиков
+
+- **API:** `game.modules.get("mist-age-toolkit").api`, функции `getCapacity(strength)`, `getItemWeight(item)`, `getItemLoad(item)`, `getEncumbrance(actor)`. Последняя возвращает вместимость, нагрузку, перевес и состояние (`ok`, `overloaded`, `heavy`).
+- **Где хранятся данные:**
+  - цена — `flags.mist-age-prices.price`;
+  - вес — `flags.mist-age-weight.slots`;
+  - «надето» — `flags.mist-age-weight.worn`;
+  - ручная вместимость — `flags.mist-age-weight.capacity`.
+
+  Это пространства прежних отдельных модулей. Они сохранены, чтобы старые данные работали без переноса.
+- **Золото противников и компаньонов** лежит в `system.gold`. Если выключить модуль, Foundry уберёт это поле при следующем сохранении такого актёра.
+- **Старые модули.** Модуль заменяет прежние **The Mist Age - Item Prices** и **The Mist Age - Item Weight** и переносит их настройки. Если старые модули ещё включены, тулкит не запустится и покажет ошибку: выключи их.
+
+## Выпуск новой версии
+
+1. Закоммить и запушь изменения.
+2. Создай и запушь тег, например `git tag v1.0.1`, затем `git push origin v1.0.1`. Можно и создать релиз с этим тегом на GitHub.
+3. GitHub Action **Release** создаст релиз, поставит версию в `module.json` и прикрепит `module.json` и `module.zip`. Foundry предложит обновление всем, кто ставил модуль по ссылке.

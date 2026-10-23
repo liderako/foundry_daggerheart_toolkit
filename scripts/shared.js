@@ -20,3 +20,12 @@ export function rerenderActorSheets() {
 		}
 	}
 }
+
+export function rerenderItemAndActorSheets() {
+	const { ActorSheetV2, ItemSheetV2 } = foundry.applications.sheets;
+	for (const app of foundry.applications.instances.values()) {
+		if ((app instanceof ActorSheetV2 || app instanceof ItemSheetV2) && app.rendered) {
+			app.render();
+		}
+	}
+}

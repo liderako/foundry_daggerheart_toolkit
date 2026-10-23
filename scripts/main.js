@@ -1,6 +1,8 @@
-import { registerAdversaryInventory } from "./adversary-inventory.js";
 import { registerDeathLoot } from "./death-loot.js";
+import { registerInventoryTabs } from "./inventory-tab.js";
+import { registerOverloadEffect } from "./overload-effect.js";
 import { preparePricesWorld, registerPrices } from "./prices.js";
+import { registerSettingsMenu } from "./settings-menu.js";
 import { MODULE_ID } from "./shared.js";
 import { registerWeight } from "./weight.js";
 
@@ -43,8 +45,10 @@ Hooks.once("init", () => {
 	});
 	registerPrices();
 	registerWeight();
-	registerAdversaryInventory();
+	registerOverloadEffect();
+	registerInventoryTabs();
 	registerDeathLoot();
+	registerSettingsMenu();
 
 	Hooks.once("ready", async () => {
 		if (!game.user.isGM) {

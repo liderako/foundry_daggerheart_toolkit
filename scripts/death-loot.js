@@ -16,7 +16,7 @@ export function registerDeathLoot() {
 		name: "MIST_AGE.DeathLoot.Name",
 		hint: "MIST_AGE.DeathLoot.Hint",
 		scope: "world",
-		config: true,
+		config: false,
 		type: Boolean,
 		default: true
 	});

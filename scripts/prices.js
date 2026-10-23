@@ -6,16 +6,16 @@ import {
 	relinkTablesToHb,
 	syncHbLootTables
 } from "./hb.js";
-import { INVENTORY_TYPES, MODULE_ID, PRICE_PATH, nameKey } from "./shared.js";
+import { INVENTORY_TYPES, MODULE_ID, PRICE_PATH, nameKey, rerenderItemAndActorSheets } from "./shared.js";
 
 const LEGACY_PRICE_PATH = "flags.item-piles.system.price";
 const PRICE_TABLE_URL = `modules/${MODULE_ID}/data/compendium-prices.json`;
 // Bump when the matching rules change, so the table is applied again.
 const PRICE_TABLE_LOGIC = 2;
 
-// Worth of one unit of each Daggerheart currency, in handfuls. Item Piles currencies are rebuilt from this table.
-// 10 Penny (coins) = 1 Silver (handfuls), 100 Silver = 1 Gold (bags). Gold Bar (chests) is disabled in homebrew.
-const EXCHANGE_RATES = { chests: 1000, bags: 100, handfuls: 1, coins: 0.1 };
+// Exchange rates between neighbouring Daggerheart currencies, editable in the module settings. Defaults are
+// The Mist Age's: 10 Penny (coins) = 1 Silver (handfuls), 100 Silver = 1 Gold (bags), 10 Gold = 1 Gold Bar (chests).
+const RATE_DEFAULTS = { coinsPerHandful: 10, handfulsPerBag: 100, bagsPerChest: 10 };
 const CURRENCY_IMAGES = {
 	chests: "icons/commodities/metal/ingot-gold.webp",
 	bags: "icons/commodities/currency/coin-embossed-crown-gold.webp",
@@ -31,9 +31,22 @@ function getCurrencies() {
 	return game.settings.get("daggerheart", "Homebrew")?.currency ?? {};
 }
 
+/**
+ * Worth of one unit of each currency in handfuls, largest first. Prices are stored in handfuls, so changing the
+ * rates changes how a price is split into coins, not the stored price. Item Piles currencies are rebuilt from this.
+ */
+function getExchangeRates() {
+	const rate = key => {
+		const value = Number(game.settings.get(MODULE_ID, key));
+		return value > 0 ? value : RATE_DEFAULTS[key];
+	};
+	const handfulsPerBag = rate("handfulsPerBag");
+	return { chests: handfulsPerBag * rate("bagsPerChest"), bags: handfulsPerBag, handfuls: 1, coins: 1 / rate("coinsPerHandful") };
+}
+
 function getEnabledUnits() {
 	const currencies = getCurrencies();
-	return Object.entries(EXCHANGE_RATES)
+	return Object.entries(getExchangeRates())
 		.filter(([key]) => currencies[key]?.enabled)
 		.map(([key, rate]) => ({ key, rate, label: game.i18n.localize(currencies[key].label), icon: currencies[key].icon }));
 }
@@ -85,17 +98,18 @@ function injectPriceInput(sheet, element, item) {
 	const base = units.find(unit => unit.rate === 1)?.label ?? "handfuls";
 	const smallest = units.at(-1);
 	const largest = units[0];
+	const shortRate = rate => Math.round((rate ?? 1) * 10000) / 10000;
 	const hint = foundry.utils.escapeHTML(game.i18n.format("MIST_AGE_PRICES.PriceHint", {
 		currency: base,
 		smallest: smallest?.label ?? base,
-		smallestRate: smallest?.rate ?? 1,
+		smallestRate: shortRate(smallest?.rate),
 		largest: largest?.label ?? base,
-		largestRate: largest?.rate ?? 1
+		largestRate: shortRate(largest?.rate)
 	}));
 	const disabled = sheet.isEditable ? "" : "disabled";
 	fieldset.insertAdjacentHTML("beforeend", `
 		<span data-tooltip="${hint}">${game.i18n.localize("MIST_AGE_PRICES.Price")} (${foundry.utils.escapeHTML(base)})</span>
-		<input class="mist-price-input" type="number" name="${PRICE_PATH}" value="${getPrice(item)}" min="0" step="0.1" data-dtype="Number" ${disabled} />
+		<input class="mist-price-input" type="number" name="${PRICE_PATH}" value="${getPrice(item)}" min="0" step="any" data-dtype="Number" ${disabled} />
 	`);
 }
 
@@ -253,8 +267,26 @@ async function syncItemPilesCurrencies() {
 	}
 }
 
+async function onRatesChanged() {
+	rerenderItemAndActorSheets();
+	if (game.user.isGM && game.itempiles?.API) {
+		await syncItemPilesCurrencies();
+	}
+}
+
 /** Called during init: settings, Item Piles wiring and sheet rendering. */
 export function registerPrices() {
+	for (const [key, defaultValue] of Object.entries(RATE_DEFAULTS)) {
+		game.settings.register(MODULE_ID, key, {
+			name: `MIST_AGE_PRICES.Rates.${key}.Name`,
+			hint: `MIST_AGE_PRICES.Rates.${key}.Hint`,
+			scope: "world",
+			config: false,
+			type: Number,
+			default: defaultValue,
+			onChange: onRatesChanged
+		});
+	}
 	game.settings.register(MODULE_ID, "legacyPricesMigrated", {
 		scope: "world",
 		config: false,
