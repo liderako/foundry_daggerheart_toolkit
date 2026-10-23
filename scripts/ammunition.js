@@ -1,7 +1,9 @@
-import { MODULE_ID } from "./shared.js";
+import { MODULE_ID, nameKey } from "./shared.js";
 
 export const CONSUMES_PATH = `flags.${MODULE_ID}.consumesAmmo`;
 const AMMO_PATH = `flags.${MODULE_ID}.ammoItems`;
+// [link, name] pairs, so a link to an item that no longer exists can still be matched by name.
+const AMMO_NAMES_PATH = `flags.${MODULE_ID}.ammoNames`;
 const SOURCE_PATH = "_stats.compendiumSource";
 
 /**
@@ -36,6 +38,11 @@ function getAmmoLinks(weapon) {
 	return foundry.utils.getProperty(weapon, AMMO_PATH) ?? [];
 }
 
+function getAmmoLinkNames(weapon) {
+	const pairs = foundry.utils.getProperty(weapon, AMMO_NAMES_PATH);
+	return new Map(Array.isArray(pairs) ? pairs : []);
+}
+
 /** The document id of a compendium UUID. An "(HB)" copy keeps the id of the system item it copies. */
 function compendiumId(uuid) {
 	return uuid?.startsWith("Compendium.") ? uuid.split(".").at(-1) : null;
@@ -64,24 +71,35 @@ function getLineage(uuid, document) {
 	return lineage;
 }
 
-/** Whether an inventory item is the linked item or another copy of the same compendium entry. */
-function isLinkedItem(item, link) {
+/**
+ * Whether an inventory item is the linked item or another copy of the same compendium entry. When the ids do not
+ * meet, a stack with the linked item's name counts; savedName stands in when the linked item no longer exists.
+ */
+function isLinkedItem(item, link, savedName) {
 	const itemLineage = getLineage(item.uuid, item);
+	const linked = fromUuidSync(link, { strict: false });
 	const linkIds = new Set();
-	for (const source of getLineage(link, fromUuidSync(link, { strict: false }))) {
+	for (const source of getLineage(link, linked)) {
 		if (itemLineage.has(source)) {
 			return true;
 		}
 		linkIds.add(compendiumId(source));
 	}
 	linkIds.delete(null);
-	return [...itemLineage].some(source => linkIds.has(compendiumId(source)));
+	if ([...itemLineage].some(source => linkIds.has(compendiumId(source)))) {
+		return true;
+	}
+	// A stack whose copy chain was lost (made by hand, or brought in without a compendium source) still counts when it
+	// carries the linked item's name; the "(HB)" suffix and letter case are ignored.
+	const name = linked?.name ?? savedName;
+	return !!name && nameKey("consumable", name) === nameKey("consumable", item.name);
 }
 
 /** Consumable stacks in the weapon owner's inventory that it shoots and that have units left, in the weapon's order. */
 function getAmmoStacks(weapon) {
 	const links = getAmmoLinks(weapon);
-	const rank = item => links.findIndex(link => isLinkedItem(item, link));
+	const names = getAmmoLinkNames(weapon);
+	const rank = item => links.findIndex(link => isLinkedItem(item, link, names.get(link)));
 	return (weapon.actor?.items ?? [])
 		.filter(item => item.type === "consumable" && item.system.quantity > 0 && rank(item) >= 0)
 		.sort((a, b) => rank(a) - rank(b));
@@ -107,11 +125,11 @@ function injectWeaponFields(sheet, element, weapon) {
 	`);
 	const tags = element.querySelector(".mist-ammo-fields document-tags");
 	// Runs before the field's own drop handler, which would accept any item as it is.
-	tags?.addEventListener("drop", event => onDropAmmo(event, tags), { capture: true });
+	tags?.addEventListener("drop", event => onDropAmmo(event, tags, weapon), { capture: true });
 }
 
 /** Links a dropped consumable. An inventory item is linked through its compendium entry, so later stacks count too. */
-function onDropAmmo(event, tags) {
+function onDropAmmo(event, tags, weapon) {
 	event.preventDefault();
 	event.stopImmediatePropagation();
 	if (!tags.editable) {
@@ -128,6 +146,11 @@ function onDropAmmo(event, tags) {
 	const link = inCompendium ? data.uuid : (foundry.utils.getProperty(item, SOURCE_PATH) ?? item.flags?.core?.sourceId ?? data.uuid);
 	if (!tags.value.includes(link)) {
 		tags.value = [...tags.value, link];
+	}
+	const names = getAmmoLinkNames(weapon);
+	if (names.get(link) !== item.name) {
+		names.set(link, item.name);
+		weapon.update({ [AMMO_NAMES_PATH]: [...names] });
 	}
 }
 
