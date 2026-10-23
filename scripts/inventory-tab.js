@@ -1,6 +1,8 @@
 import { INVENTORY_TYPES, MODULE_ID } from "./shared.js";
 
 const TEMPLATE = `modules/${MODULE_ID}/templates/inventory-tab.hbs`;
+// The item drag selector of the Daggerheart character and adversary sheets.
+const ITEM_DRAG_SELECTOR = '[data-item-id][draggable="true"], [data-item-id] [draggable="true"]';
 // Actor types that get an inventory with gold: the Daggerheart sheet (in game.system.api) and the tab it follows.
 const INVENTORY_ACTORS = [
 	{ type: "adversary", sheet: "Adversary", after: "features" },
@@ -66,6 +68,13 @@ function addInventoryTab(sheetClass, after) {
 		selector: [...INVENTORY_TYPES].map(type => `[data-item-uuid][data-type="${type}"]`).join(", "),
 		options: { parentClassHooks: false, fixed: true }
 	});
+
+	// Items are dragged out of a sheet only where it declares this selector, as the character and adversary sheets
+	// do; the companion sheet does not. Application options concatenate dragDrop with the parent sheet's.
+	const dragDrop = sheetClass.DEFAULT_OPTIONS.dragDrop ??= [];
+	if (!dragDrop.some(d => d.dragSelector === ITEM_DRAG_SELECTOR)) {
+		dragDrop.push({ dragSelector: ITEM_DRAG_SELECTOR, dropSelector: null });
+	}
 }
 
 /** Edit, send to chat and delete: the Daggerheart common item options. Called with the sheet as `this`. */
