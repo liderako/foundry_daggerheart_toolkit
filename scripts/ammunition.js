@@ -2,6 +2,7 @@ import { MODULE_ID } from "./shared.js";
 
 export const CONSUMES_PATH = `flags.${MODULE_ID}.consumesAmmo`;
 const AMMO_PATH = `flags.${MODULE_ID}.ammoItems`;
+const SOURCE_PATH = "_stats.compendiumSource";
 
 /**
  * Weapon ammunition. A weapon marked "Consumes ammunition" links the consumables it shoots, dropped from a compendium
@@ -10,6 +11,11 @@ const AMMO_PATH = `flags.${MODULE_ID}.ammoItems`;
  * spends the first ammunition left. Called during init.
  */
 export function registerAmmunition() {
+	// Lets a compendium index entry tell where it was copied from, for isLinkedItem.
+	const indexFields = CONFIG.Item.compendiumIndexFields ??= [];
+	if (!indexFields.includes(SOURCE_PATH)) {
+		indexFields.push(SOURCE_PATH);
+	}
 	Hooks.on("renderItemSheetV2", (sheet, element) => {
 		if (sheet.document.type === "weapon") {
 			injectWeaponFields(sheet, element, sheet.document);
@@ -35,11 +41,41 @@ function compendiumId(uuid) {
 	return uuid?.startsWith("Compendium.") ? uuid.split(".").at(-1) : null;
 }
 
-/** Whether an inventory item is the linked item: the item itself, or a copy taken from that compendium entry. */
+/**
+ * UUIDs a document stands for: itself, what it was copied from, and what that compendium entry was copied from in
+ * turn. An item taken from a compendium remembers only the entry it came from, while that entry may be a copy of an
+ * entry in another compendium.
+ */
+function getLineage(uuid, document) {
+	const lineage = new Set([uuid]);
+	const addSources = doc => {
+		for (const source of [foundry.utils.getProperty(doc ?? {}, SOURCE_PATH), doc?._stats?.duplicateSource, doc?.flags?.core?.sourceId]) {
+			if (source) {
+				lineage.add(source);
+			}
+		}
+	};
+	addSources(document);
+	for (const source of [...lineage]) {
+		if (source !== uuid && source.startsWith("Compendium.")) {
+			addSources(fromUuidSync(source, { strict: false }));
+		}
+	}
+	return lineage;
+}
+
+/** Whether an inventory item is the linked item or another copy of the same compendium entry. */
 function isLinkedItem(item, link) {
-	const linkId = compendiumId(link);
-	const sources = [item.uuid, item._stats?.compendiumSource, item.flags?.core?.sourceId];
-	return sources.some(source => source && (source === link || (linkId && compendiumId(source) === linkId)));
+	const itemLineage = getLineage(item.uuid, item);
+	const linkIds = new Set();
+	for (const source of getLineage(link, fromUuidSync(link, { strict: false }))) {
+		if (itemLineage.has(source)) {
+			return true;
+		}
+		linkIds.add(compendiumId(source));
+	}
+	linkIds.delete(null);
+	return [...itemLineage].some(source => linkIds.has(compendiumId(source)));
 }
 
 /** Consumable stacks in the weapon owner's inventory that it shoots and that have units left, in the weapon's order. */
@@ -82,12 +118,14 @@ function onDropAmmo(event, tags) {
 		return;
 	}
 	const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
-	const item = data.type === "Item" && data.uuid ? fromUuidSync(data.uuid) : null;
+	const item = data.type === "Item" && data.uuid ? fromUuidSync(data.uuid, { strict: false }) : null;
 	if (item?.type !== "consumable") {
 		ui.notifications.warn(game.i18n.localize("MIST_AGE.Ammo.OnlyConsumables"));
 		return;
 	}
-	const link = item._stats?.compendiumSource ?? item.flags?.core?.sourceId ?? data.uuid;
+	// A compendium entry is linked as it is, even when it was itself copied from another compendium.
+	const inCompendium = data.uuid.startsWith("Compendium.");
+	const link = inCompendium ? data.uuid : (foundry.utils.getProperty(item, SOURCE_PATH) ?? item.flags?.core?.sourceId ?? data.uuid);
 	if (!tags.value.includes(link)) {
 		tags.value = [...tags.value, link];
 	}
@@ -129,7 +167,7 @@ function spendAmmo(roll, config) {
 	if (!(roll instanceof CONFIG.Dice.daggerheart.D20Roll) || !config.source?.actor) {
 		return;
 	}
-	const weapon = fromUuidSync(config.source.actor)?.items?.get(config.source.item);
+	const weapon = fromUuidSync(config.source.actor, { strict: false })?.items?.get(config.source.item);
 	if (!consumesAmmo(weapon)) {
 		return;
 	}
