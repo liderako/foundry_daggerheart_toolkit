@@ -1,4 +1,4 @@
-import { MODULE_ID } from "./shared.js";
+import { INVENTORY_TYPES, MODULE_ID } from "./shared.js";
 
 const TEMPLATE = `modules/${MODULE_ID}/templates/adversary-inventory.hbs`;
 
@@ -51,4 +51,17 @@ function addInventoryTab(sheetClass) {
 	const features = tabs.primary.tabs.findIndex(tab => tab.id === "features");
 	tabs.primary.tabs.splice(features + 1, 0, { id: "inventory" });
 	sheetClass.TABS = tabs;
+
+	// The character sheet edits and deletes inventory items through this row menu; the adversary sheet only has
+	// one for its attack.
+	sheetClass.DEFAULT_OPTIONS.contextMenus.push({
+		handler: getInventoryContextOptions,
+		selector: [...INVENTORY_TYPES].map(type => `[data-item-uuid][data-type="${type}"]`).join(", "),
+		options: { parentClassHooks: false, fixed: true }
+	});
+}
+
+/** Edit, send to chat and delete: the Daggerheart common item options. Called with the sheet as `this`. */
+function getInventoryContextOptions() {
+	return this._getContextMenuCommonOptions({ toChat: true });
 }
