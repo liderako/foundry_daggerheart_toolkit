@@ -66,13 +66,17 @@
 				"Done": "{actor}: jam dice back to 1 — {weapons}."
 			}
 		},
+		"EmptyConsumables": {
+			"Name": "Remove used-up consumables",
+			"Hint": "A consumable at quantity 0 disappears from the inventory at once and is deleted when the GM next loads the world. Until then its chat card can still apply the healing or effects it rolled. Item Piles merchants keep empty stacks."
+		},
 		"Settings": {
 			"Title": "The Mist Age - Toolkit settings",
 			"Save": "Save Changes",
 			"Menu": {
 				"Name": "Toolkit settings",
 				"Label": "Open settings",
-				"Hint": "Currencies, carrying capacity, overload, weapon jams, token names and adversary loot, grouped into sections."
+				"Hint": "Currencies, carrying capacity, overload, inventory, weapon jams, token names and adversary loot, grouped into sections."
 			},
 			"Sections": {
 				"prices": {
@@ -86,6 +90,10 @@
 				"overload": {
 					"Label": "Overload",
 					"Hint": "What happens when a character carries more than its capacity."
+				},
+				"inventory": {
+					"Label": "Inventory",
+					"Hint": "Items in character and NPC inventories."
 				},
 				"weapons": {
 					"Label": "Weapons",
