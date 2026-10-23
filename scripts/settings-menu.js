@@ -12,6 +12,7 @@ const SECTIONS = [
 		keys: ["capacityBase", "capacityPerStrength", "capacityPerNegativeStrength", "characterCapacity", "characterManualCapacity", "characterCapacityGMOnly"]
 	},
 	{ id: "overload", icon: "fa-solid fa-weight-hanging", keys: ["freeOverload", "overloadEffect", "overloadIcon"] },
+	{ id: "weapons", icon: "fa-solid fa-crosshairs", keys: ["weaponJam"] },
 	{ id: "tokens", icon: "fa-solid fa-id-badge", keys: ["syncTokenNames"] },
 	{ id: "adversaries", icon: "fa-solid fa-skull", keys: ["deathLoot"] }
 ];

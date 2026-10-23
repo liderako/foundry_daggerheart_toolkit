@@ -176,3 +176,35 @@
 	font-style: italic;
 	opacity: 0.8;
 }
+
+.mist-jam-options {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	max-height: 420px;
+	overflow-y: auto;
+}
+
+.mist-jam-option {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.mist-jam-option img {
+	flex: none;
+	width: 28px;
+	height: 28px;
+	border: none;
+	object-fit: contain;
+}
+
+.mist-jam-option .mist-jam-dice {
+	margin-left: auto;
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+.mist-jam-option .fa-triangle-exclamation {
+	color: light-dark(#a8261b, #e5574a);
+}

@@ -1,6 +1,6 @@
 import { MODULE_ID } from "./shared.js";
 
-const CONSUMES_PATH = `flags.${MODULE_ID}.consumesAmmo`;
+export const CONSUMES_PATH = `flags.${MODULE_ID}.consumesAmmo`;
 const AMMO_PATH = `flags.${MODULE_ID}.ammoItems`;
 
 /**
@@ -22,7 +22,7 @@ export function registerAmmunition() {
 	});
 }
 
-function consumesAmmo(weapon) {
+export function consumesAmmo(weapon) {
 	return weapon?.type === "weapon" && !!foundry.utils.getProperty(weapon, CONSUMES_PATH);
 }
 
@@ -97,7 +97,8 @@ function onDropAmmo(event, tags) {
 function injectAmmoChoice(app, element) {
 	const weapon = app.item;
 	const controls = element.querySelector(".roll-dialog-controls");
-	if (!consumesAmmo(weapon) || !app.config || !controls || element.querySelector(".mist-ammo")) {
+	// The dialog also confirms costs of actions without a roll, such as clearing a jam; those spend no ammunition.
+	if (!consumesAmmo(weapon) || !app.config || !app.roll || !controls || element.querySelector(".mist-ammo")) {
 		return;
 	}
 	const escape = foundry.utils.escapeHTML;

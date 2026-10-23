@@ -20,13 +20,59 @@
 			"NoneLeft": "{weapon}: no ammunition left, none was spent.",
 			"OnlyConsumables": "Only consumables can be weapon ammunition."
 		},
+		"Jam": {
+			"Setting": {
+				"Name": "Weapon jams",
+				"Hint": "Weapons that consume ammunition get a jam die and a number of jam dice. The GM requests jam rolls and raises jam dice from the Daggerheart Menu; Weapon Care on a rest sets the dice back to 1."
+			},
+			"Die": "Weapon jam die",
+			"Count": "Jam dice",
+			"Menu": {
+				"Legend": "Weapon Jam",
+				"Request": "Request jam roll",
+				"Raise": "Raise jam die"
+			},
+			"NoPlayers": "No player with a character is online.",
+			"Request": {
+				"Title": "Request a weapon jam roll",
+				"Player": "Player",
+				"Button": "Request roll",
+				"Sent": "Weapon jam roll requested from {player}."
+			},
+			"Raise": {
+				"Title": "Raise jam die",
+				"Hint": "Every weapon that consumes ammunition carried by the chosen characters gets one more jam die.",
+				"Button": "Raise",
+				"Done": "Jam dice raised for {count} characters.",
+				"NoCharacters": "No character carries a weapon that consumes ammunition."
+			},
+			"Roll": {
+				"Title": "Weapon Jam Roll",
+				"Hint": "Choose the weapons to roll for. A 1 on any jam die of a weapon jams it.",
+				"Button": "Roll",
+				"NoWeapons": "{actor} carries no weapon that consumes ammunition.",
+				"Jammed": "Jammed!",
+				"Holds": "holds"
+			},
+			"Effect": "Weapon Jammed",
+			"EffectHint": "This weapon is jammed. Use its Clear Weapon Jam action to fix it.",
+			"ClearAction": "Clear Weapon Jam",
+			"ClearActionHint": "Clear the jam of this weapon. Mark 1 Stress.",
+			"Care": {
+				"Name": "Weapon Care",
+				"shortRest": "Choose one weapon that consumes ammunition: its jam dice go back to 1.",
+				"longRest": "All weapons that consume ammunition: their jam dice go back to 1.",
+				"Button": "Care for weapon",
+				"Done": "{actor}: jam dice back to 1 — {weapons}."
+			}
+		},
 		"Settings": {
 			"Title": "The Mist Age - Toolkit settings",
 			"Save": "Save Changes",
 			"Menu": {
 				"Name": "Toolkit settings",
 				"Label": "Open settings",
-				"Hint": "Currencies, carrying capacity, overload, token names and adversary loot, grouped into sections."
+				"Hint": "Currencies, carrying capacity, overload, weapon jams, token names and adversary loot, grouped into sections."
 			},
 			"Sections": {
 				"prices": {
@@ -40,6 +86,10 @@
 				"overload": {
 					"Label": "Overload",
 					"Hint": "What happens when a character carries more than its capacity."
+				},
+				"weapons": {
+					"Label": "Weapons",
+					"Hint": "Ammunition and weapon jams."
 				},
 				"tokens": {
 					"Label": "Tokens",

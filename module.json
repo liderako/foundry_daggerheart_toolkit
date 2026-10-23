@@ -1,7 +1,7 @@
 {
 	"id": "mist-age-toolkit",
 	"title": "The Mist Age - Toolkit",
-	"description": "Item prices and Item Piles currencies, weight in slots with Strength-based load, HB copies of the Daggerheart item compendiums and loot tables, an inventory with gold for adversaries, and loot from fallen adversaries.",
+	"description": "Item prices and Item Piles currencies, weight in slots with Strength-based load, HB copies of the Daggerheart item compendiums and loot tables, an inventory with gold for adversaries, loot from fallen adversaries, weapon ammunition and weapon jams.",
 	"version": "1.0.0",
 	"compatibility": {
 		"minimum": "13",
@@ -49,6 +49,7 @@
 			"path": "languages/ru.json"
 		}
 	],
+	"socket": true,
 	"url": "https://github.com/liderako/the_mist_age_foundry_daggerheart_addtional",
 	"manifest": "https://github.com/liderako/the_mist_age_foundry_daggerheart_addtional/releases/latest/download/module.json",
 	"download": "https://github.com/liderako/the_mist_age_foundry_daggerheart_addtional/releases/download/v1.0.0/module.zip"
