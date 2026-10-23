@@ -1,3 +1,4 @@
+import { registerAmmunition } from "./ammunition.js";
 import { registerDeathLoot } from "./death-loot.js";
 import { registerInventoryTabs } from "./inventory-tab.js";
 import { registerOverloadEffect } from "./overload-effect.js";
@@ -50,6 +51,7 @@ Hooks.once("init", () => {
 	registerInventoryTabs();
 	registerDeathLoot();
 	registerTokenNames();
+	registerAmmunition();
 	registerSettingsMenu();
 
 	Hooks.once("ready", async () => {

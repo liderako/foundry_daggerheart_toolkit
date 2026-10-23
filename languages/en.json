@@ -10,6 +10,16 @@
 			"Hint": "A token shows the same name on the map, in chat, in combat and on its sheet. Linked tokens and the prototype take the actor name; an unlinked token keeps a name given to it alone, otherwise it takes the actor name. Renaming an actor, a token or a token's sheet renames the rest. Turn this off to name tokens by hand.",
 			"Synced": "Token names now match their sheets: {count} renamed."
 		},
+		"Ammo": {
+			"Legend": "Ammunition",
+			"ConsumesAmmo": "Consumes ammunition",
+			"Ammunition": "Weapon ammunition",
+			"AmmunitionHint": "Consumables this weapon shoots. Drop them here from a compendium or from an inventory; every stack taken from the same compendium entry counts. Each attack spends one unit of one of them.",
+			"Spend": "Spend ammunition:",
+			"NoAmmo": "No ammunition left",
+			"NoneLeft": "{weapon}: no ammunition left, none was spent.",
+			"OnlyConsumables": "Only consumables can be weapon ammunition."
+		},
 		"Settings": {
 			"Title": "The Mist Age - Toolkit settings",
 			"Save": "Save Changes",

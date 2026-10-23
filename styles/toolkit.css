@@ -161,3 +161,18 @@
 	border: none;
 	object-fit: contain;
 }
+
+.daggerheart .mist-ammo-fields document-tags {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.daggerheart.roll-selection .mist-ammo select {
+	width: 100%;
+}
+
+.daggerheart.roll-selection .mist-ammo-empty {
+	font-style: italic;
+	opacity: 0.8;
+}
