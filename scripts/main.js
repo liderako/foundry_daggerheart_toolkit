@@ -4,6 +4,7 @@ import { registerOverloadEffect } from "./overload-effect.js";
 import { preparePricesWorld, registerPrices } from "./prices.js";
 import { registerSettingsMenu } from "./settings-menu.js";
 import { MODULE_ID } from "./shared.js";
+import { registerTokenNames } from "./token-names.js";
 import { registerWeight } from "./weight.js";
 
 // The separate modules this toolkit replaces. Running them side by side would apply every hook twice.
@@ -48,6 +49,7 @@ Hooks.once("init", () => {
 	registerOverloadEffect();
 	registerInventoryTabs();
 	registerDeathLoot();
+	registerTokenNames();
 	registerSettingsMenu();
 
 	Hooks.once("ready", async () => {
