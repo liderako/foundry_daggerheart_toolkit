@@ -84,3 +84,11 @@
 	overflow-y: auto;
 	scrollbar-gutter: stable;
 }
+
+.daggerheart .mist-load-value .mist-load-capacity {
+	width: 4em;
+	height: auto;
+	padding: 0 2px;
+	text-align: center;
+	font-weight: bold;
+}

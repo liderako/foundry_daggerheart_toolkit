@@ -4,7 +4,11 @@ const SLOTS_PATH = `${WEIGHT_FLAGS}.slots`;
 const WORN_PATH = `${WEIGHT_FLAGS}.worn`;
 // Active effects can raise capacity by adding to this flag (e.g. a backpack: ADD 4).
 const BONUS_PATH = `${WEIGHT_FLAGS}.bonusSlots`;
+// Capacity typed in by the GM; replaces the Strength formula for these actor types.
+const CAPACITY_PATH = `${WEIGHT_FLAGS}.capacity`;
+const MANUAL_CAPACITY_TYPES = new Set(["adversary"]);
 const WEARABLE_TYPES = new Set(["loot"]);
+const LOAD_BAR_TYPES = new Set(["character", "adversary"]);
 
 // Carrying capacity in slots by Strength. Values outside the table continue the nearest step.
 const CAPACITY_BY_STRENGTH = { "-1": 18, 0: 20, 1: 24, 2: 28, 3: 32 };
@@ -91,10 +95,15 @@ export function getItemLoad(item) {
 	return getItemWeight(item) * getQuantity(item);
 }
 
+/** Adversaries have no Strength trait: they use a capacity set by hand, or the Strength 0 capacity. */
 export function getEncumbrance(actor) {
+	const hasStrength = actor.system.traits?.strength !== undefined;
 	const strength = Number(actor.system.traits?.strength?.value) || 0;
 	const bonus = Number(foundry.utils.getProperty(actor, BONUS_PATH)) || 0;
-	const baseCapacity = getCapacity(strength);
+	const formulaCapacity = getCapacity(strength);
+	const ownCapacity = foundry.utils.getProperty(actor, CAPACITY_PATH);
+	const manualCapacity = MANUAL_CAPACITY_TYPES.has(actor.type) && ownCapacity !== null && ownCapacity !== undefined && ownCapacity !== "";
+	const baseCapacity = manualCapacity ? Math.max(0, Number(ownCapacity) || 0) : formulaCapacity;
 	const capacity = baseCapacity + bonus;
 	const load = round(actor.items.reduce((sum, item) => sum + getItemLoad(item), 0));
 	const free = game.settings.get(MODULE_ID, "freeOverload");
@@ -105,7 +114,7 @@ export function getEncumbrance(actor) {
 	} else if (overload > 0) {
 		state = "overloaded";
 	}
-	return { strength, bonus, baseCapacity, capacity, load, overload, free, state };
+	return { hasStrength, strength, bonus, manualCapacity, formulaCapacity, baseCapacity, capacity, load, overload, free, state };
 }
 
 function weightIcon() {
@@ -177,16 +186,31 @@ function injectInventoryWeights(actor, element) {
 	}
 }
 
-function injectLoadBar(actor, element) {
+/** The capacity as text, or for the GM on an adversary an input that sets it by hand (empty = formula). */
+function capacityHTML(sheet, encumbrance) {
+	if (!MANUAL_CAPACITY_TYPES.has(sheet.document.type) || !game.user.isGM || !sheet.isEditable) {
+		return `${encumbrance.capacity}`;
+	}
+	const value = encumbrance.manualCapacity ? encumbrance.baseCapacity : "";
+	const hint = foundry.utils.escapeHTML(game.i18n.format("MIST_AGE_WEIGHT.CapacityHint", { default: encumbrance.formulaCapacity }));
+	const bonus = encumbrance.bonus ? ` ${signed(encumbrance.bonus)}` : "";
+	return `<input class="mist-load-capacity" type="number" name="${CAPACITY_PATH}" value="${value}" placeholder="${encumbrance.formulaCapacity}" min="0" step="any" data-dtype="Number" data-tooltip="${hint}" />${bonus}`;
+}
+
+function injectLoadBar(sheet, element) {
 	const tab = element.querySelector(".tab.inventory");
 	if (!tab) {
 		return;
 	}
 	tab.querySelector(".mist-load")?.remove();
-	const encumbrance = getEncumbrance(actor);
+	const encumbrance = getEncumbrance(sheet.document);
 	const percent = encumbrance.capacity > 0 ? Math.min(100, (encumbrance.load / encumbrance.capacity) * 100) : 100;
 	const bonus = encumbrance.bonus ? game.i18n.format("MIST_AGE_WEIGHT.Bonus", { bonus: signed(encumbrance.bonus) }) : "";
-	const tooltip = foundry.utils.escapeHTML(game.i18n.format("MIST_AGE_WEIGHT.LoadTooltip", {
+	let tooltipKey = encumbrance.hasStrength ? "MIST_AGE_WEIGHT.LoadTooltip" : "MIST_AGE_WEIGHT.LoadTooltipNoStrength";
+	if (encumbrance.manualCapacity) {
+		tooltipKey = "MIST_AGE_WEIGHT.LoadTooltipManual";
+	}
+	const tooltip = foundry.utils.escapeHTML(game.i18n.format(tooltipKey, {
 		strength: signed(encumbrance.strength),
 		capacity: encumbrance.baseCapacity,
 		bonus,
@@ -202,7 +226,7 @@ function injectLoadBar(actor, element) {
 		<div class="mist-load mist-load-${encumbrance.state}" data-tooltip="${tooltip}">
 			<span class="mist-load-label">${weightIcon()} ${game.i18n.localize("MIST_AGE_WEIGHT.Load")}</span>
 			<div class="mist-load-bar"><div class="mist-load-fill" style="width: ${percent}%"></div></div>
-			<span class="mist-load-value">${encumbrance.load} / ${encumbrance.capacity}</span>
+			<span class="mist-load-value">${encumbrance.load} / ${capacityHTML(sheet, encumbrance)}</span>
 			${status ? `<span class="mist-load-status">${status}</span>` : ""}
 		</div>`;
 	const anchor = tab.querySelector(".gold-section") ?? tab.querySelector(".search-section");
@@ -239,8 +263,8 @@ export function registerWeight() {
 	Hooks.on("renderActorSheetV2", (sheet, element) => {
 		const actor = sheet.document;
 		injectInventoryWeights(actor, element);
-		if (actor.type === "character" && !game.itempiles?.API.isValidItemPile(actor)) {
-			injectLoadBar(actor, element);
+		if (LOAD_BAR_TYPES.has(actor.type) && !game.itempiles?.API.isValidItemPile(actor)) {
+			injectLoadBar(sheet, element);
 		}
 	});
 }
