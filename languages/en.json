@@ -107,6 +107,15 @@
 					"Label": "Adversaries",
 					"Hint": "Inventory and loot of adversaries."
 				}
+			},
+			"Changes": {
+				"Key": "Attribute Key",
+				"Type": "Type",
+				"Value": "Value",
+				"Priority": "Priority",
+				"AddRow": "Add an empty change",
+				"AddChange": "Add Change",
+				"Delete": "Delete change"
 			}
 		}
 	},
@@ -192,18 +201,13 @@
 			"Name": "Heavy overload icon",
 			"Hint": "Image of the heavy overload effect. Changing it updates the icons already shown."
 		},
-		"OverloadLightPenalties": {
-			"Name": "Light overload penalties",
-			"Hint": "Added to the character's stats while lightly overloaded. Use negative numbers, e.g. -1 Evasion; 0 changes nothing."
+		"OverloadLightChanges": {
+			"Name": "Light overload changes",
+			"Hint": "Effect changes applied while a character is lightly overloaded, as on the Changes tab of an effect. For a penalty use Add with a negative value, e.g. system.evasion, Add, -1."
 		},
-		"OverloadHeavyPenalties": {
-			"Name": "Heavy overload penalties",
-			"Hint": "Added to the character's stats while heavily overloaded, instead of the light overload penalties. Use negative numbers; 0 changes nothing."
-		},
-		"Stats": {
-			"HitPoints": "Max Hit Points",
-			"Stress": "Max Stress",
-			"Hope": "Max Hope"
+		"OverloadHeavyChanges": {
+			"Name": "Heavy overload changes",
+			"Hint": "Effect changes applied while a character is heavily overloaded, instead of the light overload changes."
 		}
 	}
 }

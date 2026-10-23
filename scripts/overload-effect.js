@@ -4,30 +4,34 @@ import { LOAD_RULES_HOOK, getEncumbrance } from "./weight.js";
 const OVERLOAD_FLAG = `flags.${MODULE_ID}.overload`;
 const DEFAULT_ICONS = { light: "icons/svg/anchor.svg", heavy: "icons/svg/downgrade.svg" };
 const ICON_SETTINGS = { light: "overloadIcon", heavy: "overloadHeavyIcon" };
-const PENALTY_SETTINGS = { light: "overloadLightPenalties", heavy: "overloadHeavyPenalties" };
+const CHANGE_SETTINGS = { light: "overloadLightChanges", heavy: "overloadHeavyChanges" };
 const LABELS = { light: "MIST_AGE_WEIGHT.Overloaded", heavy: "MIST_AGE_WEIGHT.HeavilyOverloaded" };
-
-/** Character stats an overload penalty can lower, as Daggerheart effect paths. Labels come from Daggerheart where it has them. */
-export const PENALTY_STATS = [
-	{ key: "evasion", path: "system.evasion", label: "DAGGERHEART.GENERAL.evasion" },
-	...["agility", "strength", "finesse", "instinct", "presence", "knowledge"].map(trait => ({
-		key: trait,
-		path: `system.traits.${trait}.value`,
-		label: `DAGGERHEART.CONFIG.Traits.${trait}.name`
-	})),
-	{ key: "proficiency", path: "system.proficiency", label: "DAGGERHEART.GENERAL.proficiency" },
-	{ key: "majorThreshold", path: "system.damageThresholds.major", label: "DAGGERHEART.GENERAL.DamageThresholds.majorThreshold" },
-	{ key: "severeThreshold", path: "system.damageThresholds.severe", label: "DAGGERHEART.GENERAL.DamageThresholds.severeThreshold" },
-	{ key: "hitPoints", path: "system.resources.hitPoints.max", label: "MIST_AGE_WEIGHT.Stats.HitPoints" },
-	{ key: "stress", path: "system.resources.stress.max", label: "MIST_AGE_WEIGHT.Stats.Stress" },
-	{ key: "hope", path: "system.resources.hope.max", label: "MIST_AGE_WEIGHT.Stats.Hope" }
-];
+// Version 1.0.7 kept one number per stat; those penalties move into the change lists once.
+const LEGACY_PENALTY_SETTINGS = { light: "overloadLightPenalties", heavy: "overloadHeavyPenalties" };
+const LEGACY_PENALTY_PATHS = {
+	evasion: "system.evasion",
+	agility: "system.traits.agility.value",
+	strength: "system.traits.strength.value",
+	finesse: "system.traits.finesse.value",
+	instinct: "system.traits.instinct.value",
+	presence: "system.traits.presence.value",
+	knowledge: "system.traits.knowledge.value",
+	proficiency: "system.proficiency",
+	majorThreshold: "system.damageThresholds.major",
+	severeThreshold: "system.damageThresholds.severe",
+	hitPoints: "system.resources.hitPoints.max",
+	stress: "system.resources.stress.max",
+	hope: "system.resources.hope.max"
+};
+// Change modes of Foundry before v14, which stored a number instead of a change type.
+const LEGACY_MODES = { custom: 0, multiply: 1, add: 2, downgrade: 3, upgrade: 4, override: 5 };
 const pending = new Map();
 
 /**
  * Marks an overloaded character with an active effect on its token and sheet, one look for light overload (over
- * capacity, within the light overload limit) and another for heavy overload. The effect carries the stat penalties
- * set for that state. The overloadEffect setting turns it off or limits it to heavy overload. Called during init.
+ * capacity, within the light overload limit) and another for heavy overload. Each state carries its own list of
+ * effect changes, edited in the toolkit settings like the Changes tab of an effect. The overloadEffect setting turns
+ * the effect off or limits it to heavy overload. Called during init.
  */
 export function registerOverloadEffect() {
 	game.settings.register(MODULE_ID, "overloadEffect", {
@@ -58,18 +62,19 @@ export function registerOverloadEffect() {
 		});
 	}
 	for (const level of ["light", "heavy"]) {
-		const name = level === "light" ? "OverloadLightPenalties" : "OverloadHeavyPenalties";
-		game.settings.register(MODULE_ID, PENALTY_SETTINGS[level], {
+		const name = level === "light" ? "OverloadLightChanges" : "OverloadHeavyChanges";
+		game.settings.register(MODULE_ID, CHANGE_SETTINGS[level], {
 			name: `MIST_AGE_WEIGHT.${name}.Name`,
 			hint: `MIST_AGE_WEIGHT.${name}.Hint`,
 			scope: "world",
 			config: false,
-			type: Object,
-			default: {},
-			// Read by the toolkit settings window, which shows one number field per stat.
-			stats: PENALTY_STATS,
+			type: Array,
+			default: [],
+			// Read by the toolkit settings window, which edits the list like the Changes tab of an effect.
+			changes: true,
 			onChange: syncAllCharacters
 		});
+		game.settings.register(MODULE_ID, LEGACY_PENALTY_SETTINGS[level], { scope: "world", config: false, type: Object, default: {} });
 	}
 
 	for (const hook of ["createItem", "updateItem", "deleteItem"]) {
@@ -86,7 +91,27 @@ export function registerOverloadEffect() {
 		});
 	}
 	Hooks.on(LOAD_RULES_HOOK, syncAllCharacters);
-	Hooks.once("ready", syncAllCharacters);
+	Hooks.once("ready", async () => {
+		await migrateLegacyPenalties();
+		syncAllCharacters();
+	});
+}
+
+/** Moves the per-stat penalties of version 1.0.7 into the change lists, then clears them. */
+async function migrateLegacyPenalties() {
+	if (!game.user.isGM) {
+		return;
+	}
+	for (const level of ["light", "heavy"]) {
+		const penalties = Object.entries(game.settings.get(MODULE_ID, LEGACY_PENALTY_SETTINGS[level]) ?? {})
+			.filter(([stat, value]) => LEGACY_PENALTY_PATHS[stat] && Number(value));
+		if (!penalties.length) {
+			continue;
+		}
+		const moved = penalties.map(([stat, value]) => ({ key: LEGACY_PENALTY_PATHS[stat], type: "add", value: String(value), priority: null }));
+		await game.settings.set(MODULE_ID, CHANGE_SETTINGS[level], [...getChanges(level), ...moved]);
+		await game.settings.set(MODULE_ID, LEGACY_PENALTY_SETTINGS[level], {});
+	}
 }
 
 function syncAllCharacters() {
@@ -111,24 +136,26 @@ function queueSync(actor) {
 	}, 50));
 }
 
-/** The stat changes of an overload state, from its penalty setting; zero penalties are left out. */
-function getPenaltyChanges(level) {
-	const penalties = game.settings.get(MODULE_ID, PENALTY_SETTINGS[level]) ?? {};
-	return PENALTY_STATS
-		.filter(stat => Number(penalties[stat.key]))
-		.map(stat => ({ key: stat.path, value: Number(penalties[stat.key]), label: stat.label }));
+/** The changes of an overload state, without rows that have no attribute key. */
+function getChanges(level) {
+	const changes = game.settings.get(MODULE_ID, CHANGE_SETTINGS[level]);
+	return (Array.isArray(changes) ? changes : []).filter(change => change?.key);
 }
 
 /** Effect data for the changes, in the shape this Foundry version stores: system.changes from v14, changes before. */
 function changeData(changes) {
+	const priority = change => (Number.isFinite(change.priority) ? { priority: change.priority } : {});
 	if (game.release.generation >= 14) {
-		return { system: { changes: changes.map(({ key, value }) => ({ key, type: "add", value: String(value) })) } };
+		return { system: { changes: changes.map(change => ({ key: change.key, type: change.type, value: String(change.value ?? ""), ...priority(change) })) } };
 	}
-	return { changes: changes.map(({ key, value }) => ({ key, mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: String(value) })) };
-}
-
-function describe(changes) {
-	return changes.map(({ label, value }) => `${game.i18n.localize(label)} ${value > 0 ? "+" : ""}${value}`).join(", ");
+	return {
+		changes: changes.map(change => ({
+			key: change.key,
+			mode: LEGACY_MODES[change.type] ?? LEGACY_MODES.add,
+			value: String(change.value ?? ""),
+			...priority(change)
+		}))
+	};
 }
 
 async function syncOverloadEffect(actor) {
@@ -144,19 +171,19 @@ async function syncOverloadEffect(actor) {
 	if (!show) {
 		return;
 	}
-	const changes = getPenaltyChanges(level);
+	const changes = getChanges(level);
 	const name = `${game.i18n.localize(LABELS[level])} (+${overload})`;
 	const img = game.settings.get(MODULE_ID, ICON_SETTINGS[level]) || DEFAULT_ICONS[level];
-	const description = describe(changes);
 	// Compared through a flag, since the stored shape of changes differs between Foundry versions.
-	const signature = JSON.stringify(changes.map(({ key, value }) => [key, value]));
-	const data = { name, img, description, [`flags.${MODULE_ID}.overloadChanges`]: signature, ...changeData(changes) };
+	const signature = JSON.stringify(changes.map(({ key, type, value, priority }) => [key, type, String(value ?? ""), priority ?? null]));
+	// The description of version 1.0.7 listed the penalties; the changes now show in the effect's Changes tab.
+	const data = { name, img, description: "", [`flags.${MODULE_ID}.overloadChanges`]: signature, ...changeData(changes) };
 	if (!current) {
 		await actor.createEmbeddedDocuments("ActiveEffect", [foundry.utils.mergeObject({
 			showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS,
 			flags: { [MODULE_ID]: { overload: true } }
 		}, foundry.utils.expandObject(data))]);
-	} else if (current.name !== name || current.img !== img || current.description !== description
+	} else if (current.name !== name || current.img !== img || current.description
 		|| foundry.utils.getProperty(current, `flags.${MODULE_ID}.overloadChanges`) !== signature) {
 		await current.update(data);
 	}

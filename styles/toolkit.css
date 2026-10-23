@@ -209,14 +209,49 @@
 	color: light-dark(#a8261b, #e5574a);
 }
 
-.mist-age-settings .mist-settings-stats {
-	display: grid;
-	grid-template-columns: 1fr 5em;
-	align-items: center;
-	gap: 4px 8px;
+.mist-age-settings .mist-changes {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
 	width: 100%;
 }
 
-.mist-age-settings .mist-settings-stats input {
+.mist-age-settings .mist-change-list {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.mist-age-settings .mist-change-row {
+	display: grid;
+	grid-template-columns: 2fr 1.2fr 1fr 4.5em 1.5em;
+	align-items: center;
+	gap: 6px;
+}
+
+.mist-age-settings .mist-change-header {
+	font-weight: bold;
 	text-align: center;
+}
+
+.mist-age-settings .mist-change-row a {
+	text-align: center;
+}
+
+.mist-age-settings .mist-change-footer {
+	display: flex;
+	justify-content: flex-end;
+	gap: 6px;
+}
+
+.mist-age-settings .mist-change-footer select {
+	flex: 0 1 16em;
+}
+
+.mist-age-settings .mist-change-footer button {
+	flex: none;
+	width: auto;
 }
