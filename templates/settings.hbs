@@ -13,6 +13,13 @@
                             <select id="mist-setting-{{field.key}}" name="{{field.key}}">
                                 {{selectOptions field.choices selected=field.value localize=true}}
                             </select>
+                        {{else if field.stats}}
+                            <div class="mist-settings-stats">
+                                {{#each field.stats as |stat|}}
+                                    <label for="mist-setting-{{stat.name}}">{{stat.label}}</label>
+                                    <input type="number" id="mist-setting-{{stat.name}}" name="{{stat.name}}" value="{{stat.value}}" step="1">
+                                {{/each}}
+                            </div>
                         {{else if field.filePicker}}
                             <img class="mist-settings-icon-preview" src="{{field.value}}" alt="">
                             <file-picker id="mist-setting-{{field.key}}" name="{{field.key}}" type="{{field.filePicker}}" value="{{field.value}}"></file-picker>

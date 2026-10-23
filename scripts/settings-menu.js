@@ -11,7 +11,11 @@ const SECTIONS = [
 		icon: "fa-solid fa-dumbbell",
 		keys: ["capacityBase", "capacityPerStrength", "capacityPerNegativeStrength", "characterCapacity", "characterManualCapacity", "characterCapacityGMOnly"]
 	},
-	{ id: "overload", icon: "fa-solid fa-weight-hanging", keys: ["freeOverload", "overloadEffect", "overloadIcon"] },
+	{
+		id: "overload",
+		icon: "fa-solid fa-weight-hanging",
+		keys: ["freeOverload", "overloadEffect", "overloadIcon", "overloadHeavyIcon", "overloadLightPenalties", "overloadHeavyPenalties"]
+	},
 	{ id: "inventory", icon: "fa-solid fa-flask", keys: ["hideEmptyConsumables"] },
 	{ id: "weapons", icon: "fa-solid fa-crosshairs", keys: ["weaponJam"] },
 	{ id: "tokens", icon: "fa-solid fa-id-badge", keys: ["syncTokenNames"] },
@@ -42,14 +46,21 @@ class ToolkitSettings extends HandlebarsApplicationMixin(ApplicationV2) {
 			hint: game.i18n.localize(`MIST_AGE.Settings.Sections.${section.id}.Hint`),
 			fields: section.keys.map(key => {
 				const config = game.settings.settings.get(`${MODULE_ID}.${key}`);
+				const value = game.settings.get(MODULE_ID, key);
 				return {
 					key,
 					name: game.i18n.localize(config.name),
 					hint: game.i18n.localize(config.hint),
-					value: game.settings.get(MODULE_ID, key),
+					value,
 					isBoolean: config.type === Boolean,
 					choices: config.choices,
-					filePicker: config.filePicker
+					filePicker: config.filePicker,
+					// An object setting with one number per stat, such as the overload penalties.
+					stats: config.stats?.map(stat => ({
+						name: `${key}.${stat.key}`,
+						label: game.i18n.localize(stat.label),
+						value: Number(value?.[stat.key]) || 0
+					}))
 				};
 			})
 		}));
@@ -71,10 +82,17 @@ class ToolkitSettings extends HandlebarsApplicationMixin(ApplicationV2) {
 	}
 
 	static async #onSubmit(event, form, formData) {
-		for (const [key, value] of Object.entries(formData.object)) {
-			if (game.settings.get(MODULE_ID, key) !== value) {
-				await game.settings.set(MODULE_ID, key, value);
+		for (let [key, value] of Object.entries(foundry.utils.expandObject(formData.object))) {
+			if (game.settings.settings.get(`${MODULE_ID}.${key}`)?.stats) {
+				// Keep only the stats that change, so an untouched setting stays empty.
+				value = Object.fromEntries(Object.entries(value).filter(([, number]) => Number(number)).map(([stat, number]) => [stat, Number(number)]));
+				if (JSON.stringify(value) === JSON.stringify(game.settings.get(MODULE_ID, key))) {
+					continue;
+				}
+			} else if (game.settings.get(MODULE_ID, key) === value) {
+				continue;
 			}
+			await game.settings.set(MODULE_ID, key, value);
 		}
 	}
 }

@@ -89,7 +89,7 @@
 				},
 				"overload": {
 					"Label": "Overload",
-					"Hint": "What happens when a character carries more than its capacity."
+					"Hint": "What happens when a character carries more than its capacity: light overload is a warning, heavy overload is the full penalty."
 				},
 				"inventory": {
 					"Label": "Inventory",
@@ -141,16 +141,16 @@
 		"Worn": "Worn (doesn't count)",
 		"WornTag": "worn",
 		"Load": "Load",
-		"LoadTooltip": "Strength {strength}: {capacity} slots{bonus}. Overload up to {free} slots has no consequences.",
-		"LoadTooltipNoStrength": "No Strength: base capacity {capacity} slots{bonus}. Overload up to {free} slots has no consequences.",
-		"LoadTooltipManual": "Capacity set by hand: {capacity} slots{bonus}. Overload up to {free} slots has no consequences.",
+		"LoadTooltip": "Strength {strength}: {capacity} slots{bonus}. Up to {free} slots over capacity is light overload; beyond that, heavy overload.",
+		"LoadTooltipNoStrength": "No Strength: base capacity {capacity} slots{bonus}. Up to {free} slots over capacity is light overload; beyond that, heavy overload.",
+		"LoadTooltipManual": "Capacity set by hand: {capacity} slots{bonus}. Up to {free} slots over capacity is light overload; beyond that, heavy overload.",
 		"CapacityHint": "Capacity in slots. Leave empty for the formula ({default}).",
 		"Bonus": " ({bonus} from effects)",
-		"Overloaded": "Overloaded, no consequences",
-		"HeavilyOverloaded": "Heavily overloaded",
+		"Overloaded": "Light overload",
+		"HeavilyOverloaded": "Heavy overload",
 		"FreeOverload": {
-			"Name": "Overload without consequences",
-			"Hint": "How many slots over capacity a character can carry before counting as heavily overloaded."
+			"Name": "Light overload limit",
+			"Hint": "How many slots over capacity count as light overload, a warning. Beyond that the character is heavily overloaded."
 		},
 		"CharacterCapacity": {
 			"Name": "Carrying limit for characters",
@@ -158,10 +158,10 @@
 		},
 		"LoadUnlimitedTooltip": "No carrying limit for characters: the load is only counted.",
 		"OverloadEffect": {
-			"Name": "Overload icon on characters",
-			"Hint": "An overloaded character gets an icon-only effect (anchor) on its token and sheet. It changes nothing; it only marks the overload.",
+			"Name": "Overload effect on characters",
+			"Hint": "An overloaded character gets an effect on its token and sheet: one look for light overload, another for heavy. It carries the penalties set below. Off removes the effect and its penalties.",
 			"Off": "Off",
-			"Any": "Any overload",
+			"Any": "Light and heavy overload",
 			"Heavy": "Only heavy overload"
 		},
 		"CharacterManualCapacity": {
@@ -185,8 +185,25 @@
 			"Hint": "With manual character capacity on, only the GM can change it; players see the number."
 		},
 		"OverloadIcon": {
-			"Name": "Overload icon image",
-			"Hint": "Image of the overload effect on tokens and sheets. Changing it updates the icons already shown."
+			"Name": "Light overload icon",
+			"Hint": "Image of the light overload effect. Changing it updates the icons already shown."
+		},
+		"OverloadHeavyIcon": {
+			"Name": "Heavy overload icon",
+			"Hint": "Image of the heavy overload effect. Changing it updates the icons already shown."
+		},
+		"OverloadLightPenalties": {
+			"Name": "Light overload penalties",
+			"Hint": "Added to the character's stats while lightly overloaded. Use negative numbers, e.g. -1 Evasion; 0 changes nothing."
+		},
+		"OverloadHeavyPenalties": {
+			"Name": "Heavy overload penalties",
+			"Hint": "Added to the character's stats while heavily overloaded, instead of the light overload penalties. Use negative numbers; 0 changes nothing."
+		},
+		"Stats": {
+			"HitPoints": "Max Hit Points",
+			"Stress": "Max Stress",
+			"Hope": "Max Hope"
 		}
 	}
 }
