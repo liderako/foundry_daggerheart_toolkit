@@ -6,9 +6,9 @@
 			"Hint": "When an adversary that carries inventory items or gold is downed (all Hit Points marked, or Dead / Defeated), its token becomes an Item Piles loot pile. It turns back if the adversary recovers."
 		},
 		"TokenNames": {
-			"Name": "Token names follow the character",
-			"Hint": "Linked tokens of characters and companions always carry the actor name: in the prototype token and on every scene. Renaming the actor renames its tokens. Turn this off to give a token a name of its own.",
-			"Synced": "Token names now match their characters: {count} renamed."
+			"Name": "Token names match their sheets",
+			"Hint": "A token shows the same name on the map, in chat, in combat and on its sheet. Linked tokens and the prototype take the actor name; an unlinked token keeps a name given to it alone, otherwise it takes the actor name. Renaming an actor, a token or a token's sheet renames the rest. Turn this off to name tokens by hand.",
+			"Synced": "Token names now match their sheets: {count} renamed."
 		},
 		"Settings": {
 			"Title": "The Mist Age - Toolkit settings",
@@ -33,7 +33,7 @@
 				},
 				"tokens": {
 					"Label": "Tokens",
-					"Hint": "Tokens of player characters and companions on the map."
+					"Hint": "Names of tokens on the map."
 				},
 				"adversaries": {
 					"Label": "Adversaries",
