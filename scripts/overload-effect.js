@@ -4,9 +4,12 @@ import { LOAD_RULES_HOOK, getEncumbrance } from "./weight.js";
 const OVERLOAD_FLAG = `flags.${MODULE_ID}.overload`;
 const DEFAULT_ICONS = { light: "icons/svg/anchor.svg", heavy: "icons/svg/downgrade.svg" };
 const ICON_SETTINGS = { light: "overloadIcon", heavy: "overloadHeavyIcon" };
-const CHANGE_SETTINGS = { light: "overloadLightChanges", heavy: "overloadHeavyChanges" };
+const EFFECT_SETTINGS = { light: "overloadLightEffect", heavy: "overloadHeavyEffect" };
 const LABELS = { light: "MIST_AGE_WEIGHT.Overloaded", heavy: "MIST_AGE_WEIGHT.HeavilyOverloaded" };
-// Version 1.0.7 kept one number per stat; those penalties move into the change lists once.
+// Ids of the effects opened in the Daggerheart effect sheet; effect ids are 16 letters or digits.
+const EDITOR_IDS = { light: "mistAgeOverLight", heavy: "mistAgeOverHeavy" };
+// Earlier versions kept the penalties elsewhere: 1.0.8 as a list of changes, 1.0.7 as one number per stat.
+const LEGACY_CHANGE_SETTINGS = { light: "overloadLightChanges", heavy: "overloadHeavyChanges" };
 const LEGACY_PENALTY_SETTINGS = { light: "overloadLightPenalties", heavy: "overloadHeavyPenalties" };
 const LEGACY_PENALTY_PATHS = {
 	evasion: "system.evasion",
@@ -23,15 +26,14 @@ const LEGACY_PENALTY_PATHS = {
 	stress: "system.resources.stress.max",
 	hope: "system.resources.hope.max"
 };
-// Change modes of Foundry before v14, which stored a number instead of a change type.
-const LEGACY_MODES = { custom: 0, multiply: 1, add: 2, downgrade: 3, upgrade: 4, override: 5 };
 const pending = new Map();
+let editorClass;
 
 /**
  * Marks an overloaded character with an active effect on its token and sheet, one look for light overload (over
- * capacity, within the light overload limit) and another for heavy overload. Each state carries its own list of
- * effect changes, edited in the toolkit settings like the Changes tab of an effect. The overloadEffect setting turns
- * the effect off or limits it to heavy overload. Called during init.
+ * capacity, within the light overload limit) and another for heavy overload. What each state does to the character is
+ * an effect edited in the Daggerheart effect sheet (changes and conditionals) from the toolkit settings, and stored
+ * in a setting. The overloadEffect setting turns the effect off or limits it to heavy overload. Called during init.
  */
 export function registerOverloadEffect() {
 	game.settings.register(MODULE_ID, "overloadEffect", {
@@ -62,18 +64,19 @@ export function registerOverloadEffect() {
 		});
 	}
 	for (const level of ["light", "heavy"]) {
-		const name = level === "light" ? "OverloadLightChanges" : "OverloadHeavyChanges";
-		game.settings.register(MODULE_ID, CHANGE_SETTINGS[level], {
+		const name = level === "light" ? "OverloadLightEffect" : "OverloadHeavyEffect";
+		game.settings.register(MODULE_ID, EFFECT_SETTINGS[level], {
 			name: `MIST_AGE_WEIGHT.${name}.Name`,
 			hint: `MIST_AGE_WEIGHT.${name}.Hint`,
 			scope: "world",
 			config: false,
-			type: Array,
-			default: [],
-			// Read by the toolkit settings window, which edits the list like the Changes tab of an effect.
-			changes: true,
+			type: Object,
+			default: {},
+			// Read by the toolkit settings window, which opens the effect sheet instead of an input.
+			editEffect: () => editOverloadEffect(level),
 			onChange: syncAllCharacters
 		});
+		game.settings.register(MODULE_ID, LEGACY_CHANGE_SETTINGS[level], { scope: "world", config: false, type: Array, default: [] });
 		game.settings.register(MODULE_ID, LEGACY_PENALTY_SETTINGS[level], { scope: "world", config: false, type: Object, default: {} });
 	}
 
@@ -97,19 +100,61 @@ export function registerOverloadEffect() {
 	});
 }
 
-/** Moves the per-stat penalties of version 1.0.7 into the change lists, then clears them. */
+/** The effect data an overload state applies: its system data (changes, conditionals) as saved from the sheet. */
+function getEffectSystem(level) {
+	const system = game.settings.get(MODULE_ID, EFFECT_SETTINGS[level])?.system ?? {};
+	return { ...system, changes: Array.isArray(system.changes) ? system.changes : [] };
+}
+
+/** Opens the Daggerheart effect sheet on an overload state's effect, showing only its changes and conditionals. */
+export async function editOverloadEffect(level) {
+	const Config = game.system.api?.applications?.sheetConfigs?.ActiveEffectConfig;
+	if (!Config?.configureSetting) {
+		ui.notifications.warn(game.i18n.localize("MIST_AGE_WEIGHT.EffectEditorMissing"));
+		return;
+	}
+	editorClass ??= class OverloadEffectConfig extends Config {
+		static PARTS = Object.fromEntries(Object.entries(Config.PARTS).filter(([id]) => !["details", "settings"].includes(id)));
+
+		static TABS = {
+			...Config.TABS,
+			sheet: { ...Config.TABS.sheet, tabs: Config.TABS.sheet.tabs.filter(tab => ["conditionals", "changes"].includes(tab.id)), initial: "changes" }
+		};
+	};
+	const effect = await editorClass.configureSetting({
+		id: EDITOR_IDS[level],
+		name: game.i18n.localize(LABELS[level]),
+		img: game.settings.get(MODULE_ID, ICON_SETTINGS[level]) || DEFAULT_ICONS[level],
+		system: getEffectSystem(level)
+	});
+	if (effect?.system) {
+		await game.settings.set(MODULE_ID, EFFECT_SETTINGS[level], { system: effect.system });
+	}
+}
+
+/** Moves the penalties of versions 1.0.7 and 1.0.8 into the effect settings, then clears them. */
 async function migrateLegacyPenalties() {
 	if (!game.user.isGM) {
 		return;
 	}
 	for (const level of ["light", "heavy"]) {
-		const penalties = Object.entries(game.settings.get(MODULE_ID, LEGACY_PENALTY_SETTINGS[level]) ?? {})
-			.filter(([stat, value]) => LEGACY_PENALTY_PATHS[stat] && Number(value));
-		if (!penalties.length) {
+		const listed = (game.settings.get(MODULE_ID, LEGACY_CHANGE_SETTINGS[level]) ?? []).filter(change => change?.key);
+		const perStat = Object.entries(game.settings.get(MODULE_ID, LEGACY_PENALTY_SETTINGS[level]) ?? {})
+			.filter(([stat, value]) => LEGACY_PENALTY_PATHS[stat] && Number(value))
+			.map(([stat, value]) => ({ key: LEGACY_PENALTY_PATHS[stat], type: "add", value: String(value), priority: null }));
+		const moved = [...listed, ...perStat].map(({ key, type, value, priority }) => ({
+			key,
+			type: type || "add",
+			value: String(value ?? ""),
+			phase: "initial",
+			...(Number.isFinite(priority) ? { priority } : {})
+		}));
+		if (!moved.length) {
 			continue;
 		}
-		const moved = penalties.map(([stat, value]) => ({ key: LEGACY_PENALTY_PATHS[stat], type: "add", value: String(value), priority: null }));
-		await game.settings.set(MODULE_ID, CHANGE_SETTINGS[level], [...getChanges(level), ...moved]);
+		const system = getEffectSystem(level);
+		await game.settings.set(MODULE_ID, EFFECT_SETTINGS[level], { system: { ...system, changes: [...system.changes, ...moved] } });
+		await game.settings.set(MODULE_ID, LEGACY_CHANGE_SETTINGS[level], []);
 		await game.settings.set(MODULE_ID, LEGACY_PENALTY_SETTINGS[level], {});
 	}
 }
@@ -136,28 +181,6 @@ function queueSync(actor) {
 	}, 50));
 }
 
-/** The changes of an overload state, without rows that have no attribute key. */
-function getChanges(level) {
-	const changes = game.settings.get(MODULE_ID, CHANGE_SETTINGS[level]);
-	return (Array.isArray(changes) ? changes : []).filter(change => change?.key);
-}
-
-/** Effect data for the changes, in the shape this Foundry version stores: system.changes from v14, changes before. */
-function changeData(changes) {
-	const priority = change => (Number.isFinite(change.priority) ? { priority: change.priority } : {});
-	if (game.release.generation >= 14) {
-		return { system: { changes: changes.map(change => ({ key: change.key, type: change.type, value: String(change.value ?? ""), ...priority(change) })) } };
-	}
-	return {
-		changes: changes.map(change => ({
-			key: change.key,
-			mode: LEGACY_MODES[change.type] ?? LEGACY_MODES.add,
-			value: String(change.value ?? ""),
-			...priority(change)
-		}))
-	};
-}
-
 async function syncOverloadEffect(actor) {
 	const mode = game.settings.get(MODULE_ID, "overloadEffect");
 	const { state, overload } = getEncumbrance(actor);
@@ -171,13 +194,13 @@ async function syncOverloadEffect(actor) {
 	if (!show) {
 		return;
 	}
-	const changes = getChanges(level);
+	const system = getEffectSystem(level);
 	const name = `${game.i18n.localize(LABELS[level])} (+${overload})`;
 	const img = game.settings.get(MODULE_ID, ICON_SETTINGS[level]) || DEFAULT_ICONS[level];
-	// Compared through a flag, since the stored shape of changes differs between Foundry versions.
-	const signature = JSON.stringify(changes.map(({ key, type, value, priority }) => [key, type, String(value ?? ""), priority ?? null]));
+	// Compared through a flag, since the effect's own system data gains defaults once stored.
+	const signature = JSON.stringify(system);
 	// The description of version 1.0.7 listed the penalties; the changes now show in the effect's Changes tab.
-	const data = { name, img, description: "", [`flags.${MODULE_ID}.overloadChanges`]: signature, ...changeData(changes) };
+	const data = { name, img, description: "", system, [`flags.${MODULE_ID}.overloadChanges`]: signature };
 	if (!current) {
 		await actor.createEmbeddedDocuments("ActiveEffect", [foundry.utils.mergeObject({
 			showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS,

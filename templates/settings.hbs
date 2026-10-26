@@ -1,76 +1,35 @@
-{{#*inline "mistChangeRow"}}
-    <li class="mist-change-row">
-        <input type="text" class="mist-change-key" value="{{change.key}}" list="mist-change-paths" placeholder="system.evasion">
-        <select class="mist-change-type">
-            {{selectOptions types selected=change.type}}
-        </select>
-        <input type="text" class="mist-change-value" value="{{change.value}}">
-        <input type="number" class="mist-change-priority" value="{{change.priority}}" placeholder="{{change.defaultPriority}}">
-        <a class="mist-change-delete" data-tooltip="MIST_AGE.Settings.Changes.Delete"><i class="fa-solid fa-trash" inert></i></a>
-    </li>
-{{/inline}}
 <div class="mist-settings-sections">
     {{#each sections as |section|}}
         <fieldset class="mist-settings-section">
             <legend><i class="{{section.icon}}" inert></i> {{section.label}}</legend>
             {{#if section.hint}}<p class="hint mist-settings-section-hint">{{section.hint}}</p>{{/if}}
             {{#each section.fields as |field|}}
-                {{#if field.changes}}
-                    <div class="form-group stacked mist-changes-group">
-                        <label>{{field.name}}</label>
-                        <div class="mist-changes" data-setting="{{field.key}}">
-                            <div class="mist-change-row mist-change-header">
-                                <span>{{localize "MIST_AGE.Settings.Changes.Key"}}</span>
-                                <span>{{localize "MIST_AGE.Settings.Changes.Type"}}</span>
-                                <span>{{localize "MIST_AGE.Settings.Changes.Value"}}</span>
-                                <span>{{localize "MIST_AGE.Settings.Changes.Priority"}}</span>
-                                <a class="mist-change-add" data-tooltip="MIST_AGE.Settings.Changes.AddRow"><i class="fa-solid fa-square-plus" inert></i></a>
-                            </div>
-                            <ol class="mist-change-list">
-                                {{#each field.changes as |change|}}
-                                    {{> mistChangeRow change=change types=@root.changeTypes}}
-                                {{/each}}
-                            </ol>
-                            <template class="mist-change-template">
-                                {{> mistChangeRow change=@root.newChange types=@root.changeTypes}}
-                            </template>
-                            {{#if @root.changePaths.length}}
-                                <div class="mist-change-footer">
-                                    <select class="mist-change-path">
-                                        {{selectOptions @root.changePaths valueAttr="value" labelAttr="label"}}
-                                    </select>
-                                    <button type="button" class="mist-change-add-path"><i class="fa-solid fa-plus" inert></i> {{localize "MIST_AGE.Settings.Changes.AddChange"}}</button>
-                                </div>
-                            {{/if}}
-                        </div>
-                        {{#if field.hint}}<p class="hint">{{field.hint}}</p>{{/if}}
+                <div class="form-group">
+                    <label for="mist-setting-{{field.key}}">{{field.name}}</label>
+                    <div class="form-fields">
+                        {{#if field.isBoolean}}
+                            <input type="checkbox" id="mist-setting-{{field.key}}" name="{{field.key}}" {{checked field.value}}>
+                        {{else if field.choices}}
+                            <select id="mist-setting-{{field.key}}" name="{{field.key}}">
+                                {{selectOptions field.choices selected=field.value localize=true}}
+                            </select>
+                        {{else if field.isText}}
+                            <input type="text" id="mist-setting-{{field.key}}" name="{{field.key}}" value="{{field.value}}">
+                        {{else if field.effect}}
+                            <span class="mist-effect-summary">{{field.effect.summary}}</span>
+                            <button type="button" id="mist-setting-{{field.key}}" data-mist-edit-effect="{{field.key}}">
+                                <i class="fa-solid fa-gears" inert></i> {{localize "MIST_AGE.Settings.EditEffect"}}
+                            </button>
+                        {{else if field.filePicker}}
+                            <img class="mist-settings-icon-preview" src="{{field.value}}" alt="">
+                            <file-picker id="mist-setting-{{field.key}}" name="{{field.key}}" type="{{field.filePicker}}" value="{{field.value}}"></file-picker>
+                        {{else}}
+                            <input type="number" id="mist-setting-{{field.key}}" name="{{field.key}}" value="{{field.value}}" step="any">
+                        {{/if}}
                     </div>
-                {{else}}
-                    <div class="form-group">
-                        <label for="mist-setting-{{field.key}}">{{field.name}}</label>
-                        <div class="form-fields">
-                            {{#if field.isBoolean}}
-                                <input type="checkbox" id="mist-setting-{{field.key}}" name="{{field.key}}" {{checked field.value}}>
-                            {{else if field.choices}}
-                                <select id="mist-setting-{{field.key}}" name="{{field.key}}">
-                                    {{selectOptions field.choices selected=field.value localize=true}}
-                                </select>
-                            {{else if field.filePicker}}
-                                <img class="mist-settings-icon-preview" src="{{field.value}}" alt="">
-                                <file-picker id="mist-setting-{{field.key}}" name="{{field.key}}" type="{{field.filePicker}}" value="{{field.value}}"></file-picker>
-                            {{else}}
-                                <input type="number" id="mist-setting-{{field.key}}" name="{{field.key}}" value="{{field.value}}" step="any">
-                            {{/if}}
-                        </div>
-                        {{#if field.hint}}<p class="hint">{{field.hint}}</p>{{/if}}
-                    </div>
-                {{/if}}
+                    {{#if field.hint}}<p class="hint">{{field.hint}}</p>{{/if}}
+                </div>
             {{/each}}
         </fieldset>
     {{/each}}
-    <datalist id="mist-change-paths">
-        {{#each changePaths as |path|}}
-            <option value="{{path.value}}">{{path.label}}</option>
-        {{/each}}
-    </datalist>
 </div>

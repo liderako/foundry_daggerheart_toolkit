@@ -2,7 +2,7 @@ import { INVENTORY_TYPES, MODULE_ID, WEIGHT_FLAGS, nameKey, rerenderActorSheets 
 
 const SLOTS_PATH = `${WEIGHT_FLAGS}.slots`;
 const WORN_PATH = `${WEIGHT_FLAGS}.worn`;
-// Active effects can raise capacity by adding to this flag (e.g. a backpack: ADD 4).
+// Active effects can raise capacity by adding to this flag (e.g. a backpack: ADD 10).
 const BONUS_PATH = `${WEIGHT_FLAGS}.bonusSlots`;
 // Capacity typed in by whoever can edit the sheet; replaces the Strength formula. Adversaries and companions always
 // allow it, characters only while the GM turns on the characterManualCapacity setting.
@@ -11,9 +11,9 @@ const MANUAL_CAPACITY_TYPES = new Set(["adversary", "companion"]);
 const WEARABLE_TYPES = new Set(["loot"]);
 const LOAD_BAR_TYPES = new Set(["character", "adversary", "companion"]);
 
-// Capacity formula, editable in the module settings. The Mist Age defaults give Strength -1 = 18, 0 = 20, 1 = 24,
-// 2 = 28, 3 = 32 slots: 20 base, +4 per point of Strength, -2 per point below 0.
-const CAPACITY_DEFAULTS = { capacityBase: 20, capacityPerStrength: 4, capacityPerNegativeStrength: 2 };
+// Capacity formula, editable in the module settings. The Mist Age defaults give Strength -1 = 8, 0 = 10, 1 = 14,
+// 2 = 18, 3 = 22 slots: 10 base, +4 per point of Strength, -2 per point below 0. A backpack adds 10 by effect.
+const CAPACITY_DEFAULTS = { capacityBase: 10, capacityPerStrength: 4, capacityPerNegativeStrength: 2 };
 // Per-item defaults (potions, tiny consumables, light armor, small weapons), keyed by nameKey().
 const PRESET_WEIGHTS_URL = `modules/${MODULE_ID}/data/weights.json`;
 let presetWeights = new Map();

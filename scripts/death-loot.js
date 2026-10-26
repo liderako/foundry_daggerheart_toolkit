@@ -21,8 +21,9 @@ export function registerDeathLoot() {
 		default: true
 	});
 
+	// Gold counts too: money rolled for an adversary that is already down makes it lootable.
 	Hooks.on("updateActor", (actor, changes) => {
-		if (foundry.utils.hasProperty(changes, "system.resources.hitPoints")) {
+		if (foundry.utils.hasProperty(changes, "system.resources.hitPoints") || foundry.utils.hasProperty(changes, "system.gold")) {
 			queueCheck(actor);
 		}
 	});

@@ -5,6 +5,32 @@
 			"Name": "Loot from fallen adversaries",
 			"Hint": "When an adversary that carries inventory items or gold is downed (all Hit Points marked, or Dead / Defeated), its token becomes an Item Piles loot pile. It turns back if the adversary recovers."
 		},
+		"AdversaryMoney": {
+			"Setting": {
+				"Name": "Money button for adversaries",
+				"Hint": "A button in an adversary's inventory, seen by the GM only, that rolls the money it carries from the money table and adds it to its gold."
+			},
+			"Table": {
+				"Name": "Money table",
+				"Hint": "Name of the roll table the money button rolls. Its Daggerheart roll formulas are the wealth levels to choose from; the inline rolls in the drawn result (such as [[/r 2d6 # Silver]]) are the amount, in the currency named after #."
+			},
+			"Button": "Roll money",
+			"Tooltip": "Roll money from {table} and add it to the gold",
+			"Dialog": {
+				"Title": "Money: {name}",
+				"Hint": "How wealthy is this adversary? The amount is rolled and added to its gold.",
+				"Button": "Roll"
+			},
+			"Message": {
+				"Title": "Money for {name}",
+				"Added": "Added: {money}",
+				"Nothing": "Nothing found."
+			},
+			"NoTable": "No roll table named \"{table}\". Set its name in the toolkit settings (Adversaries).",
+			"NoMoney": "The result \"{result}\" of {table} has no money rolls, such as [[/r 2d6 # Silver]].",
+			"UnknownCurrency": "Unknown currency \"{currency}\" in the money table.",
+			"BadFormula": "Could not roll \"{formula}\" from the money table."
+		},
 		"TokenNames": {
 			"Name": "Token names match their sheets",
 			"Hint": "A token shows the same name on the map, in chat, in combat and on its sheet. Linked tokens and the prototype take the actor name; an unlinked token keeps a name given to it alone, otherwise it takes the actor name. Renaming an actor, a token or a token's sheet renames the rest. Turn this off to name tokens by hand.",
@@ -66,6 +92,67 @@
 				"Done": "{actor}: jam dice back to 1 — {weapons}."
 			}
 		},
+		"Exhaustion": {
+			"Setting": {
+				"Name": "Exhaustion checks",
+				"Hint": "The GM can ask players for exhaustion checks from the Daggerheart Menu: a Strength roll against a difficulty that starts at 15 and rises with each check until the next long rest."
+			},
+			"SheetButtonSetting": {
+				"Name": "Exhaustion button on character sheets",
+				"Hint": "A button next to the rest buttons lets the sheet's owner, or the GM for a player who is offline, roll the exhaustion check. When off, checks come only from the GM's requests in the Daggerheart Menu."
+			},
+			"Menu": {
+				"Legend": "Exhaustion",
+				"Request": "Request exhaustion check",
+				"Reset": "Reset exhaustion"
+			},
+			"NoPlayers": "No player with a character is online.",
+			"Difficulty": "DC {difficulty}",
+			"Request": {
+				"Title": "Request exhaustion checks",
+				"Hint": "Each chosen player rolls their own check.",
+				"QuietDay": "Quiet day (no events or battles): advantage on the first check since the long rest",
+				"Button": "Request checks",
+				"Sent": "Exhaustion checks requested from {count} players."
+			},
+			"Reset": {
+				"Title": "Reset exhaustion",
+				"Hint": "Set every character's exhaustion difficulty back to 15, as after a long rest?",
+				"Done": "Exhaustion reset for {count} characters."
+			},
+			"Roll": {
+				"Title": "Exhaustion check"
+			},
+			"Effect": "Exhaustion (next DC {difficulty})",
+			"EffectHint": "The difficulty of the next exhaustion check. A long rest clears it.",
+			"Outcome": {
+				"critical": "Critical success",
+				"successHope": "Success with Hope",
+				"successFear": "Success with Fear",
+				"failureHope": "Failure with Hope",
+				"failureFear": "Failure with Fear"
+			},
+			"Result": {
+				"StressCleared": "Cleared 1 Stress.",
+				"HopeGained": "Gained 1 Hope.",
+				"Stress": "Marked {count} Stress.",
+				"HitPoints": "Marked {count} Hit Points instead of Stress.",
+				"D100Lost": "d100: {total} (≤ {threshold}) — lose 1 Hope.",
+				"D100Kept": "d100: {total} (> {threshold}) — Hope kept.",
+				"HopeLost": "Lost 1 Hope.",
+				"Next": "Next exhaustion check: DC {difficulty}."
+			},
+			"Sheet": {
+				"Tooltip": "Exhaustion check (DC {difficulty})",
+				"QuietDay": "Was it a quiet day, without events or battles? By the exhaustion rules the first check since the long rest then has advantage."
+			}
+		},
+		"Rest": {
+			"Reminder": {
+				"Name": "Long rest reminder",
+				"Hint": "Shown at the top of the long rest dialog, for example to mark off a Ration. Leave empty to show nothing."
+			}
+		},
 		"EmptyConsumables": {
 			"Name": "Remove used-up consumables",
 			"Hint": "A consumable at quantity 0 disappears from the inventory at once and is deleted when the GM next loads the world. Until then its chat card can still apply the healing or effects it rolled. Item Piles merchants keep empty stacks."
@@ -85,7 +172,7 @@
 				},
 				"capacity": {
 					"Label": "Carrying capacity",
-					"Hint": "Character capacity = base + Strength × per-point step (the negative step below 0). With the defaults: Strength -1 = 18, 0 = 20, 1 = 24, 2 = 28, 3 = 32 slots."
+					"Hint": "Character capacity = base + Strength × per-point step (the negative step below 0). With the defaults: Strength -1 = 8, 0 = 10, 1 = 14, 2 = 18, 3 = 22 slots; a backpack adds 10 by an effect on flags.mist-age-weight.bonusSlots."
 				},
 				"overload": {
 					"Label": "Overload",
@@ -99,6 +186,14 @@
 					"Label": "Weapons",
 					"Hint": "Ammunition and weapon jams."
 				},
+				"exhaustion": {
+					"Label": "Exhaustion",
+					"Hint": "Exhaustion checks requested by the GM."
+				},
+				"rest": {
+					"Label": "Rest",
+					"Hint": "Downtime and rests."
+				},
 				"tokens": {
 					"Label": "Tokens",
 					"Hint": "Names of tokens on the map."
@@ -108,15 +203,8 @@
 					"Hint": "Inventory and loot of adversaries."
 				}
 			},
-			"Changes": {
-				"Key": "Attribute Key",
-				"Type": "Type",
-				"Value": "Value",
-				"Priority": "Priority",
-				"AddRow": "Add an empty change",
-				"AddChange": "Add Change",
-				"Delete": "Delete change"
-			}
+			"EditEffect": "Edit effect",
+			"NoChanges": "No changes"
 		}
 	},
 	"MIST_AGE_PRICES": {
@@ -201,13 +289,14 @@
 			"Name": "Heavy overload icon",
 			"Hint": "Image of the heavy overload effect. Changing it updates the icons already shown."
 		},
-		"OverloadLightChanges": {
-			"Name": "Light overload changes",
-			"Hint": "Effect changes applied while a character is lightly overloaded, as on the Changes tab of an effect. For a penalty use Add with a negative value, e.g. system.evasion, Add, -1."
+		"OverloadLightEffect": {
+			"Name": "Light overload effect",
+			"Hint": "What light overload does to a character, edited in the Daggerheart effect sheet: changes and conditionals. For a penalty add a change with Add and a negative value, e.g. system.evasion, Add, -1."
 		},
-		"OverloadHeavyChanges": {
-			"Name": "Heavy overload changes",
-			"Hint": "Effect changes applied while a character is heavily overloaded, instead of the light overload changes."
-		}
+		"OverloadHeavyEffect": {
+			"Name": "Heavy overload effect",
+			"Hint": "What heavy overload does to a character, instead of the light overload effect."
+		},
+		"EffectEditorMissing": "This Daggerheart version has no effect sheet for settings; overload effects cannot be edited here."
 	}
 }

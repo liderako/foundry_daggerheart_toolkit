@@ -51,6 +51,33 @@ function getEnabledUnits() {
 		.map(([key, rate]) => ({ key, rate, label: game.i18n.localize(currencies[key].label), icon: currencies[key].icon }));
 }
 
+// Usual names of each Daggerheart currency, for text that names a currency without the world's own label.
+const CURRENCY_ALIASES = {
+	coins: ["coin", "coins", "penny", "pennies", "copper"],
+	handfuls: ["handful", "handfuls", "silver"],
+	bags: ["bag", "bags", "gold"],
+	chests: ["chest", "chests", "gold bar", "gold bars"]
+};
+
+/** The gold field (coins, handfuls, bags, chests) a currency name refers to: the world's label or a usual name. */
+export function getCurrencyKey(name) {
+	const wanted = name?.trim().toLowerCase();
+	if (!wanted) {
+		return null;
+	}
+	for (const [key, currency] of Object.entries(getCurrencies())) {
+		if (game.i18n.localize(currency.label ?? "").toLowerCase() === wanted) {
+			return key;
+		}
+	}
+	return Object.entries(CURRENCY_ALIASES).find(([, aliases]) => aliases.includes(wanted))?.[0] ?? null;
+}
+
+/** The world's name of a gold field, such as "Silver" for handfuls. */
+export function getCurrencyLabel(key) {
+	return game.i18n.localize(getCurrencies()[key]?.label ?? key);
+}
+
 /** Splits a price in handfuls into the enabled currencies, largest first. */
 function splitPrice(price) {
 	const units = getEnabledUnits();

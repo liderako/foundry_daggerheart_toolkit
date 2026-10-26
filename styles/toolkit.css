@@ -209,49 +209,49 @@
 	color: light-dark(#a8261b, #e5574a);
 }
 
-.mist-age-settings .mist-changes {
-	display: flex;
-	flex-direction: column;
-	gap: 4px;
-	width: 100%;
+.mist-age-settings .mist-effect-summary {
+	flex: 1;
+	min-width: 0;
+	font-size: var(--font-size-12, 12px);
+	opacity: 0.85;
+	overflow-wrap: anywhere;
 }
 
-.mist-age-settings .mist-change-list {
-	display: flex;
-	flex-direction: column;
-	gap: 4px;
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
-.mist-age-settings .mist-change-row {
-	display: grid;
-	grid-template-columns: 2fr 1.2fr 1fr 4.5em 1.5em;
-	align-items: center;
-	gap: 6px;
-}
-
-.mist-age-settings .mist-change-header {
-	font-weight: bold;
-	text-align: center;
-}
-
-.mist-age-settings .mist-change-row a {
-	text-align: center;
-}
-
-.mist-age-settings .mist-change-footer {
-	display: flex;
-	justify-content: flex-end;
-	gap: 6px;
-}
-
-.mist-age-settings .mist-change-footer select {
-	flex: 0 1 16em;
-}
-
-.mist-age-settings .mist-change-footer button {
+.mist-age-settings [data-mist-edit-effect] {
 	flex: none;
 	width: auto;
+}
+
+.daggerheart.downtime .mist-rest-reminder {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0 0 8px 0;
+	padding: 6px 10px;
+	border: 1px solid light-dark(#a87b00, #e0b23a);
+	border-radius: 6px;
+	font-weight: bold;
+}
+
+.application.sheet.daggerheart.actor .tab.inventory .mist-money-roll {
+	display: flex;
+	justify-content: flex-end;
+	padding: 0 16px var(--spacer-8, 8px) 16px;
+}
+
+.application.sheet.daggerheart.actor .tab.inventory .mist-money-roll button {
+	flex: none;
+	width: auto;
+	gap: 6px;
+}
+
+.mist-money-level {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.mist-money-level small {
+	font-size: var(--font-size-12, 12px);
+	opacity: 0.8;
 }

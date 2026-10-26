@@ -1,4 +1,6 @@
 export const MODULE_ID = "mist-age-toolkit";
+// The module socket, through which the GM asks a player's client to open a roll (module.json sets socket: true).
+export const SOCKET = `module.${MODULE_ID}`;
 
 // The toolkit merges the earlier mist-age-prices and mist-age-weight modules. Their flag scopes are kept, so prices
 // and weights already stored on items, compendiums and actors keep working without a migration.
@@ -28,4 +30,15 @@ export function rerenderItemAndActorSheets() {
 			app.render();
 		}
 	}
+}
+
+/** The character a player rolls for: the assigned one, or else the first character the player owns. */
+export function getPlayerCharacter(user) {
+	const owned = actor => actor.type === "character" && !game.itempiles?.API.isValidItemPile(actor) && actor.testUserPermission(user, "OWNER");
+	return user.character ?? game.actors.find(owned) ?? null;
+}
+
+/** Values of the checked inputs with this name in a form, in document order. */
+export function checkedValues(form, name) {
+	return [...form.querySelectorAll(`input[name="${name}"]:checked`)].map(input => input.value);
 }

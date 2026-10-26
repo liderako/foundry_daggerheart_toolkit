@@ -1,5 +1,5 @@
 import { CONSUMES_PATH, consumesAmmo } from "./ammunition.js";
-import { MODULE_ID, rerenderItemAndActorSheets } from "./shared.js";
+import { MODULE_ID, SOCKET, checkedValues, getPlayerCharacter, rerenderItemAndActorSheets } from "./shared.js";
 
 const JAM_DIE_PATH = `flags.${MODULE_ID}.jamDie`;
 const JAM_COUNT_PATH = `flags.${MODULE_ID}.jamCount`;
@@ -10,7 +10,6 @@ const DEFAULT_JAM_DIE = "d6";
 const CLEAR_JAM_ID = "mistAgeClearJam0";
 const JAM_ICON = "icons/svg/hazard.svg";
 const CARE_MOVE = "mistAgeWeaponCare";
-const SOCKET = `module.${MODULE_ID}`;
 
 /**
  * Weapon jams for weapons that consume ammunition. Each such weapon has a jam die and a number of jam dice. From the
@@ -137,12 +136,6 @@ function injectMenu(app, element) {
 	element.querySelector("[data-mist-jam='raise']").addEventListener("click", raiseJamDice);
 }
 
-/** The character a player rolls for: the assigned one, or else the first character the player owns. */
-function getPlayerCharacter(user) {
-	const owned = actor => actor.type === "character" && !isPile(actor) && actor.testUserPermission(user, "OWNER");
-	return user.character ?? game.actors.find(owned) ?? null;
-}
-
 async function requestJamRoll() {
 	const players = game.users
 		.filter(user => user.active && !user.isGM)
@@ -197,10 +190,6 @@ async function raiseJamDice() {
 		await actor.updateEmbeddedDocuments("Item", updates);
 	}
 	ui.notifications.info(localize("Raise.Done", { count: ids.length }));
-}
-
-function checkedValues(form, name) {
-	return [...form.querySelectorAll(`input[name="${name}"]:checked`)].map(input => input.value);
 }
 
 /* -------------------------------------------- */
