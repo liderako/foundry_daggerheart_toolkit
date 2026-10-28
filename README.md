@@ -1,250 +1,250 @@
 # The Mist Age - Toolkit
 
-Модуль Foundry VTT для мира *The Mist Age* на системе Daggerheart. Добавляет цены и вес предметам, торговлю через Item Piles, нагрузку персонажей, HB-копии компендиумов и таблиц лута, инвентарь противникам и компаньонам, расход амуниции и клин оружия, проверки усталости, синхронизацию имён токенов с их листами.
+A Foundry VTT module for the *The Mist Age* world on the Daggerheart system. It adds prices and weight to items, trading through Item Piles, character carrying load, HB copies of the compendiums and loot tables, an inventory for adversaries and companions, ammunition use and weapon jams, exhaustion checks, and token names kept in sync with their sheets.
 
-## Что нужно
+## Requirements
 
-| | Версия |
+| | Version |
 |---|---|
 | Foundry VTT | 13–14 |
-| Система | Daggerheart |
-| Модули | [Item Piles](https://github.com/fantasycalendar/FoundryVTT-ItemPiles) 3.x (вместе с ним socketlib и libWrapper) |
+| System | Daggerheart |
+| Modules | [Item Piles](https://github.com/fantasycalendar/FoundryVTT-ItemPiles) 3.x (with socketlib and libWrapper) |
 
-## Установка
+## Installation
 
-В Foundry: **Add-on Modules → Install Module**, вставь ссылку и нажми **Install**:
+In Foundry: **Add-on Modules → Install Module**, paste the link and click **Install**:
 
 ```
-https://github.com/liderako/the_mist_age_foundry_daggerheart_addtional/releases/latest/download/module.json
+https://github.com/liderako/foundry_daggerheart_toolkit/releases/latest/download/module.json
 ```
 
-Foundry сам предложит поставить Item Piles. Потом включи модуль в мире: **Game Settings → Manage Modules → The Mist Age - Toolkit**.
+Foundry offers to install Item Piles as well. Then enable the module in the world: **Game Settings → Manage Modules → The Mist Age - Toolkit**.
 
-### Первый запуск
+### First launch
 
-При первой загрузке мира GM модуль один раз:
+The first time a GM loads the world, the module once:
 
-- создаёт мировые компендиумы **Weapons (HB)**, **Armors (HB)**, **Consumables (HB)**, **Loot (HB)** и **Rolltables (HB)**;
-- создаёт таблицы лута в папке **Weapons & Armor (HB)**;
-- проставляет цены из таблицы цен всем предметам, у которых цены ещё нет;
-- настраивает в Item Piles атрибут цены и валюты.
+- creates the world compendiums **Weapons (HB)**, **Armors (HB)**, **Consumables (HB)**, **Loot (HB)** and **Rolltables (HB)**;
+- creates the loot tables in the **Weapons & Armor (HB)** folder;
+- sets prices from the price table on every item that has no price yet;
+- sets up the price attribute and currencies in Item Piles.
 
-Это занимает несколько секунд. Повторно эти шаги не выполняются: повторяется только проставление цен, если изменилась таблица цен.
+This takes a few seconds. These steps do not run again; only setting prices repeats, when the price table has changed.
 
-## Возможности
+## Features
 
-### Цены и валюта
+### Prices and currency
 
-- **Цена предмета.** У оружия, брони, расходников и лута есть цена. GM задаёт её во вкладке **Settings** листа предмета.
-- **Где видна цена:** в шапке листа предмета и тегом у предмета в инвентаре. Цена раскладывается по монетам с иконками валют из homebrew Daggerheart, например `2 Gold 50 Silver 3 Penny`.
-- **Хранение.** Цена хранится в основной валюте, в горстях (handfuls): в The Mist Age это Silver. Поле принимает дроби: `0.1` при курсе 10 — это одна монета.
-- **Курсы валют** задаются в настройках. По умолчанию 10 монет = 1 горсть, 100 горстей = 1 мешок, 10 мешков = 1 сундук. При смене курса меняется только раскладка цены по монетам, сами цены остаются.
-- **Item Piles.** Модуль сам указывает Item Piles, где лежит цена, и собирает его валюты из валют Daggerheart: названия, курсы, основная валюта. Торговцы продают и покупают по этим ценам, а деньги берутся из золота на листе.
-- **Таблица цен** `data/compendium-prices.json` проставляет цены предметам без цены: в мировых компендиумах, в папке Items, у персонажей и торговцев. Предметы сопоставляются по названию и типу, приставка «(HB)» не важна. Цену, поставленную вручную, модуль не трогает.
+- **Item price.** Weapons, armor, consumables and loot have a price. The GM sets it on the **Settings** tab of the item sheet.
+- **Where the price shows:** in the header of the item sheet and as a tag on the item in the inventory. The price is broken down into coins with the currency icons of the Daggerheart homebrew settings, for example `2 Gold 50 Silver 3 Penny`.
+- **Storage.** The price is stored in the main currency, handfuls: in The Mist Age that is Silver. The field takes fractions: `0.1` at a rate of 10 is one coin.
+- **Exchange rates** are set in the settings. By default 10 coins = 1 handful, 100 handfuls = 1 bag, 10 bags = 1 chest. Changing a rate only changes how prices break down into coins; the prices themselves stay.
+- **Item Piles.** The module tells Item Piles where the price is kept and builds its currencies from Daggerheart's: names, rates, the main currency. Merchants sell and buy at these prices, and money is taken from the gold on the sheet.
+- **The price table** `data/compendium-prices.json` sets prices on items without one: in the world compendiums, in the Items folder, on characters and merchants. Items are matched by name and type; the "(HB)" suffix does not matter. A price set by hand is never changed.
 
-### HB-компендиумы и таблицы
+### HB compendiums and tables
 
-- **HB-копии.** Модуль копирует компендиумы оружия, брони, расходников и лута Daggerheart в мировые компендиумы с приставкой «(HB)» у каждого предмета. ID предметов те же, что у оригиналов. Обновление системы мировые компендиумы не трогает, поэтому цены и вес настраиваются прямо в HB-копиях.
-- **Таблицы бросков.** Таблицы мира и копия **Rolltables (HB)** ведут на HB-предметы, а не на системные. Если позже импортировать таблицу из системного компендиума, модуль переведёт её на HB при следующей загрузке GM.
-- **Таблицы лута** в папке **Weapons & Armor (HB)**:
+- **HB copies.** The module copies Daggerheart's weapon, armor, consumable and loot compendiums into world compendiums, adding "(HB)" to every item. Item IDs are the same as the originals'. A system update does not touch world compendiums, so prices and weights are set right in the HB copies.
+- **Roll tables.** The world's tables and the **Rolltables (HB)** copy point to the HB items, not the system ones. A table imported later from a system compendium is switched to HB on the next GM load.
+- **Loot tables** in the **Weapons & Armor (HB)** folder:
   - Primary Physical Weapons (HB);
   - Primary Magic Weapons (HB);
   - Secondary Physical Weapons (HB);
   - Secondary Magic Weapons (HB);
   - Armor (HB).
 
-  В каждой таблице все предметы категории, отсортированы по тиру. Редкость выбирается в формуле броска: **Common** = Tier 1, **Uncommon** = Tier 2, **Rare** = Tier 3, **Legendary** = Tier 4. Каждая формула попадает только в предметы своего тира.
+  Each table holds every item of its category, sorted by tier. Rarity is chosen with the roll formula: **Common** = Tier 1, **Uncommon** = Tier 2, **Rare** = Tier 3, **Legendary** = Tier 4. Each formula lands only on items of its tier.
 
-### Вес и нагрузка
+### Weight and carrying load
 
-- **Вес предмета** указывается в слотах, можно дробно. GM задаёт его во вкладке **Settings** листа предмета, пустое поле — вес по умолчанию. Вес виден в шапке листа и тегом в инвентаре: вес × количество.
-- **Вес по умолчанию.** Индивидуальные значения берутся из `data/weights.json`:
-  - зелья и всё во флаконах — 0.5;
-  - травы, порошки, семена и прочая мелочь — 0.1;
-  - кожаная, стёганая и тканевая броня — 2;
-  - кинжалы и прочее маленькое одноручное оружие — 1.
+- **Item weight** is given in slots, fractions allowed. The GM sets it on the **Settings** tab of the item sheet; an empty field means the default weight. The weight shows in the sheet header and as a tag in the inventory: weight × quantity.
+- **Default weight.** Weights of particular items come from `data/weights.json`:
+  - potions and anything in a vial — 0.5;
+  - herbs, powders, seeds and other small things — 0.1;
+  - leather, padded and cloth armor — 2;
+  - daggers and other small one-handed weapons — 1.
 
-  Остальное считается по типу: одноручное оружие 2, двуручное 3, броня 4, прочее 1.
-- **Что не считается:** надетая броня и лут с галочкой **Worn** (одежда, плащи, украшения).
-- **Шкала нагрузки** на вкладке инвентаря у персонажей, противников и компаньонов: нагрузка / вместимость, цвет по состоянию. Норма — зелёный, лёгкий перегруз — жёлтый, полный перегруз — красный.
-- **Вместимость персонажа** = база + Сила × прибавка за очко. Ниже 0 вместо прибавки вычитается штраф за очко. Со значениями по умолчанию (10, +4, −2): Сила −1 = 8, 0 = 10, 1 = 14, 2 = 18, 3 = 22 слота. Формула меняется в настройках.
-- **Ручная вместимость.** GM может разрешить задавать вместимость персонажа вручную, прямо в шкале нагрузки; пустое поле — снова формула. Отдельная галочка оставляет это право только GM.
-- **Противники и компаньоны.** Силы у них нет. Вместимость вписывается в шкалу; пусто — вместимость как при Силе 0.
-- **Бонус к вместимости.** Его даёт активный эффект с ключом `flags.mist-age-weight.bonusSlots` в режиме **Add**, например рюкзак +10. Эффект на предмете с галочкой Transfer работает, пока предмет у персонажа. С модулем **The Mist Age - Equipment** бонус одежды и рюкзака работает, только пока они надеты.
-- **Без ограничения.** Для персонажей ограничение веса можно выключить: тогда нагрузка только считается, без вместимости и перевеса.
-- **Два состояния перегруза.**
-  - **Лёгкий перегруз** (предупреждение): нагрузка выше вместимости, но не больше чем на предел лёгкого перегруза (по умолчанию 8 слотов).
-  - **Полный перегруз:** нагрузка ещё больше.
-- **Эффект перегруза.** Перегруженный персонаж получает эффект на токене и в эффектах листа: «Light overload (+5)» или «Heavy overload (+15)». У каждого состояния свой значок.
-- **Дебафы.** Для каждого состояния в настройках есть кнопка **Edit effect**. Она открывает обычное окно эффекта Daggerheart с вкладками **Changes** и **Conditionals**: те же строки Attribute Key / Type / Value / Priority, кнопка «+», список типов с **Add Change** (Armor, Standard Attack и т. д.) и условия.
-  - **Дебаф:** например `system.evasion`, Add, −1 или `system.traits.agility.value`, Add, −1. Напоминание о помехе — `system.disadvantageSources`, Add, «Agility rolls (overloaded)»: в окне броска появится значок с причиной.
-  - **Сохранение:** нажми **Save** в окне эффекта и закрой его; рядом с кнопкой в настройках видна сводка изменений.
-  - **Полный перегруз** использует только свой эффект, а не изменения лёгкого.
-  - **Перенос:** дебафы, заданные в версиях 1.0.7 и 1.0.8, при загрузке GM переносятся в эти эффекты.
-- **Когда показывать эффект.** В настройках выбирается: при обоих состояниях, только при полном перегрузе или никогда. При «никогда» дебафов тоже нет. Там же меняются значки; новая картинка сразу появляется на уже висящих эффектах.
+  Everything else goes by type: one-handed weapon 2, two-handed 3, armor 4, other 1.
+- **What does not count:** worn armor, and loot with the **Worn** box checked (clothing, cloaks, jewelry).
+- **Load bar** on the inventory tab of characters, adversaries and companions: load / capacity, colored by state. Normal is green, light overload yellow, heavy overload red.
+- **Character capacity** = base + Strength × slots per point. Below 0, a penalty per point is subtracted instead. With the defaults (10, +4, −2): Strength −1 = 8, 0 = 10, 1 = 14, 2 = 18, 3 = 22 slots. The formula is changed in the settings.
+- **Capacity set by hand.** The GM can let a character's capacity be typed in by hand, right in the load bar; an empty field goes back to the formula. A separate box keeps this right to the GM.
+- **Adversaries and companions** have no Strength. Their capacity is typed into the bar; empty means the capacity at Strength 0.
+- **Capacity bonus.** It comes from an active effect with the key `flags.mist-age-weight.bonusSlots` in **Add** mode, for example a backpack +10. An effect on an item with Transfer checked works while the character has the item. With the **The Mist Age - Equipment** module, the bonus of clothing and a backpack works only while they are worn.
+- **No limit.** The weight limit can be turned off for characters: then the load is only counted, with no capacity and no overload.
+- **Two overload states.**
+  - **Light overload** (a warning): load above capacity, by no more than the light overload limit (8 slots by default).
+  - **Heavy overload:** more than that.
+- **Overload effect.** An overloaded character gets an effect on the token and among the sheet's effects: "Light overload (+5)" or "Heavy overload (+15)". Each state has its own icon.
+- **Penalties.** Each state has an **Edit effect** button in the settings. It opens the regular Daggerheart effect window with the **Changes** and **Conditionals** tabs: the same Attribute Key / Type / Value / Priority rows, the "+" button, the type list with **Add Change** (Armor, Standard Attack and so on), and conditions.
+  - **A penalty:** for example `system.evasion`, Add, −1, or `system.traits.agility.value`, Add, −1. A reminder of disadvantage is `system.disadvantageSources`, Add, "Agility rolls (overloaded)": the roll window then shows an icon with the reason.
+  - **Saving:** click **Save** in the effect window and close it; a summary of the changes shows next to the button in the settings.
+  - **Heavy overload** uses only its own effect, not the light one's changes.
+  - **Carried over:** penalties set in versions 1.0.7 and 1.0.8 move into these effects on the GM's load.
+- **When to show the effect.** The settings offer: for both states, only for heavy overload, or never. With "never" there are no penalties either. The icons are changed there too; a new image shows at once on effects already applied.
 
-### Израсходованные расходники
+### Used-up consumables
 
-Включается настройкой **Remove used-up consumables** (по умолчанию включена).
+Turned on by the **Remove used-up consumables** setting (on by default).
 
-- **Сразу.** Расходник, у которого количество дошло до 0 (выпили зелье, потратили последнюю стрелу), сразу пропадает из инвентаря на листе.
-- **Удаление.** Сам предмет удаляется при следующей загрузке мира GM. До этого он нужен карточке в чате: Daggerheart берёт с предмета действие, когда по кнопке применяет лечение, урон или эффекты зелья.
-- **Item Piles.** У торговцев и куч пустые стопки остаются, как и раньше.
+- **At once.** A consumable whose quantity reaches 0 (a potion drunk, the last arrow spent) disappears from the inventory on the sheet right away.
+- **Deletion.** The item itself is deleted on the next GM load of the world. Until then the chat card needs it: Daggerheart takes the action from the item when its button applies the healing, damage or effects of the potion.
+- **Item Piles.** Merchants and piles keep empty stacks, as before.
 
-### Инвентарь противников и компаньонов
+### Inventory of adversaries and companions
 
-- **Вкладка Inventory.** У adversary и компаньонов появляется вкладка **Inventory**, как у персонажа: деньги (Penny/Silver/Gold), оружие, броня, расходники и лут, плюс шкала нагрузки.
-- **Как пользоваться:** предметы перетаскиваются на лист или создаются кнопкой «+». Меню «⋮» у предмета: **Edit**, **Send to Chat**, **Delete**; с Shift удаление идёт без подтверждения.
-- **Деньги** хранятся там же, где у персонажа, поэтому Item Piles может их забрать.
+- **Inventory tab.** Adversaries and companions get an **Inventory** tab like a character's: money (Penny/Silver/Gold), weapons, armor, consumables and loot, plus the load bar.
+- **How to use it:** items are dragged onto the sheet or created with the "+" button. The item's "⋮" menu has **Edit**, **Send to Chat**, **Delete**; with Shift, deleting skips the confirmation.
+- **Money** is kept where a character keeps it, so Item Piles can take it.
 
-### Амуниция
+### Ammunition
 
-- **Настройка оружия.** Во вкладке **Settings** листа оружия есть блок **Ammunition**:
-  - галочка **Consumes ammunition** — оружие тратит амуницию;
-  - поле **Weapon ammunition** — ссылки на расходники, которыми оно стреляет. Перетащи их в поле из компендиума (например, Arrow (HB) из **Consumables (HB)**) или из инвентаря персонажа. Принимаются только расходники.
-- **Как находится амуниция.**
-  - **По связи (ID).** Подходит стопка в инвентаре, взятая из той же записи компендиума: купленная у торговца или перетащенная из компендиума, неважно когда. Учитывается и цепочка копий: HB-копия и системный оригинал, запись, скопированная из другого компендиума, считаются одним предметом. Если перетащить в поле предмет из инвентаря, ссылка ставится на его запись в компендиуме.
-  - **По названию.** Если по ID стопка не подходит, ищется стопка с тем же названием, что у связанного предмета; регистр и приставка «(HB)» не важны. Название запоминается, когда предмет кидают в поле, поэтому поиск работает, даже если связанной пачки уже нет.
-- **Атака.** В окне броска атаки таким оружием внизу появляется список **Spend ammunition:** со связанными расходниками, у которых ещё есть единицы, и их количеством. По кнопке броска выбранный расходник теряет 1 единицу.
-- **Кончилась амуниция.** Расходник с количеством 0 пропадает из инвентаря (см. «Израсходованные расходники»). Если амуниции нет вообще, в окне видно «No ammunition left». Бросок всё равно проходит, ничего не тратится, и приходит предупреждение.
-- **Быстрый бросок без окна** тратит первую по порядку амуницию из тех, что остались.
+- **Weapon setup.** The **Settings** tab of a weapon sheet has an **Ammunition** block:
+  - the **Consumes ammunition** box — the weapon spends ammunition;
+  - the **Weapon ammunition** field — links to the consumables it shoots. Drag them into the field from a compendium (for example Arrow (HB) from **Consumables (HB)**) or from a character's inventory. Only consumables are accepted.
+- **How ammunition is found.**
+  - **By link (ID).** A stack in the inventory matches when it was taken from the same compendium entry: bought from a merchant or dragged from the compendium, no matter when. The chain of copies counts too: an HB copy and its system original, or an entry copied from another compendium, are the same item. When an item from an inventory is dropped into the field, the link points to its compendium entry.
+  - **By name.** When no stack matches by ID, a stack with the same name as the linked item is used; letter case and the "(HB)" suffix do not matter. The name is saved when an item is dropped into the field, so the search works even after the linked stack is gone.
+- **Attack.** The attack roll window of such a weapon shows a **Spend ammunition:** list at the bottom with the linked consumables that still have units, and how many. The roll button takes 1 unit from the chosen consumable.
+- **Out of ammunition.** A consumable at quantity 0 disappears from the inventory (see "Used-up consumables"). With no ammunition at all, the window shows "No ammunition left". The roll still goes through, nothing is spent, and a warning appears.
+- **A quick roll without the window** spends the first ammunition, in order, of those left.
 
-### Клин оружия
+### Weapon jams
 
-Включается настройкой **Weapon jams** (по умолчанию включена). Работает для оружия с галочкой **Consumes ammunition**.
+Turned on by the **Weapon jams** setting (on by default). Works for weapons with **Consumes ammunition** checked.
 
-- **Настройка оружия.** В блоке **Ammunition** под галочкой:
-  - **Weapon jam die** — кость клина: d4, d6, d8, d10 или d12, по умолчанию d6;
-  - **Jam dice** — количество костей клина, сначала 1.
-- **Меню Daggerheart → Weapon Jam** (только GM):
-  - **Request jam roll** — GM выбирает игрока онлайн (с его персонажем), и у игрока открывается окно **Weapon Jam Roll**. Игрок отмечает одно или несколько своих оружий с амуницией и жмёт **Roll**. Для каждого оружия в чат бросаются его кости клина, например 2d8.
-  - **Raise jam die** — GM отмечает персонажей, и всё их оружие с амуницией получает +1 кость клина.
-- **Заклинило.** Если на костях клина оружия выпала хоть одна 1, на оружие вешается эффект **Weapon Jammed**, а у оружия появляется действие **Clear Weapon Jam**. Действие стоит 1 Stress: персонаж отмечает Stress, эффект и само действие пропадают.
-- **Отдых → Weapon Care.** У персонажа с оружием с амуницией в окне отдыха появляется действие **Weapon Care**. Оно занимает один выбор отдыха, как и остальные.
-  - **Долгий отдых:** кости клина всего оружия с амуницией сбрасываются до 1.
-  - **Короткий отдых:** открывается окно, где игрок выбирает одно оружие и жмёт **Care for weapon**; его кости клина сбрасываются до 1.
+- **Weapon setup.** In the **Ammunition** block, under the box:
+  - **Weapon jam die** — the jam die: d4, d6, d8, d10 or d12, d6 by default;
+  - **Jam dice** — the number of jam dice, 1 at first.
+- **Daggerheart menu → Weapon Jam** (GM only):
+  - **Request jam roll** — the GM picks an online player (with their character), and a **Weapon Jam Roll** window opens for that player. The player checks one or more of their weapons with ammunition and clicks **Roll**. Each weapon's jam dice are rolled to chat, for example 2d8.
+  - **Raise jam die** — the GM checks characters, and all their weapons with ammunition get +1 jam die.
+- **Jammed.** If any of a weapon's jam dice shows a 1, the weapon gets the **Weapon Jammed** effect and a **Clear Weapon Jam** action. The action costs 1 Stress: the character marks Stress, and the effect and the action go away.
+- **Rest → Weapon Care.** A character with a weapon with ammunition gets a **Weapon Care** action in the rest window. It takes one rest choice, like the others.
+  - **Long rest:** the jam dice of every weapon with ammunition reset to 1.
+  - **Short rest:** a window opens where the player picks one weapon and clicks **Care for weapon**; its jam dice reset to 1.
 
-  Weapon Care добавляется только в окно отдыха и не попадает в настройки отдыха Daggerheart (Homebrew).
-- **Нужен перезапуск мира.** Запрос броска передаётся игроку через сокет модуля. После установки или обновления модуля мир нужно перезапустить: **Return to Setup → Launch World**. F5 для этого не хватит.
+  Weapon Care is added only to the rest window and does not appear in Daggerheart's rest settings (Homebrew).
+- **The world must be restarted.** The roll request reaches the player through the module's socket. After installing or updating the module, restart the world: **Return to Setup → Launch World**. F5 is not enough for this.
 
-### Проверка усталости
+### Exhaustion checks
 
-Включается настройкой **Exhaustion checks** (по умолчанию включена). Кнопку на листе персонажа можно отдельно убрать настройкой **Exhaustion button on character sheets**: тогда проверки будут только по запросу GM.
+Turned on by the **Exhaustion checks** setting (on by default). The button on the character sheet can be removed on its own with the **Exhaustion button on character sheets** setting: then checks happen only at the GM's request.
 
-- **Запрос.** **Меню Daggerheart → Exhaustion → Request exhaustion check** (только GM). В окне отмечаются игроки онлайн (рядом видна текущая сложность каждого) и галочка **Quiet day** — спокойный день без событий и боёв. Каждый отмеченный игрок получает свою проверку, а не групповую.
-- **С листа персонажа.** Проверку можно бросить и без запроса: кнопка с усталым лицом в шапке листа, рядом с кнопками короткого и долгого отдыха. В подсказке видна текущая сложность. Кнопка видна владельцу листа и GM, поэтому GM может бросить за игрока, который не в игре. Для первой проверки после долгого отдыха окно спросит, был ли день спокойным: «Да» даёт преимущество.
-- **Бросок.** У игрока открывается обычное окно броска Daggerheart: проверка **Силы** против сложности усталости персонажа, сначала 15. После спокойного дня первая проверка после долгого отдыха идёт с преимуществом. Hope и Fear начисляются как при любом броске Daggerheart.
-- **Результат** применяется сам и пишется в чат:
+- **Request.** **Daggerheart menu → Exhaustion → Request exhaustion check** (GM only). The window lists the online players to check (each with their current difficulty) and a **Quiet day** box — a calm day with no events or battles. Each checked player gets their own check, not a group one.
+- **From the character sheet.** A check can also be rolled without a request: the button with a tired face in the sheet header, next to the short and long rest buttons. Its tooltip shows the current difficulty. The button is visible to the sheet's owner and the GM, so the GM can roll for a player who is not in the game. For the first check after a long rest, a window asks whether the day was quiet: "Yes" gives advantage.
+- **Roll.** The player gets the regular Daggerheart roll window: a **Strength** check against the character's exhaustion difficulty, 15 at first. After a quiet day, the first check since the long rest has advantage. Hope and Fear are gained as on any Daggerheart roll.
+- **The outcome** is applied by itself and written to chat:
 
-  | Результат | Эффект | Следующая сложность |
+  | Outcome | Effect | Next difficulty |
   |---|---|---|
-  | Критический успех | −1 Stress, +1 Hope | +4 |
-  | Успех с Надеждой | отметить 1 Stress | +2 |
-  | Успех со Страхом | отметить 2 Stress | +2 |
-  | Провал с Надеждой | отметить 2 Stress; d100 ≤ 50 — потерять 1 Hope | +2 |
-  | Провал со Страхом | отметить 3 Stress; d100 ≤ 80 — потерять 1 Hope | +4 |
+  | Critical success | −1 Stress, +1 Hope | +4 |
+  | Success with Hope | mark 1 Stress | +2 |
+  | Success with Fear | mark 2 Stress | +2 |
+  | Failure with Hope | mark 2 Stress; d100 ≤ 50 — lose 1 Hope | +2 |
+  | Failure with Fear | mark 3 Stress; d100 ≤ 80 — lose 1 Hope | +4 |
 
-  Если Hope потерять нельзя, отмечается 1 Stress. Если Stress отметить нельзя, отмечается HP.
-- **Сложность** хранится в эффекте «Exhaustion (next DC N)» на персонаже. **Долгий отдых** в окне отдыха Daggerheart её сбрасывает. Кнопка **Reset exhaustion** в меню сбрасывает сложность всем персонажам, например если долгий отдых провели через «Refresh» в меню.
-- **Нужен перезапуск мира** после установки модуля (сокет), как для клина оружия.
+  If no Hope can be lost, 1 Stress is marked instead. If no Stress can be marked, an HP is marked.
+- **The difficulty** is kept in the "Exhaustion (next DC N)" effect on the character. A **long rest** in Daggerheart's rest window resets it. The **Reset exhaustion** button in the menu resets the difficulty for all characters, for example when a long rest was taken through "Refresh" in the menu.
+- **The world must be restarted** after installing the module (socket), as for weapon jams.
 
-### Напоминание на долгом отдыхе
+### Long rest reminder
 
-Вверху окна долгого отдыха Daggerheart показывается напоминание, по умолчанию «Don't forget to mark off 1 Ration for the long rest.». Текст меняется в настройке **Long rest reminder** (раздел Rest); пустое поле — без напоминания. На коротком отдыхе напоминания нет.
+The top of Daggerheart's long rest window shows a reminder, by default "Don't forget to mark off 1 Ration for the long rest.". The text is changed in the **Long rest reminder** setting (Rest section); an empty field means no reminder. A short rest shows none.
 
-### Имена токенов
+### Token names
 
-Foundry записывает имя токена только при его создании и потом не обновляет. Есть два следствия:
+Foundry writes a token's name only when the token is created and does not update it afterwards. That has two consequences:
 
-- **Переименованный актёр** оставался со старым именем на карте, в чате и в трекере боя.
-- **Копия противника.** Если скопировать противника, например Royal Advisor, и переименовать копию, её прототип токена остаётся «Royal Advisor». Непривязанный токен, поставленный с чужим именем, Foundry записывает с этим именем и на его лист. Поэтому такой токен и его лист показывали «Royal Advisor».
+- **A renamed actor** kept its old name on the map, in chat and in the combat tracker.
+- **A copied adversary.** When an adversary such as Royal Advisor is copied and the copy renamed, its prototype token is still "Royal Advisor". Foundry writes an unlinked token placed with a different name onto its sheet as well. So such a token and its sheet showed "Royal Advisor".
 
-Модуль держит одно и то же имя на карте и на листе токена:
+The module keeps one name on the map and on the token's sheet:
 
-- **Привязанные (linked) токены** и прототип токена носят имя актёра. Это обычно персонажи игроков.
-- **Непривязанный токен** носит имя актёра. Если этому токену дали своё имя (например, «Lin Yu» у токена Martial Artist), он сохраняет его, и то же имя показывается на его листе.
-- **Когда синхронизируется:**
-  - переименовал актёра — переименуются прототип и его токены;
-  - переименовал токен — переименуется его лист;
-  - переименовал лист токена — переименуется токен.
+- **Linked tokens** and the prototype token carry the actor's name. These are usually player characters.
+- **An unlinked token** carries the actor's name. If the token was given a name of its own (say, "Lin Yu" for a Martial Artist token), it keeps it, and its sheet shows the same name.
+- **When it syncs:**
+  - rename the actor — its prototype and its tokens are renamed;
+  - rename a token — its sheet is renamed;
+  - rename a token's sheet — the token is renamed.
 
-  При загрузке мира GM подтягиваются и привязанные токены, переименованные без GM в игре.
-- **Однократное исправление.** При первой загрузке GM с этой версией модуль один раз чистит старые имена. Прототип каждого актёра получает имя актёра. Каждый токен получает имя со своего листа. Имена прежнего прототипа и имена из компендиумов (Sellsword, Royal Advisor и т. п.) считаются остатками копирования и заменяются именем актёра. Остальные имена, данные отдельным токенам, сохраняются.
-- **Своё имя прототипу или привязанному токену.** Выключи настройку **Token names match their sheets**.
-- **Item Piles.** Кучи и торговцев модуль не трогает.
+  When a GM loads the world, linked tokens renamed while no GM was in the game are brought in line too.
+- **One-time cleanup.** On the first GM load with this version, the module cleans up old names once. Each actor's prototype gets the actor's name. Each token gets the name from its sheet. The old prototype's names and names from compendiums (Sellsword, Royal Advisor and so on) are taken as leftovers of copying and replaced with the actor's name. Other names given to individual tokens are kept.
+- **A name of its own for a prototype or a linked token.** Turn off the **Token names match their sheets** setting.
+- **Item Piles.** The module leaves piles and merchants alone.
 
-### Лут с павших противников
+### Loot from fallen adversaries
 
-Когда у adversary отмечены все HP или на нём статус **Dead** или **Defeated**, и у него есть предметы или золото, его токен становится кучей Item Piles. Игроки открывают её двойным кликом и забирают вещи и деньги.
+When an adversary has all its HP marked or has the **Dead** or **Defeated** status, and it has items or gold, its token becomes an Item Piles pile. Players open it with a double click and take the items and money.
 
-- **Токен остаётся телом на карте:** со своей картинкой и именем, не исчезает, когда кучу опустошат.
-- **Если adversary встаёт,** токен снова становится обычным.
-- **Пустой инвентарь:** без предметов и золота противник лутом не становится.
+- **The token stays on the map as a body:** with its own image and name; it does not vanish when the pile is emptied.
+- **If the adversary gets back up,** the token becomes a regular one again.
+- **Empty inventory:** an adversary without items or gold does not become loot.
 
-### Деньги противников
+### Adversary money
 
-В инвентаре adversary под деньгами есть кнопка **Roll money** (её видит только GM). Она бросает, сколько денег у противника, и сразу добавляет их в его Penny/Silver/Gold.
+Below the money in an adversary's inventory there is a **Roll money** button (only the GM sees it). It rolls how much money the adversary has and adds it straight to its Penny/Silver/Gold.
 
-- **Уровень достатка.** Сначала GM выбирает, насколько противник богат: строки — это формулы Daggerheart в таблице денег (Destitute, Poor, Common…), под каждой видно сумму и кто к ней относится. Модуль запоминает последний выбор до перезагрузки, так что группу одинаковых бандитов можно прокликать подряд.
-- **Сумма.** Таблица бросается с выбранной формулой, а броски в тексте выпавшего результата бросаются как сумма. Валюта берётся после `#`: `[[/r 2d6 # Silver]]`, `[[/r 1d4 # Silver]] + [[/r 1d10 # Penny]]`. Подходят названия валют мира (Penny, Silver, Gold) и обычные имена Daggerheart (coins, handfuls, bags, chests).
-- **Чат.** Броски и итог («Добавлено: 3 Silver, 7 Penny») приходят шёпотом GM.
-- **Таблица** по умолчанию — **Money from Enemies (HB)**; её название меняется в настройках. Самой таблицы в модуле нет: подойдёт любая таблица такого вида.
-- **Повторный бросок** добавляет деньги ещё раз, лишнее правится руками в полях денег.
-- **Уже упавший противник** без вещей после броска денег становится лутом Item Piles.
+- **Level of wealth.** First the GM picks how wealthy the adversary is: the rows are the Daggerheart formulas of the money table (Destitute, Poor, Common…), each with its amount and who it fits. The module remembers the last choice until a reload, so a group of identical bandits can be clicked through in a row.
+- **Amount.** The table is rolled with the chosen formula, and the rolls in the text of the result are rolled as an amount. The currency is taken after `#`: `[[/r 2d6 # Silver]]`, `[[/r 1d4 # Silver]] + [[/r 1d10 # Penny]]`. The world's currency names (Penny, Silver, Gold) work, and so do Daggerheart's usual names (coins, handfuls, bags, chests).
+- **Chat.** The rolls and the total ("Added: 3 Silver, 7 Penny") are whispered to the GM.
+- **The table** is **Money from Enemies (HB)** by default; its name is changed in the settings. The module does not include the table itself: any table of this kind will do.
+- **Rolling again** adds the money once more; anything extra is fixed by hand in the money fields.
+- **An adversary already down** with no items becomes Item Piles loot after its money is rolled.
 
-## Настройки
+## Settings
 
-**Game Settings → Configure Settings → The Mist Age - Toolkit → Open settings** (только для GM). Окно разбито на разделы:
+**Game Settings → Configure Settings → The Mist Age - Toolkit → Open settings** (GM only). The window is split into sections:
 
-| Раздел | Настройка | По умолчанию |
+| Section | Setting | Default |
 |---|---|---|
 | **Currency** | Rate: coins per handful | 10 |
 | | Rate: handfuls per bag | 100 |
 | | Rate: bags per chest | 10 |
-| **Carrying capacity** | Base capacity | 20 |
+| **Carrying capacity** | Base capacity | 10 |
 | | Slots per point of Strength | 4 |
 | | Slots lost per negative point | 2 |
-| | Carrying limit for characters | вкл |
-| | Players set character capacity by hand | выкл |
-| | Only the GM sets character capacity | выкл |
-| **Overload** | Light overload limit (слотов лёгкого перегруза) | 8 |
+| | Carrying limit for characters | on |
+| | Players set character capacity by hand | off |
+| | Only the GM sets character capacity | off |
+| **Overload** | Light overload limit (slots of light overload) | 8 |
 | | Overload effect on characters: Off / Light and heavy overload / Only heavy overload | Light and heavy overload |
-| | Light overload icon (картинка, выбор файла с превью) | `icons/svg/anchor.svg` |
+| | Light overload icon (an image, file picker with a preview) | `icons/svg/anchor.svg` |
 | | Heavy overload icon | `icons/svg/downgrade.svg` |
-| | Light overload effect (кнопка Edit effect — окно эффекта Daggerheart) | без изменений |
-| | Heavy overload effect | без изменений |
-| **Inventory** | Remove used-up consumables | вкл |
-| **Weapons** | Weapon jams | вкл |
-| **Exhaustion** | Exhaustion checks | вкл |
-| | Exhaustion button on character sheets | вкл |
-| **Rest** | Long rest reminder (текст, пусто — выключено) | Don't forget to mark off 1 Ration for the long rest. |
-| **Tokens** | Token names match their sheets | вкл |
-| **Adversaries** | Loot from fallen adversaries | вкл |
-| | Money button for adversaries | вкл |
-| | Money table (название таблицы) | Money from Enemies (HB) |
+| | Light overload effect (Edit effect button — the Daggerheart effect window) | no changes |
+| | Heavy overload effect | no changes |
+| **Inventory** | Remove used-up consumables | on |
+| **Weapons** | Weapon jams | on |
+| **Exhaustion** | Exhaustion checks | on |
+| | Exhaustion button on character sheets | on |
+| **Rest** | Long rest reminder (text; empty turns it off) | Don't forget to mark off 1 Ration for the long rest. |
+| **Tokens** | Token names match their sheets | on |
+| **Adversaries** | Loot from fallen adversaries | on |
+| | Money button for adversaries | on |
+| | Money table (the table's name) | Money from Enemies (HB) |
 
-## Файлы данных
+## Data files
 
-- **`data/compendium-prices.json`** — таблица цен: название и тип предмета, цена в горстях, исходная строка из прайса. Изменённая таблица применяется при следующей загрузке GM, но только к предметам без цены.
-- **`data/weights.json`** — веса по умолчанию для отдельных предметов. Изменения видны после перезагрузки. Вес, вписанный руками, главнее.
+- **`data/compendium-prices.json`** — the price table: item name and type, price in handfuls, and the source line from the price list. A changed table is applied on the next GM load, but only to items without a price.
+- **`data/weights.json`** — default weights of particular items. Changes show after a reload. A weight typed in by hand takes precedence.
 
-## Для разработчиков
+## For developers
 
-- **API:** `game.modules.get("mist-age-toolkit").api`, функции `getCapacity(strength)`, `getItemWeight(item)`, `getItemLoad(item)`, `getEncumbrance(actor)`. Последняя возвращает вместимость, нагрузку, перевес и состояние (`ok`, `overloaded`, `heavy`).
-- **Где хранятся данные:**
-  - цена — `flags.mist-age-prices.price`;
-  - вес — `flags.mist-age-weight.slots`;
-  - «надето» — `flags.mist-age-weight.worn`;
-  - ручная вместимость — `flags.mist-age-weight.capacity`;
-  - амуниция оружия — `flags.mist-age-toolkit.consumesAmmo` и `flags.mist-age-toolkit.ammoItems` (UUID связанных расходников);
-  - клин оружия — `flags.mist-age-toolkit.jamDie` и `flags.mist-age-toolkit.jamCount`; эффект клина помечен `flags.mist-age-toolkit.jammed`, действие Clear Weapon Jam имеет id `mistAgeClearJam0`.
+- **API:** `game.modules.get("mist-age-toolkit").api`, with `getCapacity(strength)`, `getItemWeight(item)`, `getItemLoad(item)`, `getEncumbrance(actor)`. The last one returns the capacity, load, overload and state (`ok`, `overloaded`, `heavy`).
+- **Where data is kept:**
+  - price — `flags.mist-age-prices.price`;
+  - weight — `flags.mist-age-weight.slots`;
+  - worn — `flags.mist-age-weight.worn`;
+  - capacity set by hand — `flags.mist-age-weight.capacity`;
+  - weapon ammunition — `flags.mist-age-toolkit.consumesAmmo` and `flags.mist-age-toolkit.ammoItems` (UUIDs of the linked consumables);
+  - weapon jams — `flags.mist-age-toolkit.jamDie` and `flags.mist-age-toolkit.jamCount`; the jam effect is marked with `flags.mist-age-toolkit.jammed`, and the Clear Weapon Jam action has the id `mistAgeClearJam0`.
 
-  Это пространства прежних отдельных модулей. Они сохранены, чтобы старые данные работали без переноса.
-- **Золото противников и компаньонов** лежит в `system.gold`. Если выключить модуль, Foundry уберёт это поле при следующем сохранении такого актёра.
-- **Старые модули.** Модуль заменяет прежние **The Mist Age - Item Prices** и **The Mist Age - Item Weight** и переносит их настройки. Если старые модули ещё включены, тулкит не запустится и покажет ошибку: выключи их.
+  These are the namespaces of the earlier separate modules. They are kept so old data works without being moved.
+- **Gold of adversaries and companions** is kept in `system.gold`. If the module is turned off, Foundry drops this field the next time such an actor is saved.
+- **Old modules.** This module replaces the earlier **The Mist Age - Item Prices** and **The Mist Age - Item Weight** and carries over their settings. If the old modules are still enabled, the toolkit does not start and shows an error: turn them off.
 
-## Выпуск новой версии
+## Releasing a new version
 
-1. Закоммить и запушь изменения.
-2. Создай и запушь тег, например `git tag v1.0.1`, затем `git push origin v1.0.1`. Можно и создать релиз с этим тегом на GitHub.
-3. GitHub Action **Release** создаст релиз, поставит версию в `module.json` и прикрепит `module.json` и `module.zip`. Foundry предложит обновление всем, кто ставил модуль по ссылке.
+1. Commit and push the changes.
+2. Create and push a tag, for example `git tag v1.0.1`, then `git push origin v1.0.1`. A GitHub release with that tag works too.
+3. The **Release** GitHub Action creates the release, sets the version in `module.json` and attaches `module.json` and `module.zip`. Foundry offers the update to everyone who installed the module from the link.
