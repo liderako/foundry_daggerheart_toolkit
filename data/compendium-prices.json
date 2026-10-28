@@ -27,6 +27,14 @@
 			"source": "50"
 		},
 		{
+			"pack": "world.armors-hb",
+			"id": "c6tMXz4rPf9ioQrf",
+			"name": "Legendary Gambeson Armor",
+			"type": "armor",
+			"price": 150,
+			"source": "150"
+		},
+		{
 			"pack": "daggerheart.armors",
 			"id": "nibfdNtp2PtxvbVz",
 			"name": "Leather Armor",
@@ -49,6 +57,14 @@
 			"type": "armor",
 			"price": 60,
 			"source": "60"
+		},
+		{
+			"pack": "world.armors-hb",
+			"id": "Tptgl5WOj76TyFn7",
+			"name": "Legendary Leather Armor",
+			"type": "armor",
+			"price": 180,
+			"source": "180"
 		},
 		{
 			"pack": "daggerheart.armors",
@@ -75,6 +91,14 @@
 			"source": "80"
 		},
 		{
+			"pack": "world.armors-hb",
+			"id": "EsIN5OLKe9ZYFNXZ",
+			"name": "Legendary Chainmail Armor",
+			"type": "armor",
+			"price": 240,
+			"source": "240"
+		},
+		{
 			"pack": "daggerheart.armors",
 			"id": "UdUJNa31WxFW2noa",
 			"name": "Full Plate Armor",
@@ -99,6 +123,86 @@
 			"source": "160"
 		},
 		{
+			"pack": "world.armors-hb",
+			"id": "SXWjUR2aUR6bYvdl",
+			"name": "Legendary Full Plate Armor",
+			"type": "armor",
+			"price": 480,
+			"source": "480"
+		},
+		{
+			"pack": "world.armors-hb",
+			"id": "uL6AvEhXGaFlzjjS",
+			"name": "Brigandine Armor",
+			"type": "armor",
+			"price": 35,
+			"source": "35"
+		},
+		{
+			"pack": "world.armors-hb",
+			"id": "rWDk8ovwnBrBwWRR",
+			"name": "Mage Robes",
+			"type": "armor",
+			"price": 50,
+			"source": "50"
+		},
+		{
+			"pack": "world.armors-hb",
+			"id": "qks7PQ7xkP2Kwedr",
+			"name": "Improved Mage Robes",
+			"type": "armor",
+			"price": 100,
+			"source": "100"
+		},
+		{
+			"pack": "world.armors-hb",
+			"id": "gNuhJUzazz3mKWkU",
+			"name": "Advanced Mage Robes",
+			"type": "armor",
+			"price": 142,
+			"source": "142"
+		},
+		{
+			"pack": "world.armors-hb",
+			"id": "OGIBjQJEYv6uq0DA",
+			"name": "Legendary Mage Robes",
+			"type": "armor",
+			"price": 426,
+			"source": "426"
+		},
+		{
+			"pack": "world.armors-hb",
+			"id": "hfueRvwhlpTbtHmK",
+			"name": "Scale Mail Armor",
+			"type": "armor",
+			"price": 25,
+			"source": "25"
+		},
+		{
+			"pack": "world.armors-hb",
+			"id": "JJ08yuuFq3NjjMRV",
+			"name": "Improved Scale Mail Armor",
+			"type": "armor",
+			"price": 50,
+			"source": "50"
+		},
+		{
+			"pack": "world.armors-hb",
+			"id": "z6C6ll1T4G476zKv",
+			"name": "Advanced Scale Mail Armor",
+			"type": "armor",
+			"price": 100,
+			"source": "100"
+		},
+		{
+			"pack": "world.armors-hb",
+			"id": "SV7ukfVR9mhhY0E9",
+			"name": "Legendary Scale Mail Armor",
+			"type": "armor",
+			"price": 300,
+			"source": "300"
+		},
+		{
 			"pack": "daggerheart.armors",
 			"id": "PSW3BxCGmtLeWOxM",
 			"name": "Tyris Soft Armor",
@@ -115,12 +219,60 @@
 			"source": "2 с"
 		},
 		{
+			"pack": "world.weapons-hb",
+			"id": "BEmAR60PM3ZaiNXa",
+			"name": "Improved Quarterstaff",
+			"type": "weapon",
+			"price": 4,
+			"source": "4 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "zJtm2f9ZFKZRtCRg",
+			"name": "Advanced Quarterstaff",
+			"type": "weapon",
+			"price": 10,
+			"source": "10"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "1ZciqG7vIKLYpKsP",
+			"name": "Legendary Quarterstaff",
+			"type": "weapon",
+			"price": 30,
+			"source": "30"
+		},
+		{
 			"pack": "daggerheart.weapons",
 			"id": "iStO0BbeMTTR0rQi",
 			"name": "Dagger",
 			"type": "weapon",
 			"price": 2,
 			"source": "2 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "ScjTkb9qrndhlk9S",
+			"name": "Improved Dagger",
+			"type": "weapon",
+			"price": 4,
+			"source": "4 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "mrioysDjNQEIE8hN",
+			"name": "Advanced Dagger",
+			"type": "weapon",
+			"price": 12,
+			"source": "12"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "GmTg3Fdne1UPNs8t",
+			"name": "Legendary Dagger",
+			"type": "weapon",
+			"price": 42,
+			"source": "42"
 		},
 		{
 			"pack": "daggerheart.weapons",
@@ -131,12 +283,60 @@
 			"source": "5 с"
 		},
 		{
+			"pack": "world.weapons-hb",
+			"id": "nxGUpuHLmuKdKsDC",
+			"name": "Improved Battleaxe",
+			"type": "weapon",
+			"price": 10,
+			"source": "10 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "FcbvY1ydbNVMjKvk",
+			"name": "Advanced Battleaxe",
+			"type": "weapon",
+			"price": 25,
+			"source": "25"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "1nztpLzoHGfbKf5x",
+			"name": "Legendary Battleaxe",
+			"type": "weapon",
+			"price": 75,
+			"source": "75"
+		},
+		{
 			"pack": "daggerheart.weapons",
 			"id": "cKQCDyM2UopDL9zF",
 			"name": "Mace",
 			"type": "weapon",
 			"price": 5,
 			"source": "5 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "zSLx52U4Yltqx8F1",
+			"name": "Improved Mace",
+			"type": "weapon",
+			"price": 10,
+			"source": "10 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "WreMYiH5uhVDaoVw",
+			"name": "Advanced Mace",
+			"type": "weapon",
+			"price": 20,
+			"source": "20"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "RsDsy7tIhrhaAQQc",
+			"name": "Legendary Mace",
+			"type": "weapon",
+			"price": 60,
+			"source": "60"
 		},
 		{
 			"pack": "daggerheart.weapons",
@@ -147,12 +347,60 @@
 			"source": "5 с"
 		},
 		{
+			"pack": "world.weapons-hb",
+			"id": "ddRjXnp2vbohu7rJ",
+			"name": "Improved Cutlass",
+			"type": "weapon",
+			"price": 10,
+			"source": "10 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "bw9WO9lxkM9bWZxQ",
+			"name": "Advanced Cutlass",
+			"type": "weapon",
+			"price": 24,
+			"source": "24"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "Rpyz0jbFJ1SwqfyD",
+			"name": "Legendary Cutlass",
+			"type": "weapon",
+			"price": 72,
+			"source": "72"
+		},
+		{
 			"pack": "daggerheart.weapons",
 			"id": "p9tdjQr2AZP19RYm",
 			"name": "Shortbow",
 			"type": "weapon",
 			"price": 6,
 			"source": "6 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "6ZWl6ARfvYBaAMwY",
+			"name": "Improved Shortbow",
+			"type": "weapon",
+			"price": 12,
+			"source": "12 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "JpSlJvDR0X8VFDns",
+			"name": "Advanced Shortbow",
+			"type": "weapon",
+			"price": 30,
+			"source": "30с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "j7kp36jaetfn5jb3",
+			"name": "Legendary Shortbow",
+			"type": "weapon",
+			"price": 90,
+			"source": "90"
 		},
 		{
 			"pack": "daggerheart.weapons",
@@ -163,12 +411,60 @@
 			"source": "6 с"
 		},
 		{
+			"pack": "world.weapons-hb",
+			"id": "pxaN4ZK4eqKrjtWj",
+			"name": "Improved Warhammer",
+			"type": "weapon",
+			"price": 12,
+			"source": "12 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "8Lipw3RRKDgBVP0p",
+			"name": "Advanced Warhammer",
+			"type": "weapon",
+			"price": 25,
+			"source": "25с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "W9ymfEDck2icfvla",
+			"name": "Legendary Warhammer",
+			"type": "weapon",
+			"price": 75,
+			"source": "75"
+		},
+		{
 			"pack": "daggerheart.weapons",
 			"id": "1cwWNt4sqlgA8gCT",
 			"name": "Broadsword",
 			"type": "weapon",
 			"price": 7,
 			"source": "7 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "OcKeLJxvmdT81VBc",
+			"name": "Improved Broadsword",
+			"type": "weapon",
+			"price": 14,
+			"source": "14 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "WtQAGz0TUgz8Xg70",
+			"name": "Advanced Broadsword",
+			"type": "weapon",
+			"price": 35,
+			"source": "35с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "y3hfTPfZhMognyaJ",
+			"name": "Legendary Broadsword",
+			"type": "weapon",
+			"price": 105,
+			"source": "105"
 		},
 		{
 			"pack": "daggerheart.weapons",
@@ -179,12 +475,60 @@
 			"source": "10 с"
 		},
 		{
+			"pack": "world.weapons-hb",
+			"id": "QyBZ5NxM8F9nCL9s",
+			"name": "Improved Longsword",
+			"type": "weapon",
+			"price": 20,
+			"source": "20 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "9xkB3MWXahrsVP4N",
+			"name": "Advanced Longsword",
+			"type": "weapon",
+			"price": 35,
+			"source": "35с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "14abPqQcROJfDChR",
+			"name": "Legendary Longsword",
+			"type": "weapon",
+			"price": 105,
+			"source": "105"
+		},
+		{
 			"pack": "daggerheart.weapons",
 			"id": "zkAgEW6zMkRZalEm",
 			"name": "Rapier",
 			"type": "weapon",
 			"price": 10,
 			"source": "10 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "LFPH8nD2f4Blv3AM",
+			"name": "Improved Rapier",
+			"type": "weapon",
+			"price": 20,
+			"source": "20 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "KxFne76d7cak15dO",
+			"name": "Advanced Rapier",
+			"type": "weapon",
+			"price": 40,
+			"source": "40с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "BakN97v4jTePcXiZ",
+			"name": "Legendary Rapier",
+			"type": "weapon",
+			"price": 120,
+			"source": "120"
 		},
 		{
 			"pack": "daggerheart.weapons",
@@ -195,12 +539,60 @@
 			"source": "10 с"
 		},
 		{
+			"pack": "world.weapons-hb",
+			"id": "NacNonjbzyoVMNhI",
+			"name": "Improved Longbow",
+			"type": "weapon",
+			"price": 20,
+			"source": "20 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "M5CywMAyPKGgebsJ",
+			"name": "Advanced Longbow",
+			"type": "weapon",
+			"price": 40,
+			"source": "40с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "Utt1GpoH1fhaTOtN",
+			"name": "Legendary Longbow",
+			"type": "weapon",
+			"price": 120,
+			"source": "120"
+		},
+		{
 			"pack": "daggerheart.weapons",
 			"id": "TF85tKJetUjLwh54",
 			"name": "Spear",
 			"type": "weapon",
 			"price": 12,
 			"source": "12 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "j5Pt1thLfcvopBij",
+			"name": "Improved Spear",
+			"type": "weapon",
+			"price": 24,
+			"source": "24 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "pK6dsNABKKp1CIGN",
+			"name": "Advanced Spear",
+			"type": "weapon",
+			"price": 48,
+			"source": "48с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "4e5pWxi2qohuGsWh",
+			"name": "Legendary Spear",
+			"type": "weapon",
+			"price": 144,
+			"source": "144"
 		},
 		{
 			"pack": "daggerheart.weapons",
@@ -211,12 +603,60 @@
 			"source": "15 с"
 		},
 		{
+			"pack": "world.weapons-hb",
+			"id": "55NwHIIZHUeKSE3M",
+			"name": "Improved Crossbow",
+			"type": "weapon",
+			"price": 30,
+			"source": "30 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "3HGs0AgVrdIBTaKG",
+			"name": "Advanced Crossbow",
+			"type": "weapon",
+			"price": 60,
+			"source": "60с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "1G6xX2QL9O0Rsgz7",
+			"name": "Legendary Crossbow",
+			"type": "weapon",
+			"price": 180,
+			"source": "180"
+		},
+		{
 			"pack": "daggerheart.weapons",
 			"id": "qT7FfmauAumOjJoq",
 			"name": "Halberd",
 			"type": "weapon",
 			"price": 25,
 			"source": "25 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "F9PETfCQGwczBPif",
+			"name": "Improved Halberd",
+			"type": "weapon",
+			"price": 50,
+			"source": "50 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "C8gQn7onAc9wsrCs",
+			"name": "Advanced Halberd",
+			"type": "weapon",
+			"price": 100,
+			"source": "100с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "1AuMNiJz96Ez9fur",
+			"name": "Legendary Halberd",
+			"type": "weapon",
+			"price": 300,
+			"source": "300"
 		},
 		{
 			"pack": "daggerheart.weapons",
@@ -227,12 +667,68 @@
 			"source": "25 с"
 		},
 		{
+			"pack": "world.weapons-hb",
+			"id": "FPX4ouDrxXiQ5MDf",
+			"name": "Improved Greatsword",
+			"type": "weapon",
+			"price": 50,
+			"source": "50 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "MAC6YWTo4lzSotQc",
+			"name": "Advanced Greatsword",
+			"type": "weapon",
+			"price": 100,
+			"source": "100с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "zMZ46F9VR7zdTxb9",
+			"name": "Legendary Greatsword",
+			"type": "weapon",
+			"price": 300,
+			"source": "300"
+		},
+		{
 			"pack": "daggerheart.weapons",
 			"id": "PC5EyEIq7NWBV0n5",
 			"name": "Arcane Gauntlets",
 			"type": "weapon",
 			"price": 30,
 			"source": "30 c"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "kENTDpa1hr5LDhIT",
+			"name": "Improved Arcane Gauntlets",
+			"type": "weapon",
+			"price": 60,
+			"source": "60 с"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "hXR56fTKwZ6s1obs",
+			"name": "Advanced Arcane Gauntlets",
+			"type": "weapon",
+			"price": 120,
+			"source": "120"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "umADDPYCaykXDc1v",
+			"name": "Legendary Arcane Gauntlets",
+			"type": "weapon",
+			"price": 360,
+			"source": "360"
+		},
+		{
+			"pack": "world.weapons-hb",
+			"id": "zGm6Wa1fGF6cECY5",
+			"name": "Urok Broadsword",
+			"type": "weapon",
+			"price": 100,
+			"source": "100"
 		},
 		{
 			"pack": "daggerheart.weapons",
