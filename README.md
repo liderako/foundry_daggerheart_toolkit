@@ -248,3 +248,7 @@ Below the money in an adversary's inventory there is a **Roll money** button (on
 1. Commit and push the changes.
 2. Create and push a tag, for example `git tag v1.0.1`, then `git push origin v1.0.1`. A GitHub release with that tag works too.
 3. The **Release** GitHub Action creates the release, sets the version in `module.json` and attaches `module.json` and `module.zip`. Foundry offers the update to everyone who installed the module from the link.
+
+## License
+
+[MIT](LICENSE) © 2026 asvirido.
