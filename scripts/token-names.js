@@ -53,7 +53,7 @@ export function registerTokenNames() {
 	});
 	// A renamed unlinked token gets the same name on its sheet.
 	Hooks.on("updateToken", (token, changes) => {
-		if (!("name" in changes) || token.actorLink || !token.baseActor || isPile(token) || !canSync(token.baseActor)) {
+		if (!("name" in changes) || token.actorLink || !token.baseActor || isPile(token) || isDisguised(token) || !canSync(token.baseActor)) {
 			return;
 		}
 		const sheetName = ownSheetName(token, token.name);
@@ -76,6 +76,12 @@ function isPile(document) {
 	return !!game.itempiles?.API.isValidItemPile(document);
 }
 
+/** A token transformed by the mist-age-transformations module shows a borrowed name until the transformation is dropped. */
+function isDisguised(token) {
+	// Read directly: getFlag throws for the scope of a module that is not enabled.
+	return !!token.flags?.["mist-age-transformations"]?.original;
+}
+
 /** The name an unlinked token keeps on its own sheet: null while it shows the actor name. */
 function getOwnSheetName(token) {
 	return token._source.delta?.name ?? null;
@@ -94,7 +100,7 @@ async function syncPlacedTokens(actors, { unlinked = false } = {}) {
 	let renamed = 0;
 	for (const scene of game.scenes) {
 		const updates = scene.tokens
-			.filter(token => names.has(token.actorId) && token.name !== names.get(token.actorId) && !isPile(token))
+			.filter(token => names.has(token.actorId) && token.name !== names.get(token.actorId) && !isPile(token) && !isDisguised(token))
 			.filter(token => token.actorLink || (unlinked && getOwnSheetName(token) === null))
 			.map(token => ({ _id: token.id, name: names.get(token.actorId) }));
 		if (updates.length) {
@@ -149,7 +155,7 @@ async function repairTokenNames() {
 		const updates = [];
 		for (const token of scene.tokens) {
 			const actor = actors.get(token.actorId);
-			if (!actor || isPile(token)) {
+			if (!actor || isPile(token) || isDisguised(token)) {
 				continue;
 			}
 			if (token.actorLink) {

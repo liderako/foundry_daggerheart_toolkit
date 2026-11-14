@@ -27,7 +27,8 @@ The first time a GM loads the world, the module once:
 - creates the world compendiums **Weapons (HB)**, **Armors (HB)**, **Consumables (HB)**, **Loot (HB)** and **Rolltables (HB)**;
 - creates the loot tables in the **Weapons & Armor (HB)** folder;
 - sets prices from the price table on every item that has no price yet;
-- sets up the price attribute and currencies in Item Piles.
+- sets up the price attribute and currencies in Item Piles;
+- switches Fog of War exploration on every scene to **Shared**.
 
 This takes a few seconds. These steps do not run again; only setting prices repeats, when the price table has changed.
 
@@ -40,6 +41,7 @@ This takes a few seconds. These steps do not run again; only setting prices repe
 - **Storage.** The price is stored in the main currency, handfuls: in The Mist Age that is Silver. The field takes fractions: `0.1` at a rate of 10 is one coin.
 - **Exchange rates** are set in the settings. By default 10 coins = 1 handful, 100 handfuls = 1 bag, 10 bags = 1 chest. Changing a rate only changes how prices break down into coins; the prices themselves stay.
 - **Item Piles.** The module tells Item Piles where the price is kept and builds its currencies from Daggerheart's: names, rates, the main currency. Merchants sell and buy at these prices, and money is taken from the gold on the sheet.
+- **Piles start empty.** Item Piles makes piles from character actors, and Daggerheart gives every new character the homebrew starting money, so each new pile used to hold a coin. New piles, and the Default Item Pile actor that piles dropped on the map copy, start with no money; player characters keep their starting money.
 - **The price table** `data/compendium-prices.json` sets prices on items without one: in the world compendiums, in the Items folder, on characters and merchants. Items are matched by name and type; the "(HB)" suffix does not matter. A price set by hand is never changed.
 
 ### HB compendiums and tables
@@ -191,6 +193,12 @@ Below the money in an adversary's inventory there is a **Roll money** button (on
 - **The table** is **Money from Enemies (HB)** by default; its name is changed in the settings. The module does not include the table itself: any table of this kind will do.
 - **Rolling again** adds the money once more; anything extra is fixed by hand in the money fields.
 - **An adversary already down** with no items becomes Item Piles loot after its money is rolled.
+
+### Shared fog of war
+
+- **Fog of War → Exploration Mode** is **Shared** on every scene: all users reveal and see one explored area.
+- New scenes, including ones imported from compendiums and adventure modules, are created Shared.
+- The scenes the world already has are switched once, on the first GM load. A scene set to another mode by hand afterwards keeps it.
 
 ## Settings
 

@@ -2,6 +2,7 @@ import { registerAdversaryMoney } from "./adversary-money.js";
 import { registerAmmunition } from "./ammunition.js";
 import { registerDeathLoot } from "./death-loot.js";
 import { registerEmptyConsumables } from "./empty-consumables.js";
+import { registerEmptyPiles } from "./empty-piles.js";
 import { registerExhaustion } from "./exhaustion.js";
 import { registerInventoryTabs } from "./inventory-tab.js";
 import { registerOverloadEffect } from "./overload-effect.js";
@@ -9,6 +10,7 @@ import { preparePricesWorld, registerPrices } from "./prices.js";
 import { registerRestReminder } from "./rest-reminder.js";
 import { registerSettingsMenu } from "./settings-menu.js";
 import { MODULE_ID } from "./shared.js";
+import { registerSharedFog } from "./shared-fog.js";
 import { registerTokenNames } from "./token-names.js";
 import { registerWeaponJam } from "./weapon-jam.js";
 import { registerWeight } from "./weight.js";
@@ -60,8 +62,10 @@ Hooks.once("init", () => {
 	registerAmmunition();
 	registerWeaponJam();
 	registerEmptyConsumables();
+	registerEmptyPiles();
 	registerExhaustion();
 	registerRestReminder();
+	registerSharedFog();
 	registerSettingsMenu();
 
 	Hooks.once("ready", async () => {
