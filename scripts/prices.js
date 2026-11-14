@@ -3,6 +3,7 @@ import {
 	HB_TABLE_COMPENDIUMS,
 	LOOT_TABLES_VERSION,
 	createHbCompendiums,
+	isHbPack,
 	relinkTablesToHb,
 	syncHbLootTables
 } from "./hb.js";
@@ -219,7 +220,7 @@ function hashText(text) {
 /** Applies collectUpdates(indexEntries) to every world Item compendium; returns the number of updated items. */
 async function updateWorldCompendiums(collectUpdates) {
 	let count = 0;
-	for (const pack of game.packs.filter(p => p.documentName === "Item" && p.metadata.packageType === "world")) {
+	for (const pack of game.packs.filter(p => p.documentName === "Item" && isHbPack(p))) {
 		const index = await pack.getIndex({ fields: [PRICE_PATH] });
 		const updates = collectUpdates([...index.values()]);
 		if (!updates.length) {

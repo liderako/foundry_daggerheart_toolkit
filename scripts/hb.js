@@ -34,8 +34,16 @@ function weaponFilter(secondary, damageType) {
 		&& (entry.system?.attack?.damage?.main?.type ?? []).includes(damageType);
 }
 
+// The HB compendiums moved from the world into the mist-age-hb-items module; both places count.
+const HB_MODULE_ID = "mist-age-hb-items";
+
+/** A compendium this world owns: a world pack or one from the HB items module. */
+export function isHbPack(pack) {
+	return pack.metadata.packageType === "world" || pack.metadata.packageName === HB_MODULE_ID;
+}
+
 function findWorldPack(label) {
-	return game.packs.find(pack => pack.metadata.packageType === "world" && pack.metadata.label === label);
+	return game.packs.find(pack => isHbPack(pack) && pack.metadata.label === label);
 }
 
 /** Copies each missing source compendium into the world, adding the HB suffix to every document; returns the new packs. */

@@ -7,139 +7,139 @@
 			"id": "yJFp1bfpecDcStVK",
 			"name": "Gambeson Armor",
 			"type": "armor",
-			"price": 10,
-			"source": "10 с"
+			"price": 15,
+			"source": "15 с"
 		},
 		{
 			"pack": "daggerheart.armors",
 			"id": "jphnMZjnS2FkOH3s",
 			"name": "Improved Gambeson Armor",
 			"type": "armor",
-			"price": 25,
-			"source": "25 с"
+			"price": 30,
+			"source": "30 с"
 		},
 		{
 			"pack": "daggerheart.armors",
 			"id": "epkAmlZVk7HOfUUT",
 			"name": "Advanced Gambeson Armor",
 			"type": "armor",
-			"price": 50,
-			"source": "50"
+			"price": 60,
+			"source": "60 с"
 		},
 		{
-			"pack": "world.armors-hb",
+			"pack": "mist-age-hb-items.armors-hb",
 			"id": "c6tMXz4rPf9ioQrf",
 			"name": "Legendary Gambeson Armor",
 			"type": "armor",
-			"price": 150,
-			"source": "150"
+			"price": 180,
+			"source": "180 с"
 		},
 		{
 			"pack": "daggerheart.armors",
 			"id": "nibfdNtp2PtxvbVz",
 			"name": "Leather Armor",
 			"type": "armor",
-			"price": 15,
-			"source": "15 с"
+			"price": 25,
+			"source": "25 с"
 		},
 		{
 			"pack": "daggerheart.armors",
 			"id": "t91M61pSCMKStTNt",
 			"name": "Improved Leather Armor",
 			"type": "armor",
-			"price": 30,
-			"source": "30 с"
+			"price": 50,
+			"source": "50 с"
 		},
 		{
 			"pack": "daggerheart.armors",
 			"id": "itSOp2GCyem0f7oM",
 			"name": "Advanced Leather Armor",
 			"type": "armor",
-			"price": 60,
-			"source": "60"
+			"price": 100,
+			"source": "100 с"
 		},
 		{
-			"pack": "world.armors-hb",
+			"pack": "mist-age-hb-items.armors-hb",
 			"id": "Tptgl5WOj76TyFn7",
 			"name": "Legendary Leather Armor",
 			"type": "armor",
-			"price": 180,
-			"source": "180"
+			"price": 300,
+			"source": "300 с"
 		},
 		{
 			"pack": "daggerheart.armors",
 			"id": "haULhuEg37zUUvhb",
 			"name": "Chainmail Armor",
 			"type": "armor",
-			"price": 20,
-			"source": "20 с"
+			"price": 80,
+			"source": "80 с"
 		},
 		{
 			"pack": "daggerheart.armors",
 			"id": "K5WkjS0NGqHYmhU3",
 			"name": "Improved Chainmail Armor",
 			"type": "armor",
-			"price": 40,
-			"source": "40 с"
+			"price": 160,
+			"source": "160 с"
 		},
 		{
 			"pack": "daggerheart.armors",
 			"id": "LzLOJ9EVaHWAjoq9",
 			"name": "Advanced Chainmail Armor",
 			"type": "armor",
-			"price": 80,
-			"source": "80"
+			"price": 320,
+			"source": "320 с"
 		},
 		{
-			"pack": "world.armors-hb",
+			"pack": "mist-age-hb-items.armors-hb",
 			"id": "EsIN5OLKe9ZYFNXZ",
 			"name": "Legendary Chainmail Armor",
 			"type": "armor",
-			"price": 240,
-			"source": "240"
+			"price": 960,
+			"source": "960 с"
 		},
 		{
 			"pack": "daggerheart.armors",
 			"id": "UdUJNa31WxFW2noa",
 			"name": "Full Plate Armor",
 			"type": "armor",
-			"price": 45,
-			"source": "45 с"
+			"price": 150,
+			"source": "150 с"
 		},
 		{
 			"pack": "daggerheart.armors",
 			"id": "9f7RozpPTqrzJS1m",
 			"name": "Improved Full Plate Armor",
 			"type": "armor",
-			"price": 80,
-			"source": "80 с"
+			"price": 300,
+			"source": "300 с"
 		},
 		{
 			"pack": "daggerheart.armors",
 			"id": "crIbCb9NZ4K0VpoU",
 			"name": "Advanced Full Plate Armor",
 			"type": "armor",
-			"price": 160,
-			"source": "160"
+			"price": 600,
+			"source": "600 с"
 		},
 		{
-			"pack": "world.armors-hb",
+			"pack": "mist-age-hb-items.armors-hb",
 			"id": "SXWjUR2aUR6bYvdl",
 			"name": "Legendary Full Plate Armor",
 			"type": "armor",
-			"price": 480,
-			"source": "480"
+			"price": 1800,
+			"source": "1800 с"
 		},
 		{
-			"pack": "world.armors-hb",
+			"pack": "mist-age-hb-items.armors-hb",
 			"id": "uL6AvEhXGaFlzjjS",
 			"name": "Brigandine Armor",
 			"type": "armor",
-			"price": 35,
-			"source": "35"
+			"price": 70,
+			"source": "70 с"
 		},
 		{
-			"pack": "world.armors-hb",
+			"pack": "mist-age-hb-items.armors-hb",
 			"id": "rWDk8ovwnBrBwWRR",
 			"name": "Mage Robes",
 			"type": "armor",
@@ -147,7 +147,7 @@
 			"source": "50"
 		},
 		{
-			"pack": "world.armors-hb",
+			"pack": "mist-age-hb-items.armors-hb",
 			"id": "qks7PQ7xkP2Kwedr",
 			"name": "Improved Mage Robes",
 			"type": "armor",
@@ -155,7 +155,7 @@
 			"source": "100"
 		},
 		{
-			"pack": "world.armors-hb",
+			"pack": "mist-age-hb-items.armors-hb",
 			"id": "gNuhJUzazz3mKWkU",
 			"name": "Advanced Mage Robes",
 			"type": "armor",
@@ -163,7 +163,7 @@
 			"source": "142"
 		},
 		{
-			"pack": "world.armors-hb",
+			"pack": "mist-age-hb-items.armors-hb",
 			"id": "OGIBjQJEYv6uq0DA",
 			"name": "Legendary Mage Robes",
 			"type": "armor",
@@ -171,36 +171,36 @@
 			"source": "426"
 		},
 		{
-			"pack": "world.armors-hb",
+			"pack": "mist-age-hb-items.armors-hb",
 			"id": "hfueRvwhlpTbtHmK",
 			"name": "Scale Mail Armor",
 			"type": "armor",
-			"price": 25,
-			"source": "25"
+			"price": 60,
+			"source": "60 с"
 		},
 		{
-			"pack": "world.armors-hb",
+			"pack": "mist-age-hb-items.armors-hb",
 			"id": "JJ08yuuFq3NjjMRV",
 			"name": "Improved Scale Mail Armor",
 			"type": "armor",
-			"price": 50,
-			"source": "50"
+			"price": 120,
+			"source": "120 с"
 		},
 		{
-			"pack": "world.armors-hb",
+			"pack": "mist-age-hb-items.armors-hb",
 			"id": "z6C6ll1T4G476zKv",
 			"name": "Advanced Scale Mail Armor",
 			"type": "armor",
-			"price": 100,
-			"source": "100"
+			"price": 240,
+			"source": "240 с"
 		},
 		{
-			"pack": "world.armors-hb",
+			"pack": "mist-age-hb-items.armors-hb",
 			"id": "SV7ukfVR9mhhY0E9",
 			"name": "Legendary Scale Mail Armor",
 			"type": "armor",
-			"price": 300,
-			"source": "300"
+			"price": 720,
+			"source": "720 с"
 		},
 		{
 			"pack": "daggerheart.armors",
@@ -219,7 +219,7 @@
 			"source": "2 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "BEmAR60PM3ZaiNXa",
 			"name": "Improved Quarterstaff",
 			"type": "weapon",
@@ -227,7 +227,7 @@
 			"source": "4 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "zJtm2f9ZFKZRtCRg",
 			"name": "Advanced Quarterstaff",
 			"type": "weapon",
@@ -235,7 +235,7 @@
 			"source": "10"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "1ZciqG7vIKLYpKsP",
 			"name": "Legendary Quarterstaff",
 			"type": "weapon",
@@ -251,7 +251,7 @@
 			"source": "2 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "ScjTkb9qrndhlk9S",
 			"name": "Improved Dagger",
 			"type": "weapon",
@@ -259,7 +259,7 @@
 			"source": "4 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "mrioysDjNQEIE8hN",
 			"name": "Advanced Dagger",
 			"type": "weapon",
@@ -267,7 +267,7 @@
 			"source": "12"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "GmTg3Fdne1UPNs8t",
 			"name": "Legendary Dagger",
 			"type": "weapon",
@@ -283,7 +283,7 @@
 			"source": "5 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "nxGUpuHLmuKdKsDC",
 			"name": "Improved Battleaxe",
 			"type": "weapon",
@@ -291,7 +291,7 @@
 			"source": "10 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "FcbvY1ydbNVMjKvk",
 			"name": "Advanced Battleaxe",
 			"type": "weapon",
@@ -299,7 +299,7 @@
 			"source": "25"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "1nztpLzoHGfbKf5x",
 			"name": "Legendary Battleaxe",
 			"type": "weapon",
@@ -315,7 +315,7 @@
 			"source": "5 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "zSLx52U4Yltqx8F1",
 			"name": "Improved Mace",
 			"type": "weapon",
@@ -323,7 +323,7 @@
 			"source": "10 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "WreMYiH5uhVDaoVw",
 			"name": "Advanced Mace",
 			"type": "weapon",
@@ -331,7 +331,7 @@
 			"source": "20"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "RsDsy7tIhrhaAQQc",
 			"name": "Legendary Mace",
 			"type": "weapon",
@@ -347,7 +347,7 @@
 			"source": "5 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "ddRjXnp2vbohu7rJ",
 			"name": "Improved Cutlass",
 			"type": "weapon",
@@ -355,7 +355,7 @@
 			"source": "10 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "bw9WO9lxkM9bWZxQ",
 			"name": "Advanced Cutlass",
 			"type": "weapon",
@@ -363,7 +363,7 @@
 			"source": "24"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "Rpyz0jbFJ1SwqfyD",
 			"name": "Legendary Cutlass",
 			"type": "weapon",
@@ -379,7 +379,7 @@
 			"source": "6 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "6ZWl6ARfvYBaAMwY",
 			"name": "Improved Shortbow",
 			"type": "weapon",
@@ -387,7 +387,7 @@
 			"source": "12 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "JpSlJvDR0X8VFDns",
 			"name": "Advanced Shortbow",
 			"type": "weapon",
@@ -395,7 +395,7 @@
 			"source": "30с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "j7kp36jaetfn5jb3",
 			"name": "Legendary Shortbow",
 			"type": "weapon",
@@ -411,7 +411,7 @@
 			"source": "6 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "pxaN4ZK4eqKrjtWj",
 			"name": "Improved Warhammer",
 			"type": "weapon",
@@ -419,7 +419,7 @@
 			"source": "12 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "8Lipw3RRKDgBVP0p",
 			"name": "Advanced Warhammer",
 			"type": "weapon",
@@ -427,7 +427,7 @@
 			"source": "25с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "W9ymfEDck2icfvla",
 			"name": "Legendary Warhammer",
 			"type": "weapon",
@@ -443,7 +443,7 @@
 			"source": "7 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "OcKeLJxvmdT81VBc",
 			"name": "Improved Broadsword",
 			"type": "weapon",
@@ -451,7 +451,7 @@
 			"source": "14 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "WtQAGz0TUgz8Xg70",
 			"name": "Advanced Broadsword",
 			"type": "weapon",
@@ -459,7 +459,7 @@
 			"source": "35с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "y3hfTPfZhMognyaJ",
 			"name": "Legendary Broadsword",
 			"type": "weapon",
@@ -475,7 +475,7 @@
 			"source": "10 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "QyBZ5NxM8F9nCL9s",
 			"name": "Improved Longsword",
 			"type": "weapon",
@@ -483,7 +483,7 @@
 			"source": "20 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "9xkB3MWXahrsVP4N",
 			"name": "Advanced Longsword",
 			"type": "weapon",
@@ -491,7 +491,7 @@
 			"source": "35с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "14abPqQcROJfDChR",
 			"name": "Legendary Longsword",
 			"type": "weapon",
@@ -507,7 +507,7 @@
 			"source": "10 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "LFPH8nD2f4Blv3AM",
 			"name": "Improved Rapier",
 			"type": "weapon",
@@ -515,7 +515,7 @@
 			"source": "20 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "KxFne76d7cak15dO",
 			"name": "Advanced Rapier",
 			"type": "weapon",
@@ -523,7 +523,7 @@
 			"source": "40с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "BakN97v4jTePcXiZ",
 			"name": "Legendary Rapier",
 			"type": "weapon",
@@ -539,7 +539,7 @@
 			"source": "10 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "NacNonjbzyoVMNhI",
 			"name": "Improved Longbow",
 			"type": "weapon",
@@ -547,7 +547,7 @@
 			"source": "20 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "M5CywMAyPKGgebsJ",
 			"name": "Advanced Longbow",
 			"type": "weapon",
@@ -555,7 +555,7 @@
 			"source": "40с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "Utt1GpoH1fhaTOtN",
 			"name": "Legendary Longbow",
 			"type": "weapon",
@@ -571,7 +571,7 @@
 			"source": "12 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "j5Pt1thLfcvopBij",
 			"name": "Improved Spear",
 			"type": "weapon",
@@ -579,7 +579,7 @@
 			"source": "24 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "pK6dsNABKKp1CIGN",
 			"name": "Advanced Spear",
 			"type": "weapon",
@@ -587,7 +587,7 @@
 			"source": "48с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "4e5pWxi2qohuGsWh",
 			"name": "Legendary Spear",
 			"type": "weapon",
@@ -603,7 +603,7 @@
 			"source": "15 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "55NwHIIZHUeKSE3M",
 			"name": "Improved Crossbow",
 			"type": "weapon",
@@ -611,7 +611,7 @@
 			"source": "30 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "3HGs0AgVrdIBTaKG",
 			"name": "Advanced Crossbow",
 			"type": "weapon",
@@ -619,7 +619,7 @@
 			"source": "60с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "1G6xX2QL9O0Rsgz7",
 			"name": "Legendary Crossbow",
 			"type": "weapon",
@@ -635,7 +635,7 @@
 			"source": "25 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "F9PETfCQGwczBPif",
 			"name": "Improved Halberd",
 			"type": "weapon",
@@ -643,7 +643,7 @@
 			"source": "50 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "C8gQn7onAc9wsrCs",
 			"name": "Advanced Halberd",
 			"type": "weapon",
@@ -651,7 +651,7 @@
 			"source": "100с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "1AuMNiJz96Ez9fur",
 			"name": "Legendary Halberd",
 			"type": "weapon",
@@ -667,7 +667,7 @@
 			"source": "25 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "FPX4ouDrxXiQ5MDf",
 			"name": "Improved Greatsword",
 			"type": "weapon",
@@ -675,7 +675,7 @@
 			"source": "50 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "MAC6YWTo4lzSotQc",
 			"name": "Advanced Greatsword",
 			"type": "weapon",
@@ -683,7 +683,7 @@
 			"source": "100с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "zMZ46F9VR7zdTxb9",
 			"name": "Legendary Greatsword",
 			"type": "weapon",
@@ -699,7 +699,7 @@
 			"source": "30 c"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "kENTDpa1hr5LDhIT",
 			"name": "Improved Arcane Gauntlets",
 			"type": "weapon",
@@ -707,7 +707,7 @@
 			"source": "60 с"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "hXR56fTKwZ6s1obs",
 			"name": "Advanced Arcane Gauntlets",
 			"type": "weapon",
@@ -715,7 +715,7 @@
 			"source": "120"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "umADDPYCaykXDc1v",
 			"name": "Legendary Arcane Gauntlets",
 			"type": "weapon",
@@ -723,7 +723,7 @@
 			"source": "360"
 		},
 		{
-			"pack": "world.weapons-hb",
+			"pack": "mist-age-hb-items.weapons-hb",
 			"id": "zGm6Wa1fGF6cECY5",
 			"name": "Urok Broadsword",
 			"type": "weapon",
@@ -1053,8 +1053,8 @@
 		{
 			"name": "Empty Vial (HB)",
 			"type": "consumable",
-			"price": 3.5,
-			"source": "Vial: 2–5 с"
+			"price": 0.8,
+			"source": "Vial: 5 п – 1 с"
 		},
 		{
 			"name": "Pack of Materials (HB)",
